@@ -9,11 +9,6 @@
 
 ## Test-Set
 
-**File name:** test-set_doc-ids-and-titles.csv
-**Columns:**
-  - `doc_id`: DNB Identifier for documents
-  - `doc_title_ger`: German title of the document
-
 **File name:** test-set_doc-ids-and-titles_w-translation.csv
 **Columns:**
   - `doc_id`: DNB Identifier for documents
@@ -41,11 +36,6 @@
   - `label_text`: Preferred label (German)
 
 ## Vocab
-
-**File name:** gnd_pref-labels.csv
-**Columns:**
-  - `label_id`: Identifier for label
-  - `label_text_ger`: Preferred label (German)
 
 **File name:** gnd_pref-labels_w-translation.csv
 **Columns:**
