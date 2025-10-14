@@ -1,0 +1,104 @@
+sg,sg_label_ger,sg_label_eng
+000,"Allgemeines, Wissenschaft","General, Science"
+004,Informatik,"Computer Science"
+010,Bibliografien,Bibliographies
+020,Bibliotheks- und Informationswissenschaft,"Library and Information Science"
+030,Enzyklopädien,Encyclopedias
+050,"Zeitschriften, fortlaufende Sammelwerke","Journals, Serials"
+060,"Organisationen, Museumswissenschaft","Organizations, Museum Studies"
+070,"Nachrichtenmedien, Journalismus, Verlagswesen","News Media, Journalism, Publishing"
+080,Allgemeine Sammelwerke,"General Collections"
+090,"Handschriften, seltene Bücher","Manuscripts, Rare Books"
+100,Philosophie,Philosophy
+130,"Parapsychologie, Okkultismus","Parapsychology, Occultism"
+150,Psychologie,Psychology
+200,"Religion, Religionsphilosophie","Religion, Philosophy of Religion"
+220,Bibel,Bible
+230,"Theologie, Christentum","Theology, Christianity"
+290,Andere Religionen,"Other Religions"
+300,"Sozialwissenschaften, Soziologie, Anthropologie","Social Sciences, Sociology, Anthropology"
+310,Allgemeine Statistiken,"General Statistics"
+320,Politik,Politics
+330,Wirtschaft,Economics
+333.7,"Natürliche Ressourcen, Energie und Umwelt","Natural Resources, Energy and Environment"
+340,Recht,Law
+350,Öffentliche Verwaltung,"Public Administration"
+355,Militär,Military
+360,"Soziale Probleme, Sozialdienste, Versicherungen","Social Issues, Social Services, Insurance"
+370,"Erziehung, Schul- und Bildungswesen","Education, School and Educational System"
+380,"Handel, Kommunikation, Verkehr","Trade, Communication, Transport"
+390,"Bräuche, Etikette, Folklore","Customs, Etiquette, Folklore"
+400,"Sprache, Linguistik","Language, Linguistics"
+420,Englisch,English
+430,Deutsch,German
+439,Andere germanische Sprachen,"Other Germanic Languages"
+440,"Französisch, romanische Sprachen allgemein","French, Romance Languages (General)"
+450,"Italienisch, Rumänisch, Rätoromanisch","Italian, Romanian, Romansh"
+460,"Spanisch, Portugiesisch","Spanish, Portuguese"
+470,Latein,Latin
+480,Griechisch,Greek
+490,Andere Sprachen,"Other Languages"
+491.8,Slawische Sprachen,"Slavic Languages"
+500,Naturwissenschaften,"Natural Sciences"
+510,Mathematik,Mathematics
+520,"Astronomie, Kartografie","Astronomy, Cartography"
+530,Physik,Physics
+540,Chemie,Chemistry
+550,Geowissenschaften,Geosciences
+560,Paläontologie,Paleontology
+570,"Biowissenschaften, Biologie","Life Sciences, Biology"
+580,Pflanzen (Botanik),"Plants (Botany)"
+590,Tiere (Zoologie),"Animals (Zoology)"
+600,Technik,Technology
+610,"Medizin, Gesundheit","Medicine, Health"
+620,Ingenieurwissenschaften und Maschinenbau,"Engineering and Mechanical Engineering"
+621.3,"Elektrotechnik, Elektronik","Electrical Engineering, Electronics"
+624,Ingenieurbau und Umwelttechnik,"Civil and Environmental Engineering"
+630,"Landwirtschaft, Veterinärmedizin","Agriculture, Veterinary Medicine"
+640,Hauswirtschaft und Familienleben,"Home Economics and Family Life"
+650,Management,Management
+660,Technische Chemie,"Industrial Chemistry"
+670,Industrielle und handwerkliche Fertigung,"Industrial and Craft Production"
+690,"Hausbau, Bauhandwerk","House Construction, Building Trades"
+700,"Künste, Bildende Kunst allgemein","Arts, Fine Arts (General)"
+710,"Landschaftsgestaltung, Raumplanung","Landscape Design, Urban Planning"
+720,Architektur,Architecture
+730,"Plastik, Numismatik, Keramik, Metallkunst","Sculpture, Numismatics, Ceramics, Metal Art"
+740,"Grafik, angewandte Kunst","Graphics, Applied Arts"
+741.5,"Comics, Cartoons, Karikaturen","Comics, Cartoons, Caricatures"
+750,Malerei,Painting
+760,"Druckgrafik, Drucke","Printmaking, Prints"
+770,"Fotografie, Video, Computerkunst","Photography, Video, Computer Art"
+780,Musik,Music
+790,"Freizeitgestaltung, Darstellende Kunst","Leisure Activities, Performing Arts"
+791,"Öffentliche Darbietungen, Film, Rundfunk","Public Performances, Film, Broadcasting"
+792,"Theater, Tanz","Theater, Dance"
+793,Spiel,Games
+796,Sport,Sports
+800,"Literatur, Rhetorik, Literaturwissenschaft","Literature, Rhetoric, Literary Studies"
+810,Englische Literatur Amerikas,"American English Literature"
+820,Englische Literatur,"English Literature"
+830,Deutsche Literatur,"German Literature"
+839,Literatur in anderen germanischen Sprachen,"Literature in Other Germanic Languages"
+840,Französische Literatur,"French Literature"
+850,"Italienische, rumänische, rätoromanische Literatur","Italian, Romanian, Romansh Literature"
+860,Spanische und portugiesische Literatur,"Spanish and Portuguese Literature"
+870,Lateinische Literatur,"Latin Literature"
+880,Griechische Literatur,"Greek Literature"
+890,Literatur in anderen Sprachen,"Literature in Other Languages"
+891.8,Slawische Literatur,"Slavic Literature"
+900,Geschichte,History
+910,"Geografie, Reisen","Geography, Travel"
+914.3,"Geografie, Reisen (Deutschland)","Geography, Travel (Germany)"
+920,"Biografie, Genealogie, Heraldik","Biography, Genealogy, Heraldry"
+930,"Alte Geschichte, Archäologie","Ancient History, Archaeology"
+940,Geschichte Europas,"History of Europe"
+943,Geschichte Deutschlands,"History of Germany"
+950,Geschichte Asiens,"History of Asia"
+960,Geschichte Afrikas,"History of Africa"
+970,Geschichte Nordamerikas,"History of North America"
+980,Geschichte Südamerikas,"History of South America"
+990,Geschichte der übrigen Welt,"History of the Rest of the World"
+B,Belletristik,Fiction
+K,Kinder- und Jugendliteratur,"Children's and Young Adult Literature"
+S,Schulbücher,Textbooks
