@@ -1,0 +1,121 @@
+---
+title: "Workbook 1: Set Retrieval Metrics"
+author: "Maximilian Kähler, DNB"
+format: html
+editor: source
+---
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+
+library(knitr)
+library(tidyverse)
+library(casimir)
+options(casimir.ignore_inconsistencies = TRUE)
+```
+
+```{r}
+#| label: read-data
+#| echo: FALSE
+
+
+gold_standard <- read_csv("../data/test-set_gold-standard.csv",
+                          col_select = c("doc_id", "label_id"))
+
+files <- list(
+  "method-A" = "../data/test-set_predictions/method-A.csv",
+  "method-B" = "../data/test-set_predictions/method-B.csv",
+  "method-C" = "../data/test-set_predictions/method-C.csv",
+  "method-D" = "../data/test-set_predictions/method-D.csv",
+  "method-E" = "../data/test-set_predictions/method-E.csv",
+  "method-F" = "../data/test-set_predictions/method-F.csv"
+)
+predictions <- files |> 
+  map(read_csv) 
+```
+
+# Set Retrieval Metrics
+
+The basic way to compute metrics with casimir is the function 
+`compute_set_retrieval_scores()`. It takes as input a set of predicted labels 
+and a gold standard set of labels and computes various retrieval metrics such 
+as precision, recall, and F1-score. 
+
+Short reminder: Precision is the fraction of suggested subject terms that is
+correct, while recall is the fraction of gold standard subject terms that are
+retrieved. F1-score is the harmonic mean of precision and recall. 
+
+R-Precision is the precision at R, where R is the number of gold standard 
+subjects. This sort of avoids penelizing methods that suggest way too many
+subjects, by limiting to the actual amount of relevant subjects that could be
+found.
+
+The parameter `k` allows you to specify how many of the top predicted labels
+should be considered for the computation of the metrics.
+
+```{r}
+#| label: compute-metrics
+
+compute_set_retrieval_scores(
+  predicted = predictions[["method-A"]],
+  gold_standard = gold_standard,
+  k = 5,
+  rename_metrics = TRUE
+)
+
+```
+
+You can iterate that over multiple methods using R's `map_*()` functions for functional
+programming. `map_dfr()` is particularly useful here as it combines the results 
+into a single data frame.
+
+```{r}
+#| label: compute-metrics-multiple
+
+results <- map_dfr(
+  predictions,
+  ~ compute_set_retrieval_scores(
+    predicted = .x,
+    gold_standard = gold_standard,
+    k = 100,
+    rename_metrics = TRUE
+  ),
+  .id = "method"
+)
+
+kable(results)
+```
+
+Let's make a first visualization using R`s ggplot package
+
+```{r}
+#| label: plot-metrics
+
+ggplot(results, aes(x = method, y = value, fill = method)) +
+  geom_bar(stat = "identity") +
+  ylim(0, 1) +
+  facet_wrap(~ metric) +
+  theme_minimal() +
+  labs(
+    title = "Retrieval Metrics by Method",
+    x = "Method",
+    y = "Score"
+  ) + 
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+
+```
+
+
+# Your Turn
+
+Play around with the input options for `compute_set_retrieval_scores()` (`?compute_set_retrieval_scores` is your friend)
+
+  * Observe how you can increase precision by lowering the `k` parameter, but at the cost of recall. 
+  * What is the theoretical recall limit that you achieve by setting `k = 100` ?
+  * what happens when you switch aggregation modes `mode = "micro"` vs `mode = "doc-avg"` vs. `mode = "subj-avg"`? Can you explain the differences?
+  * what are your preffered methods, so far?
