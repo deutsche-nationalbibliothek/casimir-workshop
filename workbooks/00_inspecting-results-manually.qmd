@@ -1,0 +1,147 @@
+---
+title: "Inspecting Results Manually"
+format: html
+editor: visual
+---
+
+```{r}
+#| label: setup
+#| echo: false
+
+suppressPackageStartupMessages({
+  library(knitr)
+  library(tidyverse)
+  library(casimir)
+}
+)
+opts_chunk$set(echo = TRUE, message = FALSE)
+
+source("../src/create_qual_table.r")
+```
+
+## Looking at Data-Formats
+
+Let's start this tutorial by looking at the basic data formats and data sets.
+
+### Document Titles
+
+The subfolder `data` contains the following dataset:
+
+```{r}
+#| label: read-doc-titles
+#| message: false
+#| warning: false
+
+doc_titles <- read_csv(
+  "../data/test-set_doc-ids-and-titles_w-translation.csv"
+)
+
+num_docs <- nrow(doc_titles)
+
+kable(
+  head(doc_titles),
+  caption = "Document IDs and Titles in the Test Set"
+)
+
+
+```
+
+The dataset contains `r num_docs` document titles, their doc_id and translations.
+
+### Gold Standard Data
+
+For the above document titles we provide GND subject terms manually annotated by subject experts of the DNB. This is our gold standard data that we compare against.
+
+```{r}
+#| label: read-gold-standard
+#| message: false
+gold_standard <- read_csv("../data/test-set_gold-standard.csv",
+                          col_select = c("doc_id", "label_id"))
+
+# load label_text
+gnd_pref_labels <- read_csv("../data/gnd_pref-labels_w-translation.csv")
+gold_standard_w_labels <- gold_standard |> 
+  left_join(gnd_pref_labels, by = "label_id")
+
+head(gold_standard_w_labels)
+```
+
+### Predictions
+
+The subfolder `data/test-set_predictions` contains machine based GND subject suggestions coming from different methods.
+
+```{bash}
+ls ../data/test-set_predictions
+```
+
+These datasets all follow the same long table format with columns `doc_id`, `label_id` and `score`. Every row expresses a subject assignment of some document with a label under a confidence score.
+
+```{r}
+#| label: show-predictions
+
+files <- list(
+  "method-A" = "../data/test-set_predictions/method-A.csv",
+  "method-B" = "../data/test-set_predictions/method-B.csv",
+  "method-C" = "../data/test-set_predictions/method-C.csv",
+  "method-D" = "../data/test-set_predictions/method-D.csv",
+  "method-E" = "../data/test-set_predictions/method-E.csv",
+  "method-F" = "../data/test-set_predictions/method-F.csv"
+)
+predictions <- files |> 
+  map(read_csv) 
+head(predictions[["method-A"]])
+```
+
+Gold standard and predictions are the basic input for computing any retrieval scores.
+
+## Creating a manual comparison table
+
+Before we talk about metrics, let's look at how we can beautifully join all of the above tables and get a first informative impression of subject suggestions.
+
+CASIMiR offers a basic method to construct a comparison table:
+
+```{r}
+#| label: create-comparison
+#| warning: true
+comp <- create_comparison(
+  predicted = predictions[["method-A"]],
+  gold_standard = gold_standard
+)
+
+kable(filter(comp, doc_id == "1122545479"))
+
+```
+
+Note, CASIMiR informs you that apparently not all documents were indexed by "method-A". When working with larger data, that is quite common: There are always edge cases with document titles that lead to empty results. Silence, not SPAM, may also be a feature for an indexing method...
+
+Provided you don't know DNB's label and document ids by heart, you may need more context in form of text descriptions. Below code wraps up a lot of data wrangling to bring the tables into an instructive format:
+
+```{r}
+#| label: create-qual-table
+#| message: false
+#| warning: false
+set.seed(42)
+sample_docs <- sample_n(doc_titles, size = 5)
+
+# modify _eng to _ger to see german original texts
+qual_table <- create_qualitative_table(
+  predicted = predictions,
+  gold_standard = gold_standard,
+  doc_id_list = select(sample_docs, doc_id),
+  gnd = select(gnd_pref_labels, label_id, label_text = label_text_eng),
+  title_texts = select(doc_titles, doc_id, title = doc_title_eng),
+  limit = 5 # how many suggestions per method to consider?
+)
+
+qual_table
+```
+
+##  Your Turn:
+
+Inspect the above table:
+
+-   what subject suggestions do you agree with?
+
+-   are there false positives that would be okay, even if not contained in the gold standard?
+
+-   Which methods do you prefer?
