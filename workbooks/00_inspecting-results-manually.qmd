@@ -1,31 +1,75 @@
 ---
-title: "Inspecting Results Manually"
+title: "Inspecting Automatic Indexing Results Manually"
 format: html
+author: "Maximilian Kähler, DNB"
+toc: true
+keep-md: true
 editor: visual
 ---
+
+In this preparation workbook we will start with looking at the data formats
+that CASIMiR expects for computing retrieval metrics. Then, we will create a
+manual comparison table that allows us to inspect automatic subject suggestions
+in detail. This is very useful to get a first qualitative impression of the 
+strengths and weaknesses of different automatic indexing methods.
 
 ```{r}
 #| label: setup
 #| echo: false
+#| message: false
+#| warning: false
 
-suppressPackageStartupMessages({
-  library(knitr)
-  library(tidyverse)
-  library(casimir)
-}
-)
+
+library(knitr)
+library(tidyverse)
+library(casimir)
+
 opts_chunk$set(echo = TRUE, message = FALSE)
 
+# load some helper functions for data visualization 
 source("../src/create_qual_table.r")
 ```
 
 ## Looking at Data-Formats
 
 Let's start this tutorial by looking at the basic data formats and data sets.
+The subfolder `data` contains the following dataset:
+```{bash}
+#| label: display evailable files
+#| eval: FALSE
+tree ../data
+
+```
+
+```bash
+../data
+├── gnd_entitytypes.csv
+├── gnd_pref-labels_w-translation.csv
+├── README.md
+├── subject-groups-labels.csv
+├── test-set_doc-ids-and-titles_w-translation.csv
+├── test-set_gold-standard.csv
+├── test-set_predictions
+│   ├── method-A.csv
+│   ├── method-B.csv
+│   ├── method-C.csv
+│   ├── method-D.csv
+│   ├── method-E.csv
+│   └── method-F.csv
+└── test-set_subject-group-mapping.csv
+```
+
+Take a look at the file `data/REAMDE.md` for a description of all datasets
+provided. Here we will only introduce the most important ones for getting
+started.
 
 ### Document Titles
 
-The subfolder `data` contains the following dataset:
+This tutorial is based on a test set of document titles provided by the German
+National Library (DNB). The document titles are stored in the file
+`data/test-set_doc-ids-and-titles_w-translation.csv`. English translations are
+AI-generated and provided for convenience. Please consider these translations
+with care.
 
 ```{r}
 #| label: read-doc-titles
@@ -47,10 +91,25 @@ kable(
 ```
 
 The dataset contains `r num_docs` document titles, their doc_id and translations.
+Each `doc_id` can be resolved to the official public record by prefixing the
+base-url `https://d-nb.info/`, e.g. `doc_id = 1122545479` can be resolved to
+<https://d-nb.info/1122545479>. Here you can access more metadata about the 
+document.
 
 ### Gold Standard Data
 
-For the above document titles we provide GND subject terms manually annotated by subject experts of the DNB. This is our gold standard data that we compare against.
+Each of the document titles was manually annotated by subject experts of the DNB
+with subject terms from the Inegrated Authority File (GND). Similar to the 
+document identifiers, each GND subject term has a unique identifier, the 
+`label_id`, which can be resolved to the official GND record by prefixing the base-url
+`https://d-nb.info/`, e.g. `label_id = 041321634` can be resolved to
+<https://d-nb.info/041321634>.
+
+For more information on the GND please visit
+[the official GND website](https://gnd.network/en/).
+In particular, you can find information on each subject term by visiting
+the [GND explorer](https://explore.gnd.network/en/), where you can search for
+each `label_id`. 
 
 ```{r}
 #| label: read-gold-standard
@@ -66,6 +125,9 @@ gold_standard_w_labels <- gold_standard |>
 head(gold_standard_w_labels)
 ```
 
+For the rest of this tutorial This is our gold standard data that we compare
+against.
+
 ### Predictions
 
 The subfolder `data/test-set_predictions` contains machine based GND subject suggestions coming from different methods.
@@ -74,7 +136,11 @@ The subfolder `data/test-set_predictions` contains machine based GND subject sug
 ls ../data/test-set_predictions
 ```
 
-These datasets all follow the same long table format with columns `doc_id`, `label_id` and `score`. Every row expresses a subject assignment of some document with a label under a confidence score.
+These datasets all follow the same long table format with columns `doc_id`, 
+`label_id` and `score`. Every row expresses a subject assignment of some
+document with a label under a confidence score computed by the respective
+indexing algorithm. The origin of each prediction file is purposefully not
+disclosed here, to avoid any bias when inspecting the results.
 
 ```{r}
 #| label: show-predictions
@@ -92,11 +158,14 @@ predictions <- files |>
 head(predictions[["method-A"]])
 ```
 
-Gold standard and predictions are the basic input for computing any retrieval scores.
+Gold standard and predictions are the basic input for computing any retrieval
+scores.
 
 ## Creating a manual comparison table
 
-Before we talk about metrics, let's look at how we can beautifully join all of the above tables and get a first informative impression of subject suggestions.
+Before we talk about metrics, let's look at how we can beautifully join all of
+the above tables and get a first informative impression of the various 
+subject suggestions originating from different automatic indexing methods.
 
 CASIMiR offers a basic method to construct a comparison table:
 
@@ -112,9 +181,14 @@ kable(filter(comp, doc_id == "1122545479"))
 
 ```
 
-Note, CASIMiR informs you that apparently not all documents were indexed by "method-A". When working with larger data, that is quite common: There are always edge cases with document titles that lead to empty results. Silence, not SPAM, may also be a feature for an indexing method...
+Note, CASIMiR informs you that apparently not all documents were indexed by 
+"method-A". When working with larger data, that is quite common: There are 
+always edge cases with document titles that lead to empty results. Silence, 
+not SPAM, may also be a feature for an indexing method...
 
-Provided you don't know DNB's label and document ids by heart, you may need more context in form of text descriptions. Below code wraps up a lot of data wrangling to bring the tables into an instructive format:
+Provided you don't know DNB's label and document ids by heart, you may need 
+more context in form of text descriptions. Below code wraps up a lot of data
+wrangling to bring the tables into an instructive format:
 
 ```{r}
 #| label: create-qual-table
@@ -123,7 +197,7 @@ Provided you don't know DNB's label and document ids by heart, you may need more
 set.seed(42)
 sample_docs <- sample_n(doc_titles, size = 5)
 
-# modify _eng to _ger to see german original texts
+# modify `_eng` to `_ger` to see german original texts
 qual_table <- create_qualitative_table(
   predicted = predictions,
   gold_standard = gold_standard,
@@ -136,7 +210,7 @@ qual_table <- create_qualitative_table(
 qual_table
 ```
 
-##  Your Turn:
+## Your Turn:
 
 Inspect the above table:
 
