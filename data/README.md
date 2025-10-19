@@ -151,9 +151,9 @@ the frequency distribution of GND terms in the training data.
 ## Test Predictions
 
 Predictions for the test-set are provided from six different indexing algorithms,
-which are not disclose purposefully, to allow for unbiased evaluation.
+which are not disclosed purposefully, to allow for unbiased evaluation.
 The algorithms are referred to as `method_A` to `method_F`. Each of the
-predictions datasets follows the same format:
+prediction datasets follows the same format:
 
 **File name:** `test-set_predictions_method_*.csv`
 
