@@ -26,7 +26,7 @@ Each intentifier can be resolved using the DNB's catalogue, by prefixing
 The test-set used in this tutorial consists of 8415 records from the DNB's
 catalogue. Each record is annotated with one or more subject groups from the
 DNB's subject group system ("Sachgruppen der deutschen Nationalbibliografie"),
-which is essentialy equal to the DDC's highest order classification.
+which are based on the Dewey Decimal Classification (DDC).
 The test-set is chosen to contain an approximately equal number of records
 from 18 selected scientific subject groups.
 
@@ -99,7 +99,7 @@ the GND vocabulary.
 
 ### GND entity types
 
-There are 6 different entity types of GND terms:
+There are 6 different entity types of GND subject terms:
 
   * subject headings (Schlagworte)
   * geographic headings (Geografika)
@@ -134,7 +134,7 @@ The mapping to the GND entity types is provided in the following file:
 
 Many of the algorithms tested in this repository are supervised extreme
 multi label classification methods, which require training data. Their 
-repective performance may often depend on the number of available training
+respective performance may often depend on the number of available training
 records per GND label. Here, we provide not the full training dataset, but only
 the frequency distribution of GND terms in the training data.
 
