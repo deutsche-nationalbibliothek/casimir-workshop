@@ -8,8 +8,59 @@ the Fantastic Futures-Conference 2025 on Dec 3rd at the British National Library
 
 # Requirements
 
+## Installing R and RStudio
 
-To run this Tutorial you will need the following R packages: 
+To work with this tutorial you will need a working R environment and an IDE
+to run the provided quarto Notebooks in. Here are three options to establish a
+working environment:
+
+### Option 1: Install R and RStudio from the official sources
+
+You can install R following instructions under [https://cran.rstudio.com/](https://cran.rstudio.com/).
+
+Afterwards you can install [RStudio Desktop](https://posit.co/download/rstudio-desktop/). 
+
+This should provide instructions for all major OSs. 
+
+Of course you can also choose to work with other IDEs. Positron, VS Code or RStudio Server are other frequently used IDEs to work with R. 
+For VS Code you should install the [R extension](https://marketplace.visualstudio.com/items?itemName=REditorSupport.r) and [quarto extension](https://marketplace.visualstudio.com/items?itemName=quarto.quarto).
+
+### Option 2: Run R and RStudio in a Docker Container
+
+If you prefer an encapsulated environment, you can use one of the containers
+provided by the [rocker project](https://rocker-project.org/images/).
+
+The following command starts the container 
 ```
-install.packages(c("casimir", "tidyverse", "gt"))
+docker run --rm -ti -e DISABLE_AUTH=true -p 8787:8787 rocker/tidyverse
+```
+after which you can look up `localhost:8787` in your browser to access RStudio server.
+
+The tidyverse container 
+
+### Option 3: Install R and RStudio in Conda Environment
+
+If you are familiar with the package manager [conda](https://docs.conda.io/en/latest/), this provides also an easy method to install a working R environment.
+To install conda use the [miniforge installer](https://docs.conda.io/en/latest/#install-svg-version-1-1-width-1-0em-height-1-0em-class-sd-octicon-sd-octicon-download-sd-text-primary-viewbox-0-0-16-16-aria-hidden-true-path-d-m2-75-14a1-75-1-75-0-0-1-1-12-25v-2-5a-75-75-0-0-1-1-5-0v2-5c0-138-112-25-25-25h10-5a-25-25-0-0-0-25-25v-2-5a-75-75-0-0-1-1-5-0v2-5a1-75-1-75-0-0-1-13-25-14z-path-path-d-m7-25-7-689v2a-75-75-0-0-1-1-5-0v5-689l1-97-1-969a-749-749-0-1-1-1-06-1-06l-3-25-3-25a-749-749-0-0-1-1-06-0l4-22-6-78a-749-749-0-1-1-1-06-1-06l1-97-1-969z-path-svg).
+
+To create a conda environment with all necessary tools use:
+```bash
+conda create --name my_env r-base r-tidyverse r-gt r-collapse r-options r-rsample r-furrr r-remotes rstudio-desktop
+conda activate my_env
+```
+
+If you prefer to work with another IDE, or want to have RStudio not installed by conda, you may ommit `rstudio-desktop` from your environment specs.
+
+## Install CASIMiR
+
+Regardless how you arrived at a working R environment, to install the [CASMiR
+package](https://github.com/deutsche-nationalbibliothek/casimir) featured in this workshop use inside your R session:
+```R
+remotes::install_github("deutsche-nationalbibliothek/casimir")
+```
+To run the tutorial you may also need the following R additional packages 
+(depending on how you installed R, they may already be present):
+
+```R
+install.packages(c("tidyverse", "gt"))
 ```
