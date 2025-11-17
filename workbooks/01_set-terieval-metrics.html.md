@@ -7,17 +7,14 @@ toc: true
 editor: source
 ---
 
+In this workbook we will learn how to compute the basic set retrieval metrics
+like precision, recall, and F1-score using the CASIMiR package.
+We will also explore how to drill down into results on the subject level
+to find the best and worst performing subject terms.
+
 
 ::: {.cell}
 
-```{.r .cell-code}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-
-library(knitr)
-library(tidyverse)
-library(casimir)
-options(casimir.ignore_inconsistencies = TRUE)
-```
 :::
 
 
@@ -34,14 +31,26 @@ The basic way to compute metrics with CASIMIiR is the function
 and a gold standard set of labels and computes various retrieval metrics such 
 as precision, recall, and F1-score. 
 
-Short reminder: Precision is the fraction of suggested subject terms that is
-correct, while recall is the fraction of gold standard subject terms that are
-retrieved. F1-score is the harmonic mean of precision and recall. 
+::: {.panel-tabset}
+#### More about metrics
 
-R-Precision is the precision at R, where R is the number of gold standard 
-subjects. This sort of avoids penelizing methods that suggest way too many
-subjects, by limiting to the actual amount of relevant subjects that could be
-found.
+<details>
+<summary>Click to expand explanation of metrics</summary>
+
+Short reminder: **precision** is the fraction of suggested subject terms that is
+correct, while **recall** is the fraction of gold standard subject terms that are
+retrieved. Thus, while the denominator for recall is based on the gold standard,
+the denominator for precision is based on the number of predictions you 
+choose to make. 
+
+**F1-score** is the harmonic mean of precision and recall. 
+
+**R-Precision** is the precision at $R$, where $R$ is the number of gold standard 
+subjects. This sort of avoids penalizing methods that suggest way too many
+subjects, by limiting predictions to the actual amount of relevant subjects that could be found.
+
+</details>
+:::
 
 The parameter `k` allows you to specify how many of the top predicted labels
 should be considered for the computation of the metrics.
@@ -93,16 +102,18 @@ into a single data frame.
 ::: {.cell}
 
 ```{.r .cell-code}
+K <- 5
+
 results <- map_dfr(
   predictions,
   ~ compute_set_retrieval_scores(
     predicted = .x,
     gold_standard = gold_standard,
-    k = 5,
+    k = K,
     rename_metrics = TRUE
   ),
   # create id column from list names
-  .id = "method"
+  .id = "Method"
 )
 
 # bring results to wide tible for better display
@@ -112,13 +123,15 @@ results |>
     names_from = metric,
     values_from = value
   ) |>
-kable()
+kable(caption = paste0("Set retrieval metrics for all methods (k = ", K, ")"))
 ```
 
 ::: {.cell-output-display}
 
 
-|method   |mode    |      f1@5|    prec@5|     rec@5|   rprec@5|
+Table: Set retrieval metrics for all methods (k = 5)
+
+|Method   |mode    |      f1@5|    prec@5|     rec@5|   rprec@5|
 |:--------|:-------|---------:|---------:|---------:|---------:|
 |method-A |doc-avg | 0.2769323| 0.2886015| 0.3494472| 0.4137266|
 |method-B |doc-avg | 0.3512206| 0.3039176| 0.5233464| 0.5451911|
@@ -138,13 +151,13 @@ Let's make a first visualization using R`s ggplot package
 ::: {.cell}
 
 ```{.r .cell-code}
-ggplot(results, aes(x = method, y = value, fill = method)) +
+ggplot(results, aes(x = Method, y = value, fill = Method)) +
   geom_bar(stat = "identity") +
   ylim(0, 1) +
   facet_wrap(~ metric) +
   theme_minimal() +
   labs(
-    title = "Retrieval Metrics by Method",
+    title = "Set Retrieval Metrics by Method",
     x = "Method",
     y = "Score"
   ) + 
@@ -154,22 +167,27 @@ ggplot(results, aes(x = method, y = value, fill = method)) +
 ```
 
 ::: {.cell-output-display}
-![](01_set-terieval-metrics_files/figure-html/plot-metrics-1.png){width=672}
+![](figures/01_set-retrieval-metrics/plot-metrics-1.png){width=672}
 :::
 :::
 
 
-**Note:** Some people prefer to "zoom-in" on a smaller scale of the y-range to
+<details>
+<summary>Note</summary>
+Some people prefer to "zoom-in" on a smaller scale of the y-range to
 emphasize the differences between methods. While this is sometimes acceptable 
 for visualization purposes, be aware that this can be misleading as it visually
 exaggerates small differences. Always check the actual values in the data
 table to get a true sense of the performance differences.
+</details>
+
 
 ## Finding buttom and top performerming labels  
 
-If you want to dig into results on subject level, CASIMiR also provides functions
-to disect results on the intermediate aggregation level. The above function
-`compute_set_retrieval_scores()` is just a convenient wrapper around three steps:
+If you want to drill down into results on subject level, CASIMiR also provides 
+functions to disect results on the intermediate aggregation level. 
+The above function `compute_set_retrieval_scores()` is just a convenient 
+wrapper around three steps:
 
   1. `create_comparison()`: creates a detailed comparison of predicted vs. 
     gold standard labels for each doc_id, label_id pair.
@@ -179,7 +197,7 @@ to disect results on the intermediate aggregation level. The above function
   3. `summarise_intermediate_results()` computes avarages of the intermediate 
     results to yield the final precision, recall, and F1-score.
     
-Lets use this to find out the best and worst performing subject terms for
+Let's use this to find out the best and worst performing subject terms for
 `method-A`.
     
 
@@ -206,14 +224,16 @@ intermed |>
   select(label_id, label_text_eng, tp, fp, fn, prec, rec, f1) |> 
   head(n = 10) |> 
   kable(
-    caption = "Best performing subject terms for method-A (min. 20 gold standard instances)"
+    caption = "Best performing subject terms for method-A with a mininimum of
+     20 gold standard instances."
   )
 ```
 
 ::: {.cell-output-display}
 
 
-Table: Best performing subject terms for method-A (min. 20 gold standard instances)
+Table: Best performing subject terms for method-A with a mininimum of
+     20 gold standard instances.
 
 |label_id  |label_text_eng             | tp| fp| fn|      prec|       rec|        f1|
 |:---------|:--------------------------|--:|--:|--:|---------:|---------:|---------:|
@@ -238,14 +258,16 @@ intermed |>
   select(label_id, label_text_eng, tp, fp, fn, prec, rec, f1) |> 
   head(n = 10) |> 
   kable(
-    caption = "Worst performing subject terms for method-A (min. 20 gold standard instances)"
+    caption = "Worst performing subject terms for method-A with a minimum of
+     20 gold standard instances."
   )
 ```
 
 ::: {.cell-output-display}
 
 
-Table: Worst performing subject terms for method-A (min. 20 gold standard instances)
+Table: Worst performing subject terms for method-A with a minimum of
+     20 gold standard instances.
 
 |label_id  |label_text_eng                | tp|  fp| fn|      prec|       rec|        f1|
 |:---------|:-----------------------------|--:|---:|--:|---------:|---------:|---------:|
@@ -273,19 +295,19 @@ Play around with the input options for `compute_set_retrieval_scores()`
   * Observe how you can increase precision by lowering the `k` parameter, but
     at the cost of recall. 
   * What is the theoretical recall limit that you achieve by setting `k = 100` ?
+  * compare the top and bottom performing labels for other methods
   * what happens when you switch aggregation modes `mode = "micro"` vs `mode = "doc-avg"` vs. `mode = "subj-avg"`? 
     Can you explain the differences? (see below for more details)
-  * compare the top and bottum performing labels for other methods
-  * what are your preffered methods, so far?
+  * what are your preferred methods, so far?
   
 ## Bonus: A short digression to modes of aggregation
 
 The `compute_set_retrieval_scores()` function supports three modes of aggregation
 
   * `mode = "doc-avg"`: (default) computes precision, recall, and F1-score for each 
-    document individually and then averages these scores across all documents.
+    **document** individually and then average these scores across all documents.
   * `mode = "subj-avg"`: computes precision, recall, and F1-score for each 
-    subject term individually and then averages these scores across all subject 
+    **subject term** individually and then average these scores across all subject 
     terms.
   * `mode = "micro"`: computes global counts of true positives, false positives, 
     and false negatives across all documents and subjects, and then calculates
@@ -302,9 +324,9 @@ larger impact on the final score.
 The column `support` indicates how many instances on the intermediate level
 have contributed to the final score. For `doc_id` grouping, this is the number
 of documents. For `label_id` grouping, this is the number of subject terms.
-By default, CASIMiR ignores documents or subject terms that have no predicted
+By default, CASIMiR ignores documents or subject terms that have no predictions
 when computing precision macro averages. This avoids zero-division issues.
-To be coherent with other packages, you can change this behaviour by using the 
+To be coherent with other packages like [scikit-learn](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html), you can change this behaviour by using the 
 argument `replace_zero_division_with = 0` which will set precision to 0
 for documents or subject terms with no predictions, if they have occurences in 
 the gold standard. 

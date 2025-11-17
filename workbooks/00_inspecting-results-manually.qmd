@@ -4,7 +4,7 @@ format: html
 author: "Maximilian Kähler, DNB"
 toc: true
 keep-md: true
-editor: visual
+editor: source
 ---
 
 In this preparation workbook we will start with looking at the data formats that CASIMiR expects for computing retrieval metrics. Then, we will create a manual comparison table that allows us to inspect automatic subject suggestions in detail. This is very useful to get a first qualitative impression of the strengths and weaknesses of different automatic indexing methods.
