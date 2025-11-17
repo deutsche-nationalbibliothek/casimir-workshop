@@ -6,12 +6,16 @@ This is the official repository hosting all meterial needed for the
 Workshop **Evaluating Automated Subject Indexing Methods** hosted at 
 the Fantastic Futures-Conference 2025 on Dec 3rd at the British National Library in London. 
 
+## Update:
+
+  * 2025-11-15: added install intructions for R and RStudio
+
 # Requirements
 
 ## Installing R and RStudio
 
 To work with this tutorial you will need a working R environment and an IDE
-to run the provided quarto Notebooks in. Here are three options to establish a
+to run the provided quarto notebooks in. Here are three options to establish a
 working environment:
 
 ### Option 1: Install R and RStudio from the official sources
@@ -30,13 +34,15 @@ For VS Code you should install the [R extension](https://marketplace.visualstudi
 If you prefer an encapsulated environment, you can use one of the containers
 provided by the [rocker project](https://rocker-project.org/images/).
 
-The following command starts the container 
+The following command pulls and starts the container rocker/tidyverse
 ```
 docker run --rm -ti -e DISABLE_AUTH=true -p 8787:8787 rocker/tidyverse
 ```
-after which you can look up `localhost:8787` in your browser to access RStudio server.
+after which you can look up `localhost:8787` in your browser to access RStudio 
+server.
 
-The tidyverse container 
+The tidyverse container comes along with installation of many 
+other useful R packages.
 
 ### Option 3: Install R and RStudio in Conda Environment
 
@@ -45,16 +51,19 @@ To install conda use the [miniforge installer](https://docs.conda.io/en/latest/#
 
 To create a conda environment with all necessary tools use:
 ```bash
-conda create --name my_env r-base r-tidyverse r-gt r-collapse r-options r-rsample r-furrr r-remotes rstudio-desktop
+conda create --name my_env -c conda-forge r-base r-tidyverse r-gt r-collapse r-options r-rsample r-furrr r-remotes rstudio-desktop
 conda activate my_env
 ```
 
-If you prefer to work with another IDE, or want to have RStudio not installed by conda, you may ommit `rstudio-desktop` from your environment specs.
+If you prefer to work with another IDE, or want to have RStudio not installed by
+conda, you may ommit `rstudio-desktop` from your environment specs.
 
 ## Install CASIMiR
 
 Regardless how you arrived at a working R environment, to install the [CASMiR
-package](https://github.com/deutsche-nationalbibliothek/casimir) featured in this workshop use inside your R session:
+package](https://github.com/deutsche-nationalbibliothek/casimir) featured in 
+this workshop use the following command inside your R session:
+
 ```R
 remotes::install_github("deutsche-nationalbibliothek/casimir")
 ```
