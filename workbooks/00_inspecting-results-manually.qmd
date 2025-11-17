@@ -1,9 +1,8 @@
 ---
 title: "Inspecting Automatic Indexing Results Manually"
-format: html
 author: "Maximilian Kähler, DNB"
+format: gfm
 toc: true
-keep-md: true
 editor: source
 ---
 

@@ -1,8 +1,7 @@
 ---
 title: "Workbook 1: Set Retrieval Metrics"
 author: "Maximilian Kähler, DNB"
-format: html
-keep-md: true
+format: gfm
 toc: true
 editor: source
 ---
