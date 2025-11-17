@@ -8,6 +8,7 @@ the Fantastic Futures-Conference 2025 on Dec 3rd at the British National Library
 
 ## Update:
 
+  * 2025-11-17: add workbooks `00` and `01`
   * 2025-11-15: added install intructions for R and RStudio
 
 # Requirements

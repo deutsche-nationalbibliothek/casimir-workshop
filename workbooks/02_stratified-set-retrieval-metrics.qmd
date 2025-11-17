@@ -1,0 +1,168 @@
+---
+title: "Workbook 2: Stratified Set Retrieval Metrics"
+author: "Maximilian Kähler, DNB"
+format: gfm
+toc: true
+editor: source
+---
+
+We are now going to learn how to compute stratified set retrieval metrics. This
+is an important technique to evaluate the performance of subject indexing systems
+on different subsets of data, such as documents belonging to different categories
+or subjects.
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+#| echo: FALSE
+knitr::opts_chunk$set(
+  echo = TRUE, message = FALSE, warning = FALSE,
+  fig.path = "figures/02_stratified-set-retrieval-metrics/"
+  )
+
+library(knitr)
+library(tidyverse)
+library(casimir)
+options(casimir.ignore_inconsistencies = TRUE, digits = 3)
+```
+
+```{r}
+#| label: read-data
+#| echo: FALSE
+
+
+gold_standard <- read_csv("../data/test-set_gold-standard.csv",
+                          col_select = c("doc_id", "label_id"),
+                          show_col_types = FALSE)
+
+files <- list(
+  "method-A" = "../data/test-set_predictions/method-A.csv",
+  "method-B" = "../data/test-set_predictions/method-B.csv",
+  "method-C" = "../data/test-set_predictions/method-C.csv",
+  "method-D" = "../data/test-set_predictions/method-D.csv",
+  "method-E" = "../data/test-set_predictions/method-E.csv",
+  "method-F" = "../data/test-set_predictions/method-F.csv"
+)
+predictions <- files |> 
+  map(read_csv, show_col_types = FALSE) 
+
+subject_groups <- read_csv("../data/test-set_subject-group-mapping.csv",
+                           col_select = c(
+                            "doc_id", "sg", "sg_label_ger", "sg_label_eng"),
+                            show_col_types = FALSE)
+
+
+gnd_entity_types <- read_csv("../data/gnd_entitytypes.csv",
+                             col_select = c(
+                              "label_id", 
+                              "label_entitytype_ger",
+                              "label_entitytype_eng"
+                              ),
+                             show_col_types = FALSE
+                            )
+```
+
+## Stratified results by subject groups
+
+In the next code chunk we compute the set retrieval scores at rank 5 for
+documents stratified by their subject groups using the `compute_set_retrieval_scores()` function. This is as simple as
+the `doc_groups` argument with a prepared data frame containing the document IDs and their corresponding subject groups.
+
+```{r}
+#| label: stratified-subject-groups
+res_at_5_by_sg_method_A <- compute_set_retrieval_scores(
+  predicted = predictions[["method-A"]],
+  gold_standard = gold_standard,
+  doc_groups = subject_groups,
+  k = 5
+)
+
+head(res_at_5_by_sg_method_A)
+
+```
+
+**Note on terminology**: We refer to "subject groups" here as groups of documents that share a common subject classification, e.g. "History" or "Science". This is different from "subjects" in the sense of "subject terms" or "subject headings", which are the actual labels assigned to documents.
+
+As the information contained in the resulting data frame is quite extensive, we 
+apply some post-processing to simplify the display of results. We filter for
+the metrics precision, recall, and F1-score, remove unnecessary columns, and
+pivot the data frame to a wider format for better readability.
+
+```{r}
+#| label: stratified-subject-groups-display
+# apply post processing to simplify display of results
+res_at_5_by_sg_method_A  |>
+  filter(metric %in% c("prec", "rec", "f1")) |> 
+  select(-support, -mode)  |>
+  pivot_wider(
+    names_from = metric,
+    values_from = value
+  )  |>
+  kable(caption = "Set retrieval scores at rank 5 for Method A stratified by subject groups.")
+```
+
+We can see that the performance of Method A varies across different subject 
+groups. For example, the f1-score for physics is best, whereas
+computer science has the lowest f1-score.
+
+While this sort of analysis can be done manually for each method, it is often more
+convenient to compute the stratified results for all methods in one go. 
+
+```{r}
+#| label: stratified-subject-groups-all-methods
+res_at_5_by_sg_all_methods <- map_dfr(
+  predictions,
+  ~ compute_set_retrieval_scores(
+    predicted = .x,
+    gold_standard = gold_standard,
+    doc_groups = subject_groups,
+    k = 5),
+  .id = "Method"
+)
+
+head(res_at_5_by_sg_all_methods)
+```
+
+As above, we apply some post-processing to simplify the display of results.
+
+```{r}
+#| label: stratified-subject-groups-all-methods-display
+# apply post processing to simplify display of results
+res_at_5_by_sg_all_methods  |>
+  filter(metric == "f1") |>
+  select(-support, -mode)  |>
+  pivot_wider(
+    names_from = Method,
+    values_from = value
+  )  |>
+  kable(caption = "F1-scores at rank 5 for all methods stratified by subject groups.")
+```
+
+Here we have reached a level of detail, where displaying only numbers makes it 
+quite challenging to interpret the results. Visualizations can help to better understand
+the performance of different methods across subject groups.
+
+```{r}
+#| label: stratified-subject-groups-plot
+#| fig.width: 10
+#| fig.height: 20
+res_at_5_by_sg_all_methods  |>
+  filter(metric == "f1") |>
+  ggplot(aes(x = Method, y = value, fill = Method)) +
+  ylim(0, 0.7) +
+  geom_bar(stat = "identity", position = "dodge") +
+  facet_wrap(
+    ~sg_label_eng,
+    ncol = 4,
+    labeller = label_wrap_gen(width = 20)
+  ) +
+  labs(
+    title = "F1-scores at rank 5 for all methods stratified by subject groups",
+    x = "Method",
+    y = "F1-score"
+  ) + 
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+```
