@@ -8,6 +8,7 @@ the Fantastic Futures-Conference 2025 on Dec 3rd at the British National Library
 
 ## Update:
 
+  * 2025-11-20: add workbook `02`, simplify install instructions
   * 2025-11-17: add workbooks `00` and `01`
   * 2025-11-15: added install intructions for R and RStudio
 
@@ -63,14 +64,23 @@ conda, you may ommit `rstudio-desktop` from your environment specs.
 
 Regardless how you arrived at a working R environment, to install the [CASMiR
 package](https://github.com/deutsche-nationalbibliothek/casimir) featured in 
-this workshop use the following command inside your R session:
+this workshop and all other required packages use the following command 
+inside your R session:
 
 ```R
-remotes::install_github("deutsche-nationalbibliothek/casimir")
+install.packages(c("tidyverse", "gt", "casimir"))
 ```
-To run the tutorial you may also need the following R additional packages 
-(depending on how you installed R, they may already be present):
 
-```R
-install.packages(c("tidyverse", "gt"))
-```
+# Workshop plan
+
+The workshop is organied in individual lessons, contained in the `workbooks`
+directory. Each workbook will feature another method or point of view on 
+looking at subject indexing results. To organize your learning process it is
+suggested, that you draw up an empty table at the beginning of the workshop
+featuring columns for "pro/ contra" and a row for each method/ algorithm. 
+The reoccuring question to bear in my across these lessons is: 
+**Which method would I choose, based on what I see in these evaluation results?**
+
+The methods are referred to as `method_A` to `method_F` in this tutorial 
+and are purposefully not disclosed, to allow for unbiased evaluation. 
+The true names and algorithms will be presented at the end of the workshop. 
