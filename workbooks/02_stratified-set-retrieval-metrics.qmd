@@ -50,7 +50,22 @@ predictions <- files |>
 subject_groups <- read_csv("../data/test-set_subject-group-mapping.csv",
                            col_select = c(
                             "doc_id", "sg", "sg_label_ger", "sg_label_eng"),
-                            show_col_types = FALSE)
+                            show_col_types = FALSE)  |>
+                    mutate(
+                      sg_label_eng = as.factor(case_when(
+                        sg %in% c("940", "943") ~ "History of Germany and Europe",
+                        TRUE ~ sg_label_eng
+                      )),
+                      sg_label_ger = as.factor(case_when(
+                        sg %in% c("940", "943") ~ "Geschichte Deutschlands und Europas",
+                        TRUE ~ sg_label_ger
+                      )),
+                      sg = as.factor(case_when(
+                        sg %in% c("940", "943") ~ "940/943",
+                        TRUE ~ sg
+                      ))
+                    )
+                          
 
 
 gnd_entity_types <- read_csv("../data/gnd_entitytypes.csv",
@@ -63,10 +78,10 @@ gnd_entity_types <- read_csv("../data/gnd_entitytypes.csv",
                             )
 ```
 
-## Stratified results by subject groups
+## Stratified results by document groups
 
 In the next code chunk we compute the set retrieval scores at rank 5 for
-documents stratified by their subject groups using the `compute_set_retrieval_scores()` function. This is as simple as
+documents stratified by their subject groups using the `compute_set_retrieval_scores()` function. This is as simple as using
 the `doc_groups` argument with a prepared data frame containing the document IDs and their corresponding subject groups.
 
 ```{r}
@@ -82,7 +97,11 @@ head(res_at_5_by_sg_method_A)
 
 ```
 
-**Note on terminology**: We refer to "subject groups" here as groups of documents that share a common subject classification, e.g. "History" or "Science". This is different from "subjects" in the sense of "subject terms" or "subject headings", which are the actual labels assigned to documents.
+**Note on terminology**: We refer to "subject groups" here as groups of 
+documents that share a common subject classification, e.g. "History" or 
+"Science". This is different from "subjects" in the sense of "subject terms"
+ or "subject headings", which are the actual labels assigned to documents in the
+ process of subject indexing.
 
 As the information contained in the resulting data frame is quite extensive, we 
 apply some post-processing to simplify the display of results. We filter for
@@ -99,7 +118,7 @@ res_at_5_by_sg_method_A  |>
     names_from = metric,
     values_from = value
   )  |>
-  kable(caption = "Set retrieval scores at rank 5 for Method A stratified by subject groups.")
+  kable(caption = "Set retrieval scores at rank 5 for Method A stratified by subject group.")
 ```
 
 We can see that the performance of Method A varies across different subject 
@@ -153,16 +172,183 @@ res_at_5_by_sg_all_methods  |>
   ylim(0, 0.7) +
   geom_bar(stat = "identity", position = "dodge") +
   facet_wrap(
-    ~sg_label_eng,
+    vars(paste0(sg, ": ", sg_label_eng)),
     ncol = 4,
     labeller = label_wrap_gen(width = 20)
   ) +
   labs(
     title = "F1-scores at rank 5 for all methods stratified by subject groups",
     x = "Method",
-    y = "F1-score"
+    y = "F1-score (doc-avg)"
   ) + 
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
 ```
+
+## Your turn
+
+Some questions that may help to reflect on the results:
+
+  * which methods would win in the respective subject groups? 
+  * are there subject groups with similar performance characteristics across 
+    methods? 
+  * are there subject groups that show very distinct performance characteristics 
+    from the other groups? 
+  * alter the above plot to show precision or recall instead of f1-score. 
+    Do you observe different trends?
+
+
+## Bonus: Confidence Intervals
+
+The smaller we make the strata in our analysis, the larger will be the 
+uncertainty of performance estimates in these strata. We should not jump to
+conclusions based on results that are statistically unsound. This is why
+it is important to take into account uncertainty by computing confidence 
+intervals. Using the option `compute_bootstrap_ci = TRUE` will compute
+95% confidence intervals for each score. These are based on the 
+[bootstrap method](https://stat20.berkeley.edu/fall-2024/3-generalization/09-bootstrapping/notes.html).
+Bootstrapping is a resampling technique that involves repeatedly sampling
+with replacement from the original data to create "bootstrap samples". The
+metrics of interest (e.g., f1, precision, recall) are calculated for each
+bootstrap sample, resulting in a distribution of the metric. This distribution
+can then be used to estimate confidence intervals. The parameter `n_bt`
+specifies the number of bootstrap samples to generate. The more samples,
+the more reliable the confidence intervals, but also the longer the computation time. 
+When computing confidence intervals, it is often beneficial to use parallel
+processing to speed up the computation. This can be done using the 
+[future](https://future.futureverse.org/) package.
+
+```{r}
+#| label: stratified-subject-groups-ci
+#| cache: true
+
+# optionally use parallel processing for faster computation
+library(future)
+plan(multicore)
+
+res_at_5_by_sg_method_A_ci <- compute_set_retrieval_scores(
+  predicted = predictions[["method-A"]],
+  gold_standard = gold_standard,
+  doc_groups = subject_groups,
+  k = 5,
+  compute_bootstrap_ci = TRUE,
+  n_bt = 100L,
+  progress = TRUE
+)
+
+head(res_at_5_by_sg_method_A_ci)
+
+plan(sequential) # reset to sequential processing
+```
+
+The resulting data frame now contains additional columns for the lower
+and upper bounds of the confidence intervals (`ci_lower` and `ci_upper`).
+These can be used to visualize the uncertainty of the estimates in a plot:
+
+```{r}
+#| label: stratified-subject-groups-ci-display
+#| fig.width: 10
+#| fig.height: 20
+
+ggplot(
+  res_at_5_by_sg_method_A_ci,
+  aes(x = sg, y = value, ymin = ci_lower, ymax = ci_upper)
+) + 
+  geom_pointrange(position = position_dodge(width = 0.5)) +
+  geom_errorbar(width = 0.2, position = position_dodge(width = 0.5)) +
+  ylim(0, 0.75) +
+  labs(
+    title = "Set retrieval scores at rank 5 for Method A stratified by subject groups with 95% CI",
+    x = "Subject Group",
+    y = "Score"
+  ) +
+  facet_grid(rows = vars(metric)) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+```
+
+**Note:** You can also modify the previous bar-chart to include confidence intervals by
+using the same approach as shown. Add the `compute_bootstrap_ci = TRUE` and
+`n_bt` parameters to the `compute_set_retrieval_scores()` function calls and then
+add the following lines to the ggplot code:
+
+```r
+geom_errorbar(
+  mapping = aes(ymin = ci_lower, ymax = ci_upper),
+  stat = "identity", 
+  position = "dodge") +
+```
+
+## Bonus: Stratify by entity types of the vocabulary
+
+In the above examples we stratified the results by document groups. It is also possible
+to stratify by label groups, e.g. by entity types of the vocabulary. `CASIMiR` 
+makes this easy by allowing to pass a data frame with label IDs and their 
+corresponding groups to the `label_groups` argument of the
+ `compute_set_retrieval_scores()` function.
+
+```{r}
+#| label: stratified-label-groups
+#| cache: true
+
+# optionally use parallel processing for faster computation
+library(future)
+plan(multicore)
+
+res_at_5_by_entity_type_all_methods <- map_dfr(
+  predictions,
+  ~ compute_set_retrieval_scores(
+    predicted = .x,
+    gold_standard = gold_standard,
+    label_groups = gnd_entity_types,
+    mode = "micro",
+    compute_bootstrap_ci = TRUE,
+    n_bt = 100L,
+    k = 5,
+    progress = TRUE),
+  .id = "Method"
+)
+
+plan(sequential) # reset to sequential processing
+
+head(res_at_5_by_entity_type_all_methods)
+```
+
+**Note:** Here we set the `mode` parameter to `"micro"` to compute micro-averaged
+scores across all documents for each entity type. This is often more meaningful when
+stratifying by label groups, as some entity types may have very few associated labels.
+
+```{r}
+#| label: stratified-label-groups-plot
+#| fig.width: 10
+#| fig.height: 20
+res_at_5_by_entity_type_all_methods  |>
+  filter(metric == "f1", label_entitytype_eng != "NA") |>
+  ggplot(aes(x = Method, y = value, fill = Method)) +
+  ylim(0, 0.7) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_errorbar(
+    mapping = aes(ymin = ci_lower, ymax = ci_upper),
+    stat = "identity", 
+    position = "dodge"
+  ) +
+  facet_wrap(
+    vars(label_entitytype_eng),
+    ncol = 3,
+    labeller = label_wrap_gen(width = 20)
+  ) +
+  labs(
+    title = "F1-scores at rank 5 for all methods stratified by entity types",
+    x = "Method",
+    y = "F1-score  (micro averaged)"
+  ) + 
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+```
+
+Observe how the confidence intervals show extreme ranges for entity types with 
+very few observed labels (e.g. conferences), and very narrow ranges for entity
+ types with many labels, e.g. subject terms. 

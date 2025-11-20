@@ -1,21 +1,25 @@
 # Workbook 2: Stratified Set Retrieval Metrics
 Maximilian Kähler, DNB
 
-- [Stratified results by subject
-  groups](#stratified-results-by-subject-groups)
+- [Stratified results by document
+  groups](#stratified-results-by-document-groups)
+- [Your turn](#your-turn)
+- [Bonus: Confidence Intervals](#bonus-confidence-intervals)
+- [Bonus: Stratify by entity types of the
+  vocabulary](#bonus-stratify-by-entity-types-of-the-vocabulary)
 
 We are now going to learn how to compute stratified set retrieval
 metrics. This is an important technique to evaluate the performance of
 subject indexing systems on different subsets of data, such as documents
 belonging to different categories or subjects.
 
-## Stratified results by subject groups
+## Stratified results by document groups
 
 In the next code chunk we compute the set retrieval scores at rank 5 for
 documents stratified by their subject groups using the
-`compute_set_retrieval_scores()` function. This is as simple as the
-`doc_groups` argument with a prepared data frame containing the document
-IDs and their corresponding subject groups.
+`compute_set_retrieval_scores()` function. This is as simple as using
+the `doc_groups` argument with a prepared data frame containing the
+document IDs and their corresponding subject groups.
 
 ``` r
 res_at_5_by_sg_method_A <- compute_set_retrieval_scores(
@@ -30,7 +34,7 @@ head(res_at_5_by_sg_method_A)
 
     # A tibble: 6 × 7
       sg    sg_label_ger                     sg_label_eng metric mode  value support
-      <chr> <chr>                            <chr>        <chr>  <chr> <dbl>   <dbl>
+      <fct> <fct>                            <fct>        <chr>  <chr> <dbl>   <dbl>
     1 004   Informatik                       Computer Sc… f1     doc-… 0.211     500
     2 100   Philosophie                      Philosophy   f1     doc-… 0.338     500
     3 150   Psychologie                      Psychology   f1     doc-… 0.264     500
@@ -42,7 +46,7 @@ head(res_at_5_by_sg_method_A)
 documents that share a common subject classification, e.g. “History” or
 “Science”. This is different from “subjects” in the sense of “subject
 terms” or “subject headings”, which are the actual labels assigned to
-documents.
+documents in the process of subject indexing.
 
 As the information contained in the resulting data frame is quite
 extensive, we apply some post-processing to simplify the display of
@@ -59,7 +63,7 @@ res_at_5_by_sg_method_A  |>
     names_from = metric,
     values_from = value
   )  |>
-  kable(caption = "Set retrieval scores at rank 5 for Method A stratified by subject groups.")
+  kable(caption = "Set retrieval scores at rank 5 for Method A stratified by subject group.")
 ```
 
 | sg | sg_label_ger | sg_label_eng | f1 | prec | rec |
@@ -81,11 +85,9 @@ res_at_5_by_sg_method_A  |>
 | 650 | Management | Management | 0.252 | 0.248 | 0.333 |
 | 700 | Künste, Bildende Kunst allgemein | Arts, Fine Arts (General) | 0.303 | 0.334 | 0.351 |
 | 800 | Literatur, Rhetorik, Literaturwissenschaft | Literature, Rhetoric, Literary Studies | 0.239 | 0.243 | 0.299 |
-| 940 | Geschichte Europas | History of Europe | 0.272 | 0.260 | 0.392 |
-| 943 | Geschichte Deutschlands | History of Germany | 0.307 | 0.280 | 0.462 |
+| 940/943 | Geschichte Deutschlands und Europas | History of Germany and Europe | 0.289 | 0.269 | 0.425 |
 
-Set retrieval scores at rank 5 for Method A stratified by subject
-groups.
+Set retrieval scores at rank 5 for Method A stratified by subject group.
 
 We can see that the performance of Method A varies across different
 subject groups. For example, the f1-score for physics is best, whereas
@@ -111,7 +113,7 @@ head(res_at_5_by_sg_all_methods)
 
     # A tibble: 6 × 8
       Method   sg    sg_label_ger            sg_label_eng metric mode  value support
-      <chr>    <chr> <chr>                   <chr>        <chr>  <chr> <dbl>   <dbl>
+      <chr>    <fct> <fct>                   <fct>        <chr>  <chr> <dbl>   <dbl>
     1 method-A 004   Informatik              Computer Sc… f1     doc-… 0.211     500
     2 method-A 100   Philosophie             Philosophy   f1     doc-… 0.338     500
     3 method-A 150   Psychologie             Psychology   f1     doc-… 0.264     500
@@ -153,8 +155,7 @@ res_at_5_by_sg_all_methods  |>
 | 650 | Management | Management | f1 | 0.252 | 0.335 | 0.378 | 0.298 | 0.363 | 0.334 |
 | 700 | Künste, Bildende Kunst allgemein | Arts, Fine Arts (General) | f1 | 0.303 | 0.357 | 0.324 | 0.226 | 0.309 | 0.277 |
 | 800 | Literatur, Rhetorik, Literaturwissenschaft | Literature, Rhetoric, Literary Studies | f1 | 0.239 | 0.297 | 0.312 | 0.185 | 0.290 | 0.255 |
-| 940 | Geschichte Europas | History of Europe | f1 | 0.272 | 0.357 | 0.356 | 0.206 | 0.333 | 0.301 |
-| 943 | Geschichte Deutschlands | History of Germany | f1 | 0.307 | 0.375 | 0.356 | 0.235 | 0.346 | 0.335 |
+| 940/943 | Geschichte Deutschlands und Europas | History of Germany and Europe | f1 | 0.289 | 0.366 | 0.356 | 0.219 | 0.340 | 0.317 |
 
 F1-scores at rank 5 for all methods stratified by subject groups.
 
@@ -170,14 +171,14 @@ res_at_5_by_sg_all_methods  |>
   ylim(0, 0.7) +
   geom_bar(stat = "identity", position = "dodge") +
   facet_wrap(
-    ~sg_label_eng,
+    vars(paste0(sg, ": ", sg_label_eng)),
     ncol = 4,
     labeller = label_wrap_gen(width = 20)
   ) +
   labs(
     title = "F1-scores at rank 5 for all methods stratified by subject groups",
     x = "Method",
-    y = "F1-score"
+    y = "F1-score (doc-avg)"
   ) + 
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1)
@@ -185,3 +186,189 @@ res_at_5_by_sg_all_methods  |>
 ```
 
 ![](figures/02_stratified-set-retrieval-metrics/stratified-subject-groups-plot-1.png)
+
+## Your turn
+
+Some questions that may help to reflect on the results:
+
+- which methods would win in the respective subject groups?
+- are there subject groups with similar performance characteristics
+  across methods?
+- are there subject groups that show very distinct performance
+  characteristics from the other groups?
+- alter the above plot to show precision or recall instead of f1-score.
+  Do you observe different trends?
+
+## Bonus: Confidence Intervals
+
+The smaller we make the strata in our analysis, the larger will be the
+uncertainty of performance estimates in these strata. We should not jump
+to conclusions based on results that are statistically unsound. This is
+why it is important to take into account uncertainty by computing
+confidence intervals. Using the option `compute_bootstrap_ci = TRUE`
+will compute 95% confidence intervals for each score. These are based on
+the [bootstrap
+method](https://stat20.berkeley.edu/fall-2024/3-generalization/09-bootstrapping/notes.html).
+Bootstrapping is a resampling technique that involves repeatedly
+sampling with replacement from the original data to create “bootstrap
+samples”. The metrics of interest (e.g., f1, precision, recall) are
+calculated for each bootstrap sample, resulting in a distribution of the
+metric. This distribution can then be used to estimate confidence
+intervals. The parameter `n_bt` specifies the number of bootstrap
+samples to generate. The more samples, the more reliable the confidence
+intervals, but also the longer the computation time. When computing
+confidence intervals, it is often beneficial to use parallel processing
+to speed up the computation. This can be done using the
+[future](https://future.futureverse.org/) package.
+
+``` r
+# optionally use parallel processing for faster computation
+library(future)
+plan(multicore)
+
+res_at_5_by_sg_method_A_ci <- compute_set_retrieval_scores(
+  predicted = predictions[["method-A"]],
+  gold_standard = gold_standard,
+  doc_groups = subject_groups,
+  k = 5,
+  compute_bootstrap_ci = TRUE,
+  n_bt = 100L,
+  progress = TRUE
+)
+
+head(res_at_5_by_sg_method_A_ci)
+```
+
+    # A tibble: 6 × 9
+      sg    sg_label_ger   sg_label_eng metric mode  value ci_lower ci_upper support
+      <fct> <fct>          <fct>        <chr>  <chr> <dbl>    <dbl>    <dbl>   <dbl>
+    1 004   Informatik     Computer Sc… f1     doc-… 0.211    0.198    0.226     500
+    2 100   Philosophie    Philosophy   f1     doc-… 0.338    0.323    0.351     500
+    3 150   Psychologie    Psychology   f1     doc-… 0.264    0.250    0.278     500
+    4 230   Theologie, Ch… Theology, C… f1     doc-… 0.305    0.290    0.323     500
+    5 300   Sozialwissens… Social Scie… f1     doc-… 0.241    0.226    0.258     499
+    6 320   Politik        Politics     f1     doc-… 0.288    0.273    0.303     500
+
+``` r
+plan(sequential) # reset to sequential processing
+```
+
+The resulting data frame now contains additional columns for the lower
+and upper bounds of the confidence intervals (`ci_lower` and
+`ci_upper`). These can be used to visualize the uncertainty of the
+estimates in a plot:
+
+``` r
+ggplot(
+  res_at_5_by_sg_method_A_ci,
+  aes(x = sg, y = value, ymin = ci_lower, ymax = ci_upper)
+) + 
+  geom_pointrange(position = position_dodge(width = 0.5)) +
+  geom_errorbar(width = 0.2, position = position_dodge(width = 0.5)) +
+  ylim(0, 0.75) +
+  labs(
+    title = "Set retrieval scores at rank 5 for Method A stratified by subject groups with 95% CI",
+    x = "Subject Group",
+    y = "Score"
+  ) +
+  facet_grid(rows = vars(metric)) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+```
+
+![](figures/02_stratified-set-retrieval-metrics/stratified-subject-groups-ci-display-1.png)
+
+**Note:** You can also modify the previous bar-chart to include
+confidence intervals by using the same approach as shown. Add the
+`compute_bootstrap_ci = TRUE` and `n_bt` parameters to the
+`compute_set_retrieval_scores()` function calls and then add the
+following lines to the ggplot code:
+
+``` r
+geom_errorbar(
+  mapping = aes(ymin = ci_lower, ymax = ci_upper),
+  stat = "identity", 
+  position = "dodge") +
+```
+
+## Bonus: Stratify by entity types of the vocabulary
+
+In the above examples we stratified the results by document groups. It
+is also possible to stratify by label groups, e.g. by entity types of
+the vocabulary. `CASIMiR` makes this easy by allowing to pass a data
+frame with label IDs and their corresponding groups to the
+`label_groups` argument of the `compute_set_retrieval_scores()`
+function.
+
+``` r
+# optionally use parallel processing for faster computation
+library(future)
+plan(multicore)
+
+res_at_5_by_entity_type_all_methods <- map_dfr(
+  predictions,
+  ~ compute_set_retrieval_scores(
+    predicted = .x,
+    gold_standard = gold_standard,
+    label_groups = gnd_entity_types,
+    mode = "micro",
+    compute_bootstrap_ci = TRUE,
+    n_bt = 100L,
+    k = 5,
+    progress = TRUE),
+  .id = "Method"
+)
+
+plan(sequential) # reset to sequential processing
+
+head(res_at_5_by_entity_type_all_methods)
+```
+
+    # A tibble: 6 × 9
+      Method   label_entitytype_ger label_entitytype_eng metric mode  value ci_lower
+      <chr>    <chr>                <chr>                <chr>  <chr> <dbl>    <dbl>
+    1 method-A Geografikum          geographic name      f1     micro 0.343   0.321 
+    2 method-A Konferenz            conference           f1     micro 0.211   0     
+    3 method-A Körperschaft         corporation          f1     micro 0.247   0.213 
+    4 method-A NA                   NA                   f1     micro 0.25    0.0861
+    5 method-A Person (individuali… person (individuali… f1     micro 0.359   0.333 
+    6 method-A Sachbegriff          subject term         f1     micro 0.259   0.254 
+    # ℹ 2 more variables: ci_upper <dbl>, support <dbl>
+
+**Note:** Here we set the `mode` parameter to `"micro"` to compute
+micro-averaged scores across all documents for each entity type. This is
+often more meaningful when stratifying by label groups, as some entity
+types may have very few associated labels.
+
+``` r
+res_at_5_by_entity_type_all_methods  |>
+  filter(metric == "f1", label_entitytype_eng != "NA") |>
+  ggplot(aes(x = Method, y = value, fill = Method)) +
+  ylim(0, 0.7) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_errorbar(
+    mapping = aes(ymin = ci_lower, ymax = ci_upper),
+    stat = "identity", 
+    position = "dodge"
+  ) +
+  facet_wrap(
+    vars(label_entitytype_eng),
+    ncol = 3,
+    labeller = label_wrap_gen(width = 20)
+  ) +
+  labs(
+    title = "F1-scores at rank 5 for all methods stratified by entity types",
+    x = "Method",
+    y = "F1-score  (micro averaged)"
+  ) + 
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+```
+
+![](figures/02_stratified-set-retrieval-metrics/stratified-label-groups-plot-1.png)
+
+Observe how the confidence intervals show extreme ranges for entity
+types with very few observed labels (e.g. conferences), and very narrow
+ranges for entity types with many labels, e.g. subject terms.
