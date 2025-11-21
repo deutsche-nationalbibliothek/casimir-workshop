@@ -130,7 +130,7 @@ The mapping to the GND entity types is provided in the following file:
   - `label_entitytype_ger`: GND entity type (German)
   - `label_entitytype_eng`: GND entity type (English translation)
 
-### GND frequency distribution
+### Training frequency distribution
 
 Many of the algorithms tested in this repository are supervised extreme
 multi label classification methods, which require training data. Their 
@@ -138,7 +138,7 @@ respective performance may often depend on the number of available training
 records per GND label. Here, we provide not the full training dataset, but only
 the frequency distribution of GND terms in the training data.
 
-**File name:** `gnd_frequency-distribution.csv`
+**File name:** `training-frequency-distribution.csv`
 
 **Description:** Frequency distribution of GND labels in the training data.
 
@@ -146,7 +146,6 @@ the frequency distribution of GND terms in the training data.
 
   - `label_id`: Identifier for label
   - `label_freq`: Number of training records annotated with the label
-
 
 ## Test Predictions
 
