@@ -8,6 +8,7 @@ the Fantastic Futures-Conference 2025 on Dec 3rd at the British National Library
 
 ## Update:
 
+  * 2025-11-21: add workbook `03` and data with training frequencies
   * 2025-11-20: add workbook `02`, simplify install instructions
   * 2025-11-17: add workbooks `00` and `01`
   * 2025-11-15: added install intructions for R and RStudio
