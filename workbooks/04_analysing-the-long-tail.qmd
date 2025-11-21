@@ -1,0 +1,146 @@
+---
+title: "Workbook 4: Analysing the long-tail"
+author: "Maximilian Kähler, DNB"
+format: gfm
+toc: true
+editor: source
+---
+
+So far, we have mainly focused on evaluating the overall performance of
+different methods for subject indexing. However, in practice, it is often
+the case that some subjects are much more frequent than others. 
+
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+#| echo: FALSE
+knitr::opts_chunk$set(
+  echo = TRUE, message = FALSE, warning = FALSE,
+  fig.path = "figures/04_analysing-the-long-tail/"
+  )
+
+library(knitr)
+library(tidyverse)
+library(casimir)
+options(casimir.ignore_inconsistencies = TRUE, digits = 3)
+```
+
+```{r}
+#| label: read-data
+#| echo: FALSE
+
+
+gold_standard <- read_csv("../data/test-set_gold-standard.csv",
+                          col_select = c("doc_id", "label_id"),
+                          show_col_types = FALSE)
+
+files <- list(
+  "method-A" = "../data/test-set_predictions/method-A.csv",
+  "method-B" = "../data/test-set_predictions/method-B.csv",
+  "method-C" = "../data/test-set_predictions/method-C.csv",
+  "method-D" = "../data/test-set_predictions/method-D.csv",
+  "method-E" = "../data/test-set_predictions/method-E.csv",
+  "method-F" = "../data/test-set_predictions/method-F.csv"
+)
+predictions <- files |> 
+  map(read_csv, show_col_types = FALSE) 
+
+# load training frequency distribution for GND labels
+train_freqs <- read_csv("../data/training-frequency-distribution.csv",
+                        show_col_types = FALSE) 
+```
+
+The following picture shows the frequency distribution of GND labels in the
+training data.
+
+```{r}
+#| label: plot-frequency-distribution
+ # compute binned frequency groups
+freq_groups <- train_freqs  |>               
+                mutate(freq_group = cut(x = label_freq,
+                          breaks = c(0, 1, 10, 100, 1000, 10000, Inf),
+                          labels = c("x == 0",
+                                     "1 <= x < 10",
+                                     "10 <= x < 100",
+                                     "100 <= x < 1000",
+                                     "1000 <= x < 10000",
+                                     "10000 <= x"
+                          ),
+                          right = FALSE, include_lowest = TRUE))  |>
+                  select(-label_freq)
+
+freq_groups |> 
+  filter(freq_group != "x == 0") |>
+  group_by(freq_group) |> 
+  summarise(n_labels = n()) |> 
+  ggplot(aes(x = freq_group, y = n_labels)) + 
+  geom_col(fill = "lightblue", color = "black") +
+  labs(
+    title = "Frequency distribution of GND labels in the training data",
+    x = "x - Number of training documents per label",
+    y = "Number of labels"
+  )
+```
+
+The overwhelming majority of labels in the training data are very infrequent,
+i.e., they occur less than 10 times. This is a common phenomenon in subject
+indexing and is often referred to as the "long-tail" problem.
+It is quite common that indexing methods perform well on frequent labels, but
+struggle with infrequent ones. However, infrequent labels are often very important
+for the precise description of documents, whereas frequent labels tend to be more
+general and less informative. In the following, we will analyse how well the
+different methods perform on labels of different frequencies.
+
+## Analyse performance by label frequency, binned frequency groups
+
+We already learned in workbook 02, how to stratify set retrieval metrics
+by groups defined in the label space. We now use the same method, but
+use the freq_groups derived from the training distribution above. 
+```{r}
+#| label: performance-by-frequency-group
+#| cache: true
+
+res_by_gnd_freq <- map_dfr(
+  predictions,
+  ~ compute_set_retrieval_scores(
+    predicted = .x,
+    gold_standard = gold_standard,
+    mode = "micro",
+    k = 5,
+    label_groups = freq_groups
+  ),  .id = "method"
+)
+```
+
+We can visualize that in a plot:
+```{r}
+#| label: plot-performance-by-frequency-group
+#| fig.width: 8
+#| fig.height: 24
+
+res_by_gnd_freq |> 
+  filter(metric != "rprec", freq_group != "NA")  |>
+  ggplot(aes(x = freq_group, y = value, fill = method)) + 
+    geom_bar(stat = "identity", position = "dodge") +
+    ylim(0, 1) +
+    facet_grid(rows = vars(metric)) + 
+    labs(
+      title = "Precision, Recall and f1 by GND label frequency group",
+      x = "GND label frequency group (in training data)",
+      y = "Score (micro-averaged at k=5)"
+    )
+```
+
+## Your turn
+
+Based on the plot above, answer the following questions:
+
+  * Which method performs best on infrequent labels (1-10 training instances)?
+  * Which method performs best on frequent labels (>1000 training instances)?
+
+What are your conclusions? Which method would you choose for a production system?
+
+## Bonus: propensity scoring
+
