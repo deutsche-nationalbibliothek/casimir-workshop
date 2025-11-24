@@ -1,0 +1,135 @@
+/*-- scss:uses --*/
+
+/*-- scss:functions --*/
+
+/*-- scss:defaults --*/
+
+// fonts
+$font-family-sans-serif: "Verdana", "Arial", FreeSans, sans !default;
+
+// colors
+$body-bg: #fff !default;
+$body-color: #000 !default;
+$link-color: #51483d !default;
+$selection-bg: #26351c !default;
+
+// headings
+$presentation-heading-font: "Verdana", "Arial", FreeSans, sans !default;
+$presentation-heading-color: #000 !default;
+
+/*-- scss:mixins --*/
+
+/*-- scss:rules --*/
+
+.reveal {
+  font-size: 150%; // Decrease overall font size for slides
+}
+
+.reveal a {
+  line-height: 1.3em;
+}
+
+.reveal .slide-logo {
+  top: 20px !important;
+  right: 20px !important;
+  max-height: unset !important;
+  height: 15% !important;
+}
+
+.reveal .slide-number, .reveal.has-logo .slide-number {
+  color: black;
+  font-weight: bold;
+  font-size: .7em;
+  top: unset !important;
+  right: unset;
+  bottom: 1.8em !important;
+  left: 2.5em !important;
+}
+
+.reveal .slide-background-content {
+  left:3%; width:2.4%;
+  height:100%;
+}
+
+/*
+01: #0046c4;
+02: #a4b900;
+03: #00aefa;
+04: #ffc920;
+05: #e62e2e;
+06: #9edf03;
+07: #007eef;
+08: #00aefa;
+09: #a4b900;
+10: #fb8630;
+11: #e62e2e;
+12: #a4b900;
+13: #ffc920;
+14: #007eef;
+15: #004896;
+
+*/
+
+.reveal .slide-background:nth-child(1) .slide-background-content {
+  background:#0046c4;
+}
+
+.reveal .slide-background:nth-child(2) .slide-background-content {
+  background:#a4b900;
+}
+
+.reveal .slide-background:nth-child(3) .slide-background-content {
+  background:#00aefa;
+}
+
+.reveal .slide-background:nth-child(4) .slide-background-content {
+  background:#ffc920;
+}
+
+.reveal .slide-background:nth-child(5) .slide-background-content {
+  background:#e62e2e;
+}
+
+.reveal .slide-background:nth-child(6) .slide-background-content {
+  background:#9edf03;
+}
+
+.reveal .slide-background:nth-child(7) .slide-background-content {
+  background:#007eef;
+}
+
+.reveal .slide-background:nth-child(8) .slide-background-content {
+  background:#00aefa;
+}
+
+.reveal .slide-background:nth-child(9) .slide-background-content {
+  background:#a4b900;
+}
+
+.reveal .slide-background:nth-child(10) .slide-background-content {
+  background:#fb8630;
+}
+
+.reveal .slide-background:nth-child(11) .slide-background-content {
+  background:#e62e2e;
+}
+
+.reveal .slide-background:nth-child(12) .slide-background-content {
+  background:#a4b900;
+}
+
+.reveal .slide-background:nth-child(13) .slide-background-content {
+  background:#ffc920;
+}
+
+.reveal .slide-background:nth-child(14) .slide-background-content {
+  background:#007eef;
+}
+
+.reveal .slide-background:nth-child(15) .slide-background-content {
+  background:#004896;
+}
+
+.textsmall {
+  font-size: calc($presentation-font-size-root * $presentation-font-smaller);
+}
