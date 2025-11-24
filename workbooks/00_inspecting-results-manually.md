@@ -26,7 +26,6 @@ tree ../data
 ```
 
 ``` bash
-../data
 ├── gnd_entitytypes.csv
 ├── gnd_pref-labels_w-translation.csv
 ├── README.md
@@ -34,13 +33,14 @@ tree ../data
 ├── test-set_doc-ids-and-titles_w-translation.csv
 ├── test-set_gold-standard.csv
 ├── test-set_predictions
-│   ├── method-A.csv
-│   ├── method-B.csv
-│   ├── method-C.csv
-│   ├── method-D.csv
-│   ├── method-E.csv
-│   └── method-F.csv
-└── test-set_subject-group-mapping.csv
+│   ├── artful-accordion.csv
+│   ├── bold-bassoon.csv
+│   ├── charming-cello.csv
+│   ├── dreamy-didgeridoo.csv
+│   ├── embracing-euphonium.csv
+│   └── fantastic-flute.csv
+├── test-set_subject-group-mapping.csv
+└── training-frequency-distribution.csv
 ```
 
 Take a look at the file `data/REAMDE.md` for a description of all
@@ -136,12 +136,12 @@ subject suggestions coming from different methods.
 ls ../data/test-set_predictions
 ```
 
-    method-A.csv
-    method-B.csv
-    method-C.csv
-    method-D.csv
-    method-E.csv
-    method-F.csv
+    artful-accordion.csv
+    bold-bassoon.csv
+    charming-cello.csv
+    dreamy-didgeridoo.csv
+    embracing-euphonium.csv
+    fantastic-flute.csv
 
 These datasets all follow the same long table format with columns
 `doc_id`, `label_id` and `score`. Every row expresses a subject
@@ -152,16 +152,16 @@ when inspecting the results.
 
 ``` r
 files <- list(
-  "method-A" = "../data/test-set_predictions/method-A.csv",
-  "method-B" = "../data/test-set_predictions/method-B.csv",
-  "method-C" = "../data/test-set_predictions/method-C.csv",
-  "method-D" = "../data/test-set_predictions/method-D.csv",
-  "method-E" = "../data/test-set_predictions/method-E.csv",
-  "method-F" = "../data/test-set_predictions/method-F.csv"
+  "artful-accordion" = "../data/test-set_predictions/artful-accordion.csv",
+  "bold-bassoon" = "../data/test-set_predictions/bold-bassoon.csv",
+  "charming-cello" = "../data/test-set_predictions/charming-cello.csv",
+  "dreamy-didgeridoo" = "../data/test-set_predictions/dreamy-didgeridoo.csv",
+  "embracing-euphonium" = "../data/test-set_predictions/embracing-euphonium.csv",
+  "fantastic-flute" = "../data/test-set_predictions/fantastic-flute.csv"
 )
 predictions <- files |> 
   map(read_csv) 
-head(predictions[["method-A"]])
+head(predictions[["artful-accordion"]])
 ```
 
     # A tibble: 6 × 3
@@ -188,14 +188,13 @@ CASIMiR offers a basic method to construct a comparison table:
 
 ``` r
 comp <- create_comparison(
-  predicted = predictions[["method-A"]],
+  predicted = predictions[["artful-accordion"]],
   gold_standard = gold_standard
 )
 ```
 
-    Warning in create_comparison(predicted = predictions[["method-A"]],
-    gold_standard = gold_standard): gold standard data contains documents that are
-    not in predicted set
+    Warning in create_comparison(predicted = predictions[["artful-accordion"]], :
+    gold standard data contains documents that are not in predicted set
 
 ``` r
 kable(filter(comp, doc_id == "1122545479"))
@@ -212,9 +211,9 @@ kable(filter(comp, doc_id == "1122545479"))
 | 1122545479 | 040550729 | FALSE | 0.7565188 | TRUE      |         0 |
 
 Note, CASIMiR informs you that apparently not all documents were indexed
-by “method-A”. When working with larger data, that is quite common:
-There are always edge cases with document titles that lead to empty
-results. Silence, not SPAM, may also be a feature for an indexing
+by “artful-accordion”. When working with larger data, that is quite
+common: There are always edge cases with document titles that lead to
+empty results. Silence, not SPAM, may also be a feature for an indexing
 method…
 
 Provided you don’t know DNB’s label and document ids by heart, you may
@@ -637,7 +636,7 @@ qual_table
 
 | Qualitative Method Comparison |  |  |  |  |  |  |  |  |
 |----|----|----|----|----|----|----|----|----|
-| label_id | label_text | gold | score_method-A | score_method-B | score_method-C | score_method-D | score_method-E | score_method-F |
+| label_id | label_text | gold | score_artful-accordion | score_bold-bassoon | score_charming-cello | score_dreamy-didgeridoo | score_embracing-euphonium | score_fantastic-flute |
 | 1129543579 - Berlin - Visions of a Future Urbanity on Art, Creativity, and Alternative Urban Design |  |  |  |  |  |  |  |  |
 | 040329038 | Creativity | FALSE | 0.07579290 | 0.20905685 | NA | NA | 0.145 | 0.02877 |
 | 040621103 | Urbanity | TRUE | 0.31719807 | 0.30762604 | 0.07800756 | NA | 0.355 | 0.05075 |

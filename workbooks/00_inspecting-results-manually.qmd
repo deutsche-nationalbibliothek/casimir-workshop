@@ -37,7 +37,6 @@ tree ../data
 ```
 
 ``` bash
-../data
 ├── gnd_entitytypes.csv
 ├── gnd_pref-labels_w-translation.csv
 ├── README.md
@@ -45,13 +44,14 @@ tree ../data
 ├── test-set_doc-ids-and-titles_w-translation.csv
 ├── test-set_gold-standard.csv
 ├── test-set_predictions
-│   ├── method-A.csv
-│   ├── method-B.csv
-│   ├── method-C.csv
-│   ├── method-D.csv
-│   ├── method-E.csv
-│   └── method-F.csv
-└── test-set_subject-group-mapping.csv
+│   ├── artful-accordion.csv
+│   ├── bold-bassoon.csv
+│   ├── charming-cello.csv
+│   ├── dreamy-didgeridoo.csv
+│   ├── embracing-euphonium.csv
+│   └── fantastic-flute.csv
+├── test-set_subject-group-mapping.csv
+└── training-frequency-distribution.csv
 ```
 
 Take a look at the file `data/REAMDE.md` for a description of all datasets provided. Here we will only introduce the most important ones for getting started.
@@ -117,16 +117,16 @@ These datasets all follow the same long table format with columns `doc_id`, `lab
 #| label: show-predictions
 
 files <- list(
-  "method-A" = "../data/test-set_predictions/method-A.csv",
-  "method-B" = "../data/test-set_predictions/method-B.csv",
-  "method-C" = "../data/test-set_predictions/method-C.csv",
-  "method-D" = "../data/test-set_predictions/method-D.csv",
-  "method-E" = "../data/test-set_predictions/method-E.csv",
-  "method-F" = "../data/test-set_predictions/method-F.csv"
+  "artful-accordion" = "../data/test-set_predictions/artful-accordion.csv",
+  "bold-bassoon" = "../data/test-set_predictions/bold-bassoon.csv",
+  "charming-cello" = "../data/test-set_predictions/charming-cello.csv",
+  "dreamy-didgeridoo" = "../data/test-set_predictions/dreamy-didgeridoo.csv",
+  "embracing-euphonium" = "../data/test-set_predictions/embracing-euphonium.csv",
+  "fantastic-flute" = "../data/test-set_predictions/fantastic-flute.csv"
 )
 predictions <- files |> 
   map(read_csv) 
-head(predictions[["method-A"]])
+head(predictions[["artful-accordion"]])
 ```
 
 Gold standard and predictions are the basic input for computing any retrieval scores.
@@ -141,7 +141,7 @@ CASIMiR offers a basic method to construct a comparison table:
 #| label: create-comparison
 #| warning: true
 comp <- create_comparison(
-  predicted = predictions[["method-A"]],
+  predicted = predictions[["artful-accordion"]],
   gold_standard = gold_standard
 )
 
@@ -149,7 +149,7 @@ kable(filter(comp, doc_id == "1122545479"))
 
 ```
 
-Note, CASIMiR informs you that apparently not all documents were indexed by "method-A". When working with larger data, that is quite common: There are always edge cases with document titles that lead to empty results. Silence, not SPAM, may also be a feature for an indexing method...
+Note, CASIMiR informs you that apparently not all documents were indexed by "artful-accordion". When working with larger data, that is quite common: There are always edge cases with document titles that lead to empty results. Silence, not SPAM, may also be a feature for an indexing method...
 
 Provided you don't know DNB's label and document ids by heart, you may need more context in form of text descriptions. Below code wraps up a lot of data wrangling to bring the tables into an instructive format:
 

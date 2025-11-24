@@ -33,14 +33,14 @@ To get to know precision-recall curves, let’s first do all the
 computations step-by-step, before we later use CASIMiR’s built-in
 functions to compute precision-recall curves directly.
 
-Let’s define a function that computes precision and recall for method A
-at **varying limits** `k`:
+Let’s define a function that computes precision and recall for method
+`artful-accordion` at **varying limits** `k`:
 
 ``` r
-# compute precision and recall at k for method A
+# compute precision and recall at k for method artful-accordion
 prec_rec_rank <- function(k) {
   res_at_k <- compute_set_retrieval_scores(
-    predicted = predictions[["method-A"]],
+    predicted = predictions[["artful-accordion"]],
     gold_standard = gold_standard,
     k = k
   )  
@@ -77,7 +77,7 @@ ggplot(prec_rec_rank_df, aes(x = rec, y = prec)) +
   geom_text(aes(label = paste0("k = ", k)), vjust = -1) +
   coord_fixed(xlim = c(0, 1), ylim = c(0, 1)) +
   labs(
-    title = "Precision-Recall Curve for Method A (by rank)",
+    title = "Precision-Recall Curve for artful-accordion (by rank)",
     x = "Recall",
     y = "Precision"
   )
@@ -87,12 +87,12 @@ ggplot(prec_rec_rank_df, aes(x = rec, y = prec)) +
 
 The same idea can be applied not to the **rank** but to the **confidence
 score**. Let’s define a function that computes precision and recall for
-method A at **varying confidence score thresholds**:
+method `artful-accordion` at **varying confidence score thresholds**:
 
 ``` r
 prec_rec_threshold <- function(threshold) {
   # filter predictions by threshold
-  predictions_thresholded <- predictions[["method-A"]] |>
+  predictions_thresholded <- predictions[["artful-accordion"]] |>
     filter(score >= threshold)
   
   # compute precision and recall at threshold
@@ -133,7 +133,7 @@ ggplot(prec_rec_threshold_df, aes(x = rec, y = prec)) +
   geom_text(aes(label = paste0("t = ", round(threshold, 2))), hjust = -0.5) +
   coord_fixed(xlim = c(0, 1), ylim = c(0, 1)) + 
   labs(
-    title = "Precision-Recall Curve for Method A (by threshold)",
+    title = "Precision-Recall Curve for artful-accordion (by threshold)",
     x = "Recall",
     y = "Precision"
   )
@@ -160,7 +160,7 @@ compute precision-recall curves directly:
 
 ``` r
 pr_curve <- compute_pr_curve(
-  predicted = predictions[["method-A"]],
+  predicted = predictions[["artful-accordion"]],
   gold_standard = gold_standard,
   steps = 10
 )
@@ -169,7 +169,7 @@ ggplot(pr_curve$plot_data, aes(x = rec, y = prec_cummax)) +
   geom_point() +
   geom_path() +
   coord_fixed(xlim = c(0, 1), ylim = c(0, 1)) + 
-  ggtitle("Precision-Recall Curve for Method A, computed with CASIMiR")
+  ggtitle("Precision-Recall Curve for artful-accordion, computed with CASIMiR")
 ```
 
 ![](figures/03_precision-recall-curves/prec-rec-casimir-1.png)
@@ -213,7 +213,7 @@ and gold standard without computing the full pr-curve first:
 
 ``` r
 pr_auc_direct <- compute_pr_auc(
-  predicted = predictions[["method-A"]],
+  predicted = predictions[["artful-accordion"]],
   gold_standard = gold_standard,
   steps = 10
 )
@@ -244,7 +244,7 @@ library(future)
 plan(multicore)
 
 pr_curve_with_cutoff <- compute_pr_curve(
-  predicted = predictions[["method-A"]],
+  predicted = predictions[["artful-accordion"]],
   gold_standard = gold_standard, 
   steps = 10,
   limit_range = 1:10,

@@ -4,6 +4,7 @@ Maximilian Kähler, DNB
 - [Analyse performance by label frequency, binned frequency
   groups](#analyse-performance-by-label-frequency-binned-frequency-groups)
 - [Your turn](#your-turn)
+- [Bonus: propensity scoring](#bonus-propensity-scoring)
 
 So far, we have mainly focused on evaluating the overall performance of
 different methods for subject indexing. However, in practice, it is
@@ -56,7 +57,8 @@ methods perform on labels of different frequencies.
 
 We already learned in workbook 02, how to stratify set retrieval metrics
 by groups defined in the label space. We now use the same method, but
-use the freq_groups derived from the training distribution above.
+use the freq_groups derived from the training distribution above. :::
+{.cell}
 
 ``` r
 res_by_gnd_freq <- map_dfr(
@@ -70,6 +72,8 @@ res_by_gnd_freq <- map_dfr(
   ),  .id = "method"
 )
 ```
+
+:::
 
 We can visualize that in a plot:
 
@@ -100,3 +104,5 @@ Based on the plot above, answer the following questions:
 
 What are your conclusions? Which method would you choose for a
 production system?
+
+## Bonus: propensity scoring

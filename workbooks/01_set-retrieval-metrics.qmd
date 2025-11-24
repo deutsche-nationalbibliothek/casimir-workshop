@@ -36,13 +36,14 @@ gold_standard <- read_csv("../data/test-set_gold-standard.csv",
                           col_select = c("doc_id", "label_id"))
 
 files <- list(
-  "method-A" = "../data/test-set_predictions/method-A.csv",
-  "method-B" = "../data/test-set_predictions/method-B.csv",
-  "method-C" = "../data/test-set_predictions/method-C.csv",
-  "method-D" = "../data/test-set_predictions/method-D.csv",
-  "method-E" = "../data/test-set_predictions/method-E.csv",
-  "method-F" = "../data/test-set_predictions/method-F.csv"
+  "artful-accordion" = "../data/test-set_predictions/artful-accordion.csv",
+  "bold-bassoon" = "../data/test-set_predictions/bold-bassoon.csv",
+  "charming-cello" = "../data/test-set_predictions/charming-cello.csv",
+  "dreamy-didgeridoo" = "../data/test-set_predictions/dreamy-didgeridoo.csv",
+  "embracing-euphonium" = "../data/test-set_predictions/embracing-euphonium.csv",
+  "fantastic-flute" = "../data/test-set_predictions/fantastic-flute.csv"
 )
+
 predictions <- files |> 
   map(read_csv) 
 ```
@@ -82,7 +83,7 @@ should be considered for the computation of the metrics.
 #| label: compute-metrics-one-method
 
 compute_set_retrieval_scores(
-  predicted = predictions[["method-A"]],
+  predicted = predictions[["artful-accordion"]],
   gold_standard = gold_standard,
   k = 5,
   rename_metrics = TRUE
@@ -91,7 +92,7 @@ compute_set_retrieval_scores(
 ```
 
 The column `support` indicates how many documents have contributed to the
-computation of the respective metric. If `method-A` made predictions for
+computation of the respective metric. If `artful-accordion` made predictions for
 all documents in the gold standard, this should be equal to the number of
 documents in the gold standard. But if some documents were not assigned any
 predicted labels, they are not considered for the computation of precision.
@@ -178,7 +179,7 @@ wrapper around three steps:
     results to yield the final precision, recall, and F1-score.
     
 Let's use this to find out the best and worst performing subject terms for
-`method-A`.
+`artful-accordion`.
     
 ```{r}
 #| label: Top-and-bottom-labels
@@ -187,7 +188,7 @@ label_texts <- read_csv("../data/gnd_pref-labels_w-translation.csv",
                         col_select = c("label_id", "label_text_eng"))
 
 comp <- create_comparison(
-  predicted = predictions[["method-A"]],
+  predicted = predictions[["artful-accordion"]],
   gold_standard = gold_standard
 )
 
@@ -203,7 +204,7 @@ intermed |>
   select(label_id, label_text_eng, tp, fp, fn, prec, rec, f1) |> 
   head(n = 10) |> 
   kable(
-    caption = "Best performing subject terms for method-A with a mininimum of
+    caption = "Best performing subject terms for artful-accordion with a mininimum of
      20 gold standard instances."
   )
 
@@ -213,7 +214,7 @@ intermed |>
   select(label_id, label_text_eng, tp, fp, fn, prec, rec, f1) |> 
   head(n = 10) |> 
   kable(
-    caption = "Worst performing subject terms for method-A with a minimum of
+    caption = "Worst performing subject terms for artful-accordion with a minimum of
      20 gold standard instances."
   )
   
@@ -269,7 +270,7 @@ recall in subject averaging mode:
 ```{r}
 #| label: subj-avg-zero-devision
 compute_set_retrieval_scores(
-  predicted = predictions[["method-A"]],
+  predicted = predictions[["artful-accordion"]],
   gold_standard = gold_standard,
   k = 5,
   mode = "subj-avg",

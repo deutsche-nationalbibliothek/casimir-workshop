@@ -37,13 +37,14 @@ gold_standard <- read_csv("../data/test-set_gold-standard.csv",
                           show_col_types = FALSE)
 
 files <- list(
-  "method-A" = "../data/test-set_predictions/method-A.csv",
-  "method-B" = "../data/test-set_predictions/method-B.csv",
-  "method-C" = "../data/test-set_predictions/method-C.csv",
-  "method-D" = "../data/test-set_predictions/method-D.csv",
-  "method-E" = "../data/test-set_predictions/method-E.csv",
-  "method-F" = "../data/test-set_predictions/method-F.csv"
+  "artful-accordion" = "../data/test-set_predictions/artful-accordion.csv",
+  "bold-bassoon" = "../data/test-set_predictions/bold-bassoon.csv",
+  "charming-cello" = "../data/test-set_predictions/charming-cello.csv",
+  "dreamy-didgeridoo" = "../data/test-set_predictions/dreamy-didgeridoo.csv",
+  "embracing-euphonium" = "../data/test-set_predictions/embracing-euphonium.csv",
+  "fantastic-flute" = "../data/test-set_predictions/fantastic-flute.csv"
 )
+
 predictions <- files |> 
   map(read_csv, show_col_types = FALSE) 
 

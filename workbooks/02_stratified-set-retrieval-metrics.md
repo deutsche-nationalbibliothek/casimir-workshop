@@ -22,14 +22,14 @@ the `doc_groups` argument with a prepared data frame containing the
 document IDs and their corresponding subject groups.
 
 ``` r
-res_at_5_by_sg_method_A <- compute_set_retrieval_scores(
-  predicted = predictions[["method-A"]],
+res_at_5_by_sg_artful_accordion <- compute_set_retrieval_scores(
+  predicted = predictions[["artful-accordion"]],
   gold_standard = gold_standard,
   doc_groups = subject_groups,
   k = 5
 )
 
-head(res_at_5_by_sg_method_A)
+head(res_at_5_by_sg_artful_accordion)
 ```
 
     # A tibble: 6 × 7
@@ -56,14 +56,14 @@ for better readability.
 
 ``` r
 # apply post processing to simplify display of results
-res_at_5_by_sg_method_A  |>
+res_at_5_by_sg_artful_accordion  |>
   filter(metric %in% c("prec", "rec", "f1")) |> 
   select(-support, -mode)  |>
   pivot_wider(
     names_from = metric,
     values_from = value
   )  |>
-  kable(caption = "Set retrieval scores at rank 5 for Method A stratified by subject group.")
+  kable(caption = "Set retrieval scores at rank 5 for artful-accordion stratified by subject group.")
 ```
 
 | sg | sg_label_ger | sg_label_eng | f1 | prec | rec |
@@ -87,11 +87,12 @@ res_at_5_by_sg_method_A  |>
 | 800 | Literatur, Rhetorik, Literaturwissenschaft | Literature, Rhetoric, Literary Studies | 0.239 | 0.243 | 0.299 |
 | 940/943 | Geschichte Deutschlands und Europas | History of Germany and Europe | 0.289 | 0.269 | 0.425 |
 
-Set retrieval scores at rank 5 for Method A stratified by subject group.
+Set retrieval scores at rank 5 for artful-accordion stratified by
+subject group.
 
-We can see that the performance of Method A varies across different
-subject groups. For example, the f1-score for physics is best, whereas
-computer science has the lowest f1-score.
+We can see that the performance of artful-accordion varies across
+different subject groups. For example, the f1-score for physics is best,
+whereas computer science has the lowest f1-score.
 
 While this sort of analysis can be done manually for each method, it is
 often more convenient to compute the stratified results for all methods
@@ -112,14 +113,14 @@ head(res_at_5_by_sg_all_methods)
 ```
 
     # A tibble: 6 × 8
-      Method   sg    sg_label_ger            sg_label_eng metric mode  value support
-      <chr>    <fct> <fct>                   <fct>        <chr>  <chr> <dbl>   <dbl>
-    1 method-A 004   Informatik              Computer Sc… f1     doc-… 0.211     500
-    2 method-A 100   Philosophie             Philosophy   f1     doc-… 0.338     500
-    3 method-A 150   Psychologie             Psychology   f1     doc-… 0.264     500
-    4 method-A 230   Theologie, Christentum  Theology, C… f1     doc-… 0.305     500
-    5 method-A 300   Sozialwissenschaften, … Social Scie… f1     doc-… 0.241     499
-    6 method-A 320   Politik                 Politics     f1     doc-… 0.288     500
+      Method           sg    sg_label_ger    sg_label_eng metric mode  value support
+      <chr>            <fct> <fct>           <fct>        <chr>  <chr> <dbl>   <dbl>
+    1 artful-accordion 004   Informatik      Computer Sc… f1     doc-… 0.211     500
+    2 artful-accordion 100   Philosophie     Philosophy   f1     doc-… 0.338     500
+    3 artful-accordion 150   Psychologie     Psychology   f1     doc-… 0.264     500
+    4 artful-accordion 230   Theologie, Chr… Theology, C… f1     doc-… 0.305     500
+    5 artful-accordion 300   Sozialwissensc… Social Scie… f1     doc-… 0.241     499
+    6 artful-accordion 320   Politik         Politics     f1     doc-… 0.288     500
 
 As above, we apply some post-processing to simplify the display of
 results.
@@ -136,7 +137,7 @@ res_at_5_by_sg_all_methods  |>
   kable(caption = "F1-scores at rank 5 for all methods stratified by subject groups.")
 ```
 
-| sg | sg_label_ger | sg_label_eng | metric | method-A | method-B | method-C | method-D | method-E | method-F |
+| sg | sg_label_ger | sg_label_eng | metric | artful-accordion | bold-bassoon | charming-cello | dreamy-didgeridoo | embracing-euphonium | fantastic-flute |
 |:---|:---|:---|:---|---:|---:|---:|---:|---:|---:|
 | 004 | Informatik | Computer Science | f1 | 0.211 | 0.333 | 0.312 | 0.303 | 0.295 | 0.294 |
 | 100 | Philosophie | Philosophy | f1 | 0.338 | 0.420 | 0.373 | 0.269 | 0.372 | 0.328 |
@@ -226,8 +227,8 @@ to speed up the computation. This can be done using the
 library(future)
 plan(multicore)
 
-res_at_5_by_sg_method_A_ci <- compute_set_retrieval_scores(
-  predicted = predictions[["method-A"]],
+res_at_5_by_sg_artful_accordion_ci <- compute_set_retrieval_scores(
+  predicted = predictions[["artful-accordion"]],
   gold_standard = gold_standard,
   doc_groups = subject_groups,
   k = 5,
@@ -236,18 +237,18 @@ res_at_5_by_sg_method_A_ci <- compute_set_retrieval_scores(
   progress = TRUE
 )
 
-head(res_at_5_by_sg_method_A_ci)
+head(res_at_5_by_sg_artful_accordion_ci)
 ```
 
     # A tibble: 6 × 9
       sg    sg_label_ger   sg_label_eng metric mode  value ci_lower ci_upper support
       <fct> <fct>          <fct>        <chr>  <chr> <dbl>    <dbl>    <dbl>   <dbl>
-    1 004   Informatik     Computer Sc… f1     doc-… 0.211    0.198    0.226     500
-    2 100   Philosophie    Philosophy   f1     doc-… 0.338    0.323    0.351     500
-    3 150   Psychologie    Psychology   f1     doc-… 0.264    0.250    0.278     500
-    4 230   Theologie, Ch… Theology, C… f1     doc-… 0.305    0.290    0.323     500
-    5 300   Sozialwissens… Social Scie… f1     doc-… 0.241    0.226    0.258     499
-    6 320   Politik        Politics     f1     doc-… 0.288    0.273    0.303     500
+    1 004   Informatik     Computer Sc… f1     doc-… 0.211    0.192    0.227     500
+    2 100   Philosophie    Philosophy   f1     doc-… 0.338    0.324    0.351     500
+    3 150   Psychologie    Psychology   f1     doc-… 0.264    0.246    0.282     500
+    4 230   Theologie, Ch… Theology, C… f1     doc-… 0.305    0.294    0.321     500
+    5 300   Sozialwissens… Social Scie… f1     doc-… 0.241    0.227    0.255     499
+    6 320   Politik        Politics     f1     doc-… 0.288    0.277    0.304     500
 
 ``` r
 plan(sequential) # reset to sequential processing
@@ -260,7 +261,7 @@ estimates in a plot:
 
 ``` r
 ggplot(
-  res_at_5_by_sg_method_A_ci,
+  res_at_5_by_sg_artful_accordion_ci,
   aes(x = sg, y = value, ymin = ci_lower, ymax = ci_upper)
 ) + 
   geom_pointrange(position = position_dodge(width = 0.5)) +

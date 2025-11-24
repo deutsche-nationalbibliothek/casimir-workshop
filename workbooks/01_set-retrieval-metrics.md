@@ -54,7 +54,7 @@ labels should be considered for the computation of the metrics.
 
 ``` r
 compute_set_retrieval_scores(
-  predicted = predictions[["method-A"]],
+  predicted = predictions[["artful-accordion"]],
   gold_standard = gold_standard,
   k = 5,
   rename_metrics = TRUE
@@ -70,10 +70,10 @@ compute_set_retrieval_scores(
     4 rprec@5 doc-avg 0.414    8197
 
 The column `support` indicates how many documents have contributed to
-the computation of the respective metric. If `method-A` made predictions
-for all documents in the gold standard, this should be equal to the
-number of documents in the gold standard. But if some documents were not
-assigned any predicted labels, they are not considered for the
+the computation of the respective metric. If `artful-accordion` made
+predictions for all documents in the gold standard, this should be equal
+to the number of documents in the gold standard. But if some documents
+were not assigned any predicted labels, they are not considered for the
 computation of precision. See below digression for more details on
 aggregation modes and zero division handling.
 
@@ -108,14 +108,14 @@ results |>
 kable(caption = paste0("Set retrieval metrics for all methods (k = ", K, ")"))
 ```
 
-| Method   | mode    |      f1@5 |    prec@5 |     rec@5 |   rprec@5 |
-|:---------|:--------|----------:|----------:|----------:|----------:|
-| method-A | doc-avg | 0.2769323 | 0.2886015 | 0.3494472 | 0.4137266 |
-| method-B | doc-avg | 0.3512206 | 0.3039176 | 0.5233464 | 0.5451911 |
-| method-C | doc-avg | 0.3483506 | 0.3011289 | 0.5167074 | 0.5378927 |
-| method-D | doc-avg | 0.2578584 | 0.2155991 | 0.4130448 | 0.4260111 |
-| method-E | doc-avg | 0.3345450 | 0.2897207 | 0.4944938 | 0.5149772 |
-| method-F | doc-avg | 0.3080582 | 0.2645752 | 0.4669618 | 0.4851891 |
+| Method              | mode    |      f1@5 |    prec@5 |     rec@5 |   rprec@5 |
+|:--------------------|:--------|----------:|----------:|----------:|----------:|
+| artful-accordion    | doc-avg | 0.2769323 | 0.2886015 | 0.3494472 | 0.4137266 |
+| bold-bassoon        | doc-avg | 0.3512206 | 0.3039176 | 0.5233464 | 0.5451911 |
+| charming-cello      | doc-avg | 0.3483506 | 0.3011289 | 0.5167074 | 0.5378927 |
+| dreamy-didgeridoo   | doc-avg | 0.2578584 | 0.2155991 | 0.4130448 | 0.4260111 |
+| embracing-euphonium | doc-avg | 0.3345450 | 0.2897207 | 0.4944938 | 0.5149772 |
+| fantastic-flute     | doc-avg | 0.3080582 | 0.2645752 | 0.4669618 | 0.4851891 |
 
 Set retrieval metrics for all methods (k = 5)
 
@@ -171,14 +171,14 @@ convenient wrapper around three steps:
     F1-score.
 
 Let’s use this to find out the best and worst performing subject terms
-for `method-A`.
+for `artful-accordion`.
 
 ``` r
 label_texts <- read_csv("../data/gnd_pref-labels_w-translation.csv",
                         col_select = c("label_id", "label_text_eng"))
 
 comp <- create_comparison(
-  predicted = predictions[["method-A"]],
+  predicted = predictions[["artful-accordion"]],
   gold_standard = gold_standard
 )
 
@@ -194,7 +194,7 @@ intermed |>
   select(label_id, label_text_eng, tp, fp, fn, prec, rec, f1) |> 
   head(n = 10) |> 
   kable(
-    caption = "Best performing subject terms for method-A with a mininimum of
+    caption = "Best performing subject terms for artful-accordion with a mininimum of
      20 gold standard instances."
   )
 ```
@@ -212,8 +212,8 @@ intermed |>
 | 974041238 | Resilience                 |  13 |   1 |  14 | 0.9285714 | 0.4814815 | 0.6341463 |
 | 042979293 | Mindfulness                |  12 |   4 |  10 | 0.7500000 | 0.5454545 | 0.6315789 |
 
-Best performing subject terms for method-A with a mininimum of 20 gold
-standard instances.
+Best performing subject terms for artful-accordion with a mininimum of
+20 gold standard instances.
 
 ``` r
 intermed |>
@@ -222,7 +222,7 @@ intermed |>
   select(label_id, label_text_eng, tp, fp, fn, prec, rec, f1) |> 
   head(n = 10) |> 
   kable(
-    caption = "Worst performing subject terms for method-A with a minimum of
+    caption = "Worst performing subject terms for artful-accordion with a minimum of
      20 gold standard instances."
   )
 ```
@@ -240,8 +240,8 @@ intermed |>
 | 040158330 | Protestant Church | 1 | 5 | 44 | 0.1666667 | 0.0222222 | 0.0392157 |
 | 040124754 | Discourse | 2 | 14 | 32 | 0.1250000 | 0.0588235 | 0.0800000 |
 
-Worst performing subject terms for method-A with a minimum of 20 gold
-standard instances.
+Worst performing subject terms for artful-accordion with a minimum of 20
+gold standard instances.
 
 ## Your Turn
 
@@ -300,7 +300,7 @@ recall in subject averaging mode:
 
 ``` r
 compute_set_retrieval_scores(
-  predicted = predictions[["method-A"]],
+  predicted = predictions[["artful-accordion"]],
   gold_standard = gold_standard,
   k = 5,
   mode = "subj-avg",

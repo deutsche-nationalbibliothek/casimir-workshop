@@ -37,13 +37,14 @@ gold_standard <- read_csv("../data/test-set_gold-standard.csv",
                           show_col_types = FALSE)
 
 files <- list(
-  "method-A" = "../data/test-set_predictions/method-A.csv",
-  "method-B" = "../data/test-set_predictions/method-B.csv",
-  "method-C" = "../data/test-set_predictions/method-C.csv",
-  "method-D" = "../data/test-set_predictions/method-D.csv",
-  "method-E" = "../data/test-set_predictions/method-E.csv",
-  "method-F" = "../data/test-set_predictions/method-F.csv"
+  "artful-accordion" = "../data/test-set_predictions/artful-accordion.csv",
+  "bold-bassoon" = "../data/test-set_predictions/bold-bassoon.csv",
+  "charming-cello" = "../data/test-set_predictions/charming-cello.csv",
+  "dreamy-didgeridoo" = "../data/test-set_predictions/dreamy-didgeridoo.csv",
+  "embracing-euphonium" = "../data/test-set_predictions/embracing-euphonium.csv",
+  "fantastic-flute" = "../data/test-set_predictions/fantastic-flute.csv"
 )
+
 predictions <- files |> 
   map(read_csv, show_col_types = FALSE) 
 
@@ -86,14 +87,14 @@ the `doc_groups` argument with a prepared data frame containing the document IDs
 
 ```{r}
 #| label: stratified-subject-groups
-res_at_5_by_sg_method_A <- compute_set_retrieval_scores(
-  predicted = predictions[["method-A"]],
+res_at_5_by_sg_artful_accordion <- compute_set_retrieval_scores(
+  predicted = predictions[["artful-accordion"]],
   gold_standard = gold_standard,
   doc_groups = subject_groups,
   k = 5
 )
 
-head(res_at_5_by_sg_method_A)
+head(res_at_5_by_sg_artful_accordion)
 
 ```
 
@@ -111,17 +112,17 @@ pivot the data frame to a wider format for better readability.
 ```{r}
 #| label: stratified-subject-groups-display
 # apply post processing to simplify display of results
-res_at_5_by_sg_method_A  |>
+res_at_5_by_sg_artful_accordion  |>
   filter(metric %in% c("prec", "rec", "f1")) |> 
   select(-support, -mode)  |>
   pivot_wider(
     names_from = metric,
     values_from = value
   )  |>
-  kable(caption = "Set retrieval scores at rank 5 for Method A stratified by subject group.")
+  kable(caption = "Set retrieval scores at rank 5 for artful-accordion stratified by subject group.")
 ```
 
-We can see that the performance of Method A varies across different subject 
+We can see that the performance of artful-accordion varies across different subject 
 groups. For example, the f1-score for physics is best, whereas
 computer science has the lowest f1-score.
 
@@ -227,8 +228,8 @@ processing to speed up the computation. This can be done using the
 library(future)
 plan(multicore)
 
-res_at_5_by_sg_method_A_ci <- compute_set_retrieval_scores(
-  predicted = predictions[["method-A"]],
+res_at_5_by_sg_artful_accordion_ci <- compute_set_retrieval_scores(
+  predicted = predictions[["artful-accordion"]],
   gold_standard = gold_standard,
   doc_groups = subject_groups,
   k = 5,
@@ -237,7 +238,7 @@ res_at_5_by_sg_method_A_ci <- compute_set_retrieval_scores(
   progress = TRUE
 )
 
-head(res_at_5_by_sg_method_A_ci)
+head(res_at_5_by_sg_artful_accordion_ci)
 
 plan(sequential) # reset to sequential processing
 ```
@@ -252,7 +253,7 @@ These can be used to visualize the uncertainty of the estimates in a plot:
 #| fig.height: 20
 
 ggplot(
-  res_at_5_by_sg_method_A_ci,
+  res_at_5_by_sg_artful_accordion_ci,
   aes(x = sg, y = value, ymin = ci_lower, ymax = ci_upper)
 ) + 
   geom_pointrange(position = position_dodge(width = 0.5)) +

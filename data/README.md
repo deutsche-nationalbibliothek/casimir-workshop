@@ -151,10 +151,18 @@ the frequency distribution of GND terms in the training data.
 
 Predictions for the test-set are provided from six different indexing algorithms,
 which are not disclosed purposefully, to allow for unbiased evaluation.
-The algorithms are referred to as `method_A` to `method_F`. Each of the
-prediction datasets follows the same format:
+The algorithms are referred to as 
 
-**File name:** `test-set_predictions_method_*.csv`
+  * artful accordion
+  * bold bassoon
+  * charming cello
+  * dreamy didgeridoo
+  * embracing euphonium
+  * fantastic flute
+
+Each of the prediction datasets follows the same format:
+
+**File name:** `test-set_predictions_<method-name>.csv`
 
 **Description:** Predicted GND labels for documents in the test-set using method X.
 
