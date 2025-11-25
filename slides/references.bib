@@ -1,0 +1,170 @@
+@inproceedings{Khler2025,
+   author = {Maximilian Kähler and Lisa Kluge and Katja Konermann},
+   city = {Hannover, Germany},
+   editor = {Christian Wartena and Ulrich Heid},
+   booktitle = {Proceedings of the 21st Conference on Natural Language Processing (KONVENS 2025): Workshops},
+   month = {9},
+   pages = {455-464},
+   publisher = {HsH Applied Academics},
+   title = {DNB-AI-Project at the GermEval-2025 LLMs4Subjects Task: KIFSPrompt - Knowledge-Injected Few-Shot Prompting},
+   url = {https://aclanthology.org/2025.konvens-2.42/},
+   year = {2025}
+}
+@misc{Khler2025,
+   author = {Maximilian Kähler and Clemens Rietdorf},
+   title = {Embedding Based Matching for Automated Subject Indexing},
+   url = {https://github.com/deutsche-nationalbibliothek/ebm4subjects},
+   year = {2025}
+}
+@inproceedings{Kluge2025,
+   abstract = {This paper presents our system developed for the SemEval-2025 Task 5: LLMs4Subjects: LLM-based Automated Subject Tagging for a National Technical Library's Open-Access Catalog.Our system relies on prompting a selection of LLMs with varying examples of intellectually annotated records and asking the LLMs to similarly suggest keywords for new records. This few-shot prompting technique is combined with a series of post-processing steps that map the generated keywords to the target vocabulary, aggregate the resulting subject terms to an ensemble vote and, finally, rank them as to their relevance to the record.Our system is fourth in the quantitative ranking in the all-subjects track, but achieves the best result in the qualitative ranking conducted by subject indexing experts.},
+   author = {Lisa Kluge and Maximilian Kähler},
+   city = {Vienna, Austria},
+   editor = {Sara Rosenthal and Aiala Rosá and Debanjan Ghosh and Marcos Zampieri},
+   isbn = {979-8-89176-273-2},
+   booktitle = {Proceedings of the 19th International Workshop on Semantic Evaluation (SemEval-2025)},
+   month = {7},
+   pages = {1118-1128},
+   publisher = {Association for Computational Linguistics},
+   title = {DNB-AI-Project at SemEval-2025 Task 5: An LLM-Ensemble Approach for Automated Subject Indexing},
+   url = {https://aclanthology.org/2025.semeval-1.148/},
+   year = {2025}
+}
+@article{Poley2025,
+   author = {Christoph Poley and Sandro Uhlmann and Frank Busse and Jan-Helge Jacobs and Maximilian Kähler and Matthias Nagelschmidt and Markus Schumacher},
+   doi = {10.53377/lq.19422},
+   issue = {1},
+   journal = {LIBER Quarterly: The Journal of the Association of European Research Libraries},
+   month = {4},
+   pages = {1-29},
+   title = {Automatic Subject Cataloguing at the German National Library},
+   volume = {35},
+   url = {https://liberquarterly.eu/article/view/19422},
+   year = {2025}
+}
+@misc{Suominen2019,
+   author = {Osma Suominen},
+   journal = {https://github.com/NatLibFi/Annif/wiki/Backend%3A-Omikuji},
+   title = {Omikuji Backend},
+   year = {2019}
+}
+@misc{Suominen2021,
+   author = {Osma Suominen},
+   journal = {https://github.com/NatLibFi/Annif/wiki/Backend%3A-MLLM},
+   title = {Maui Like Lexical Matching},
+   year = {2021}
+}
+@article{Suominen2019,
+   abstract = {Manually indexing documents for subject-based access is a labour-intensive process. We propose using metadata gathered from bibliographic databases to train algorithms that assist librarians in that work. We have developed Annif, an open source tool and microservice for automated subject indexing. After training it with a subject vocabulary and existing metadata, Annif can be used to assign subject headings for new documents. We have tested Annif with different document collections including scientific papers, old scanned books and contemporary e-books, Q&A pairs from an “ask a librar-ian” service, Finnish Wikipedia, and the archives of a local newspaper. The results of analysing scientific papers and current books have been reassuring, while other types of documents have proved to be more challenging. The current version is based on a combination of existing natural language processing and machine learning tools. By combining multiple approaches and existing open source algorithms, Annif can build on the strengths of individual algorithms and adapt to different settings. With Annif, we expect to improve subject indexing and classification processes especially for electronic documents as well as collections that otherwise would not be indexed at all.},
+   author = {Osma Suominen},
+   doi = {10.18352/lq.10285},
+   issn = {14355205},
+   issue = {1},
+   journal = {LIBER Quarterly},
+   title = {Annif: DIY automated subject indexing using multiple algorithms},
+   volume = {29},
+   year = {2019}
+}
+@inproceedings{X-Transformer,
+   abstract = {We consider the extreme multi-label text classification (XMC) problem: given
+an input text, return the most relevant labels from a large label collection.
+For example, the input text could be a product description on Amazon.com and
+the labels could be product categories. XMC is an important yet challenging
+problem in the NLP community. Recently, deep pretrained transformer models have
+achieved state-of-the-art performance on many NLP tasks including sentence
+classification, albeit with small label sets. However, naively applying deep
+transformer models to the XMC problem leads to sub-optimal performance due to
+the large output space and the label sparsity issue. In this paper, we propose
+X-Transformer, the first scalable approach to fine-tuning deep transformer
+models for the XMC problem. The proposed method achieves new state-of-the-art
+results on four XMC benchmark datasets. In particular, on a Wiki dataset with
+around 0.5 million labels, the prec@1 of X-Transformer is 77.28%, a substantial
+improvement over state-of-the-art XMC approaches Parabel (linear) and
+AttentionXML (neural), which achieve 68.70% and 76.95% precision@1,
+respectively. We further apply X-Transformer to a product2query dataset from
+Amazon and gained 10.7% relative improvement on prec@1 over Parabel.},
+   author = {Wei-Cheng Chang and Hsiang-Fu Yu and Kai Zhong and Yiming Yang and Inderjit S. Dhillon},
+   city = {New York, NY, USA},
+   doi = {10.1145/3394486.3403368},
+   isbn = {9781450379984},
+   booktitle = {Proceedings of the 26th ACM SIGKDD International Conference on Knowledge Discovery \& Data Mining},
+   keywords = {extreme multi-label text classification,transformer models},
+   month = {8},
+   note = {The key idea is to break down the XMC-Problem into smaller tasks. See Figure 3:<br/>Stage 1: Semantic Label Indexing forms Clusters of Labels<br/>Stage 2: Matching Maps Each Texts to Clusters<br/>Step 3: Ranking Model maps texts to Labels within a Cluster<br/>An important step in stage 1 is &quot;Label embedding&quot;. Here is an opportunity to employ GNDf-structure for more meaningful representations. An important issue is the input feature size. In the publication they only consider short input sequences, not at all comparable to full-text},
+   pages = {3163-3171},
+   publisher = {ACM},
+   title = {Taming Pretrained Transformers for Extreme Multi-label Text Classification},
+   url = {https://dl.acm.org/doi/10.1145/3394486.3403368},
+   year = {2020}
+}
+@article{XR-Transformer,
+   abstract = {Extreme multi-label text classification (XMC) seeks to find relevant labels
+from an extreme large label collection for a given text input. Many real-world
+applications can be formulated as XMC problems, such as recommendation systems,
+document tagging and semantic search. Recently, transformer based XMC methods,
+such as X-Transformer and LightXML, have shown significant improvement over
+other XMC methods. Despite leveraging pre-trained transformer models for text
+representation, the fine-tuning procedure of transformer models on large label
+space still has lengthy computational time even with powerful GPUs. In this
+paper, we propose a novel recursive approach, XR-Transformer to accelerate the
+procedure through recursively fine-tuning transformer models on a series of
+multi-resolution objectives related to the original XMC objective function.
+Empirical results show that XR-Transformer takes significantly less training
+time compared to other transformer-based XMC models while yielding better
+state-of-the-art results. In particular, on the public Amazon-3M dataset with 3
+million labels, XR-Transformer is not only 20x faster than X-Transformer but
+also improves the Precision@1 from 51% to 54%.},
+   author = {Jiong Zhang and Wei-cheng Chang and Hsiang-fu Yu and Inderjit S. Dhillon},
+   month = {10},
+   note = {In the related work section there is a remark on shallow embedding techniques, such as AttentionXML. It is emphasized, that such methods only work for small token size.<br/><br/>PIFA: Positive Instance Feature Aggregation is the term used for evaraging a labels training instances to represent it in the hierarchical label tree (HLT). },
+   title = {Fast Multi-Resolution Transformer Fine-tuning for Extreme Multi-label Text Classification},
+   url = {https://arxiv.org/abs/2110.00685v2},
+   year = {2021}
+}
+@article{Merrillees2021,
+   abstract = {Extreme multi-label classification (XML) is becoming increasingly relevant in the era of big data. Yet, there is no method for effectively generating stratified partitions of XML datasets. Instead, researchers typically rely on provided test-train splits that, 1) aren’t always representative of the entire dataset, and 2) are missing many of the labels. This can lead to poor generalization ability and unreliable performance estimates, as has been established in the binary and multi-class settings. As such, this paper presents a new and simple algorithm that can efficiently generate stratified partitions of XML datasets with millions of unique labels. We also examine the label distributions of prevailing benchmark splits, and investigate the issues that arise from using unrepresentative subsets of data for model development. The results highlight the difficulty of stratifying XML data, and demonstrate the importance of using stratified partitions for training and evaluation.},
+   author = {Maximillian Merrillees and Lan Du},
+   doi = {10.1007/978-3-030-75765-6_27},
+   isbn = {9783030757649},
+   issn = {16113349},
+   journal = {Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)},
+   keywords = {Extreme multi-label learning,Stratified sampling,XML},
+   month = {5},
+   note = {There are two take home messages:<br/>Long-Tailed Label-distributions should be adequately split for Test-Train-Splits. Otherwise there is a risk of overestimating performance. <br/>Label-Distributions can be statistically compared employing the KL-Divergence measure.},
+   pages = {334-345},
+   publisher = {Springer, Cham},
+   title = {Stratified Sampling for Extreme Multi-label Data},
+   volume = {12713 LNAI},
+   url = {https://link.springer.com/chapter/10.1007/978-3-030-75765-6_27},
+   year = {2021}
+}
+@article{Parabel,
+   abstract = {This paper develops the Parabel algorithm for extreme multi-label learning where the objective is to learn classifiers that can annotate each data point with the most relevant subset of labels from an extremely large label set. The state-of-the-art 1-vs-All based DiSMEC and PPDSparse algorithms are the most accurate but can take upto months for training and prediction as they learn and apply an independent linear classifier per label. Consequently, they do not scale to large datasets with millions of labels. Parabel addresses both limitations by learning a balanced label hierarchy such that: (a) the 1-vs-All classifiers in the leaf nodes of the label hierarchy can be trained on a small subset of the training set thereby reducing the training time to a few hours on a single core of a standard desktop and (b) novel points can be classified by traversing the learned hierarchy in logarithmic time and applying the 1-vs-All classifiers present in just the leaf thereby reducing the prediction time to a few milliseconds per test point. This allows Parabel to scale to tasks considered infeasible for DiSMEC and PPDSparse such as predicting the subset of 7 million Bing queries that might lead to a click on a given ad-landing page for dynamic search advertising. Experiments on multiple benchmark datasets revealed that Parabel could be almost as accurate as PPDSparse and DiSMEC while being upto 1,000x faster at training and upto 40x-10,000x faster at prediction. Furthermore, Parabel was demonstrated to significantly improve dynamic search advertising on Bing by more than doubling the ad recall and improving the click-through rate by 20%. Source code for Parabel can be downloaded from [1].},
+   author = {Yashoteja Prabhu and Anil Kag and Shrutendra Harsola and Rahul Agrawal and Manik Varma},
+   doi = {10.1145/3178876.3185998},
+   isbn = {9781450356398},
+   journal = {The Web Conference 2018 - Proceedings of the World Wide Web Conference, WWW 2018},
+   keywords = {Dynamic search advertising,Extreme classification,multi-label hierarchical softmax},
+   month = {4},
+   pages = {993-1002},
+   publisher = {Association for Computing Machinery, Inc},
+   title = {Parabel: Partitioned label trees for extreme classification with application to dynamic search advertising},
+   url = {https://doi.org/10.1145/3178876.3185998},
+   year = {2018}
+}
+@inproceedings{PfastreXML,
+   abstract = {The choice of the loss function is critical in extreme multi-label learning where the objective is to annotate each data point with the most relevant subset of labels from an extremely large label set. Unfortunately, existing loss functions, such as the Hamming loss, are unsuitable for learning, model selection, hyperparameter tuning and performance evaluation. This paper addresses the issue by developing propensity scored losses which: (a) prioritize predicting the few relevant labels over the large number of irrelevant ones; (b) do not erroneously treat missing labels as irrelevant but instead provide unbiased estimates of the true loss function even when ground truth labels go missing under arbi- trary probabilistic label noise models; and (c) promote the accurate prediction of infrequently occurring, hard to predict, but rewarding tail labels. Another contribution is the development of the PfastreXML algorithm (code available from [1]) which efficiently scales to large datasets with up to 9 million labels, 70 million points and 2 million dimensions and which gives significant improvements over the state-of-the-art. This paper's results also apply to tagging, recommendation and ranking which are the motivating applications for extreme multi-label learning. They generalize previous attempts at deriving unbiased losses under the restrictive assumption that labels go missing uniformly at random from the ground truth. Furthermore, they provide a sound theoretical justification for popular label weighting heuristics used to recommend rare items. Finally, they demonstrate that the proposed contributions align with real world applications by achieving superior clickthrough rates on sponsored search advertising in Bing.},
+   author = {Himanshu Jain and Yashoteja Prabhu and Manik Varma},
+   city = {New York, NY, USA},
+   doi = {10.1145/2939672.2939756},
+   isbn = {9781450342322},
+   booktitle = {Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining},
+   month = {8},
+   note = {The paper addresses the following problems:<br/>*infrequent labels can be more important than frequent labels <br/>* ground truth (gold standard) labels may be viewed as incomplete, which makes it useful to think of XMLC-problems as missing-label problems<br/>The proposed solution is a per label inverse probability weight, which leads to <b>propensity scored</b> precision@k and nDCG@k.},
+   pages = {935-944},
+   publisher = {ACM},
+   title = {Extreme Multi-label Loss Functions for Recommendation, Tagging, Ranking and Other Missing Label Applications},
+   volume = {13-17-Augu},
+   url = {https://dl.acm.org/doi/10.1145/2939672.2939756},
+   year = {2016}
+}
