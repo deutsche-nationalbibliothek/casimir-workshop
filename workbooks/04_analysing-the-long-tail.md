@@ -182,7 +182,7 @@ ggplot(df, aes(x = N_l, y = 1/p_l, color = factor(N))) +
   )
 ```
 
-![](figures/04_analysing-the-long-tail/unnamed-chunk-1-1.png)
+![](figures/04_analysing-the-long-tail/plot-propensity-scores-1.png)
 
 Rare labels receive much higher weights than frequent ones.
 

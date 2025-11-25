@@ -170,6 +170,7 @@ The following plot shows the relationship between label frequency and
 the corresponding label weight (inversly proportional to the propensity score).
 
 ```{r}
+#| label: plot-propensity-scores
 
 N_l <- 10^seq(0,6,0.5)
 
