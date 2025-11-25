@@ -141,7 +141,6 @@ ls ../data/test-set_predictions
     charming-cello.csv
     dreamy-didgeridoo.csv
     embracing-euphonium.csv
-    fantastic-flute.csv
 
 These datasets all follow the same long table format with columns
 `doc_id`, `label_id` and `score`. Every row expresses a subject
@@ -156,9 +155,9 @@ files <- list(
   "bold-bassoon" = "../data/test-set_predictions/bold-bassoon.csv",
   "charming-cello" = "../data/test-set_predictions/charming-cello.csv",
   "dreamy-didgeridoo" = "../data/test-set_predictions/dreamy-didgeridoo.csv",
-  "embracing-euphonium" = "../data/test-set_predictions/embracing-euphonium.csv",
-  "fantastic-flute" = "../data/test-set_predictions/fantastic-flute.csv"
+  "embracing-euphonium" = "../data/test-set_predictions/embracing-euphonium.csv"
 )
+
 predictions <- files |> 
   map(read_csv) 
 head(predictions[["artful-accordion"]])
@@ -634,95 +633,85 @@ qual_table
 }
 </style>
 
-| Qualitative Method Comparison |  |  |  |  |  |  |  |  |
-|----|----|----|----|----|----|----|----|----|
-| label_id | label_text | gold | score_artful-accordion | score_bold-bassoon | score_charming-cello | score_dreamy-didgeridoo | score_embracing-euphonium | score_fantastic-flute |
-| 1129543579 - Berlin - Visions of a Future Urbanity on Art, Creativity, and Alternative Urban Design |  |  |  |  |  |  |  |  |
-| 040329038 | Creativity | FALSE | 0.07579290 | 0.20905685 | NA | NA | 0.145 | 0.02877 |
-| 040621103 | Urbanity | TRUE | 0.31719807 | 0.30762604 | 0.07800756 | NA | 0.355 | 0.05075 |
-| 040057283 | Berlin | TRUE | 0.36113155 | NA | 0.07056365 | 0.43647248 | 0.121 | NA |
-| 041143337 | Art | FALSE | 0.49477395 | 0.22454967 | 0.05172485 | NA | 0.150 | NA |
-| 040778045 | Urban Design | TRUE | 0.54210848 | 0.22112384 | 0.05332217 | 0.40142271 | 0.219 | 0.09810 |
-| 040334228 | Arts | TRUE | NA | NA | NA | NA | NA | NA |
-| 040567338 | Urban Geography | TRUE | NA | NA | NA | NA | NA | NA |
-| 04268059X | Culture economy | TRUE | NA | NA | NA | NA | NA | NA |
-| 040567540 | Urban Planning | FALSE | NA | 0.29041576 | NA | NA | NA | NA |
-| 040567303 | Urban development | FALSE | NA | NA | 0.04738772 | NA | NA | 0.03008 |
-| 041911253 | Future expectation | FALSE | NA | NA | NA | 0.10301682 | NA | NA |
-| 041328779 | Future Planning | FALSE | NA | NA | NA | 0.28373721 | NA | NA |
-| 040680975 | Future | FALSE | NA | NA | NA | 0.49127367 | NA | NA |
-| 100152912X | Dortmunder U | FALSE | NA | NA | NA | NA | NA | 0.03429 |
-| 1149279583 - Was ist besser? 1945-1965: Wie es wirklich war! |  |  |  |  |  |  |  |  |
-| 041394046 | Goods | FALSE | 0.05739328 | NA | NA | NA | NA | NA |
-| 040663809 | Reality | FALSE | 0.10689719 | NA | NA | NA | NA | NA |
-| 040013073 | Daily life | TRUE | NA | NA | NA | NA | NA | NA |
-| 040118827 | Germany | TRUE | NA | 0.26746377 | 0.10488939 | NA | 0.082 | NA |
-| 040118894 | Germany (Federal Republic) | FALSE | NA | 0.05507484 | NA | NA | NA | NA |
-| 041900812 | Economic Miracle | FALSE | NA | 0.05519071 | NA | NA | NA | NA |
-| 040205177 | History | FALSE | NA | 0.06399128 | NA | NA | NA | NA |
-| 948411694 | Post-war period | FALSE | NA | 0.35231987 | NA | NA | NA | NA |
-| 040288145 | Jewish persecution | FALSE | NA | NA | 0.04704222 | NA | NA | NA |
-| 040432718 | Austria | FALSE | NA | NA | 0.04716158 | NA | NA | NA |
-| 041227824 | Everyday Culture | FALSE | NA | NA | 0.04806859 | NA | 0.035 | NA |
-| 042071860 | Groß-Lüder | FALSE | NA | NA | 0.04973334 | NA | 0.073 | NA |
-| 041360559 | American Civil War (1861-1865) | FALSE | NA | NA | NA | 0.02764216 | NA | NA |
-| 040087840 | Civil war | FALSE | NA | NA | NA | 0.03618289 | NA | NA |
-| 043163815 | Past | FALSE | NA | NA | NA | 0.12463379 | NA | NA |
-| 043261310 | Good Times - Bad Times | FALSE | NA | NA | NA | 0.12642516 | NA | NA |
-| 04061672X | Commemoration of the past | FALSE | NA | NA | NA | 0.30247298 | NA | NA |
-| 040468402 | Portrait photography | FALSE | NA | NA | NA | NA | 0.029 | NA |
-| 040436659 | Optimism | FALSE | NA | NA | NA | NA | 0.031 | NA |
-| 943399718 | Ica | FALSE | NA | NA | NA | NA | NA | 0.02581 |
-| 041728335 | Original (Person) Translation: Original (Person) | FALSE | NA | NA | NA | NA | NA | 0.02587 |
-| 041818555 | Care | FALSE | NA | NA | NA | NA | NA | 0.03308 |
-| 960318526 | Gelsenkirchen-Resse | FALSE | NA | NA | NA | NA | NA | 0.03875 |
-| 041172353 | Cake | FALSE | NA | NA | NA | NA | NA | 0.04195 |
-| 1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful Implementation |  |  |  |  |  |  |  |  |
-| 950251194 | Transformation | FALSE | 0.05997121 | NA | NA | NA | NA | NA |
-| 041316657 | Claim | FALSE | 0.31719807 | NA | NA | 0.18597430 | NA | NA |
-| 04126892X | School development | TRUE | NA | NA | 0.11813986 | 0.47994795 | 0.858 | 0.32337 |
-| 041351487 | Organizing the Class | TRUE | NA | NA | NA | NA | NA | NA |
-| 1000723437 | Inclusive School | TRUE | NA | 0.29270390 | 0.04837416 | 0.72401166 | 0.066 | 0.02940 |
-| 965002845 | Inclusion (Sociology) | TRUE | NA | 0.19996907 | 0.06500251 | NA | 0.148 | 0.03568 |
-| 041276612 | School development planning | FALSE | NA | 0.12761976 | NA | NA | NA | NA |
-| 04053474X | School | FALSE | NA | 0.13852690 | NA | NA | NA | NA |
-| 100072185X | Inclusive Pedagogy | FALSE | NA | 0.16562288 | 0.04911679 | 0.69988042 | 0.041 | 0.02241 |
-| 041351754 | Educational research | FALSE | NA | NA | 0.04595719 | NA | NA | NA |
-| 123322929X | Inclusive teaching | FALSE | NA | NA | NA | 0.30149797 | NA | NA |
-| 040118827 | Germany | FALSE | NA | NA | NA | NA | 0.099 | NA |
-| 041156137 | Practical relevance | FALSE | NA | NA | NA | NA | NA | 0.02410 |
-| 1220297135 - The Enchantment of the World A Cultural History of Christianity |  |  |  |  |  |  |  |  |
-| 96355123X | Enchantment | FALSE | 0.31719807 | NA | NA | 0.05300185 | NA | NA |
-| 04010074X | Christianity | TRUE | 0.56590599 | 0.60737634 | 0.05565031 | NA | 0.255 | 0.03819 |
-| 041256980 | Culture | TRUE | NA | NA | 0.05168247 | NA | 0.054 | 0.03080 |
-| 040493962 | Religion | FALSE | NA | 0.07313728 | NA | NA | NA | NA |
-| 040307204 | Church History | FALSE | NA | 0.08597670 | NA | NA | NA | NA |
-| 040205177 | History | FALSE | NA | 0.08827944 | NA | NA | NA | NA |
-| 040349292 | Lifeworld | FALSE | NA | NA | 0.04947460 | NA | NA | 0.06769 |
-| 040653528 | Worldview | FALSE | NA | NA | 0.04968721 | NA | 0.059 | 0.06414 |
-| 040277437 | Islam | FALSE | NA | NA | 0.05197397 | NA | 0.091 | NA |
-| 04010110X | Christian Literature | FALSE | NA | NA | NA | 0.02210998 | NA | NA |
-| 042261309 | Cultural history writing | FALSE | NA | NA | NA | 0.07228480 | NA | NA |
-| 040205266 | Historical Consciousness | FALSE | NA | NA | NA | 0.11119287 | NA | NA |
-| 041256719 | History of Culture (Field of Study) | FALSE | NA | NA | NA | 0.20801027 | NA | NA |
-| 040013286 | Alps | FALSE | NA | NA | NA | NA | 0.039 | NA |
-| 040359646 | Literature | FALSE | NA | NA | NA | NA | NA | 0.02765 |
-| 1255811684 - Media habitus and biographical legendWriterly performance practices in the age of digitalization |  |  |  |  |  |  |  |  |
-| 042030196 | Age | FALSE | 0.07579290 | NA | NA | NA | NA | NA |
-| 040227243 | Habitus | FALSE | 0.31719807 | NA | 0.05817489 | 0.15841071 | 0.351 | 0.06861 |
-| 041230655 | Digitalization | FALSE | 0.31719807 | 0.37469912 | NA | 0.64681196 | 0.322 | 0.06866 |
-| 040350282 | Legend | FALSE | 0.31719807 | NA | NA | 0.14183481 | NA | NA |
-| 041223497 | Self-presentation | TRUE | NA | NA | NA | NA | NA | NA |
-| 041305450 | Authorship | TRUE | NA | 0.08664088 | 0.05726333 | NA | 0.122 | NA |
-| 040359646 | Literature | FALSE | NA | 0.12004970 | 0.06323440 | NA | 0.109 | NA |
-| 040272230 | Performance | FALSE | NA | 0.28547052 | NA | NA | NA | NA |
-| 040533093 | Writer | FALSE | NA | 0.30383539 | NA | NA | NA | NA |
-| 041383966 | Self-reference | FALSE | NA | NA | 0.05596432 | NA | NA | 0.04118 |
-| 041132920 | German | FALSE | NA | NA | 0.06490613 | NA | NA | NA |
-| 1038714850 | Digital Humanities | FALSE | NA | NA | NA | 0.13120206 | NA | NA |
-| 041969103 | New Media | FALSE | NA | NA | NA | 0.29255560 | 0.112 | NA |
-| 040740986 | A student teacher | FALSE | NA | NA | NA | NA | NA | 0.04461 |
-| 964162512 | Media Competence | FALSE | NA | NA | NA | NA | NA | 0.06389 |
+| Qualitative Method Comparison |  |  |  |  |  |  |  |
+|----|----|----|----|----|----|----|----|
+| label_id | label_text | gold | score_artful-accordion | score_bold-bassoon | score_charming-cello | score_dreamy-didgeridoo | score_embracing-euphonium |
+| 1129543579 - Berlin - Visions of a Future Urbanity on Art, Creativity, and Alternative Urban Design |  |  |  |  |  |  |  |
+| 040329038 | Creativity | FALSE | 0.07579290 | 0.20905685 | NA | NA | 0.145 |
+| 040621103 | Urbanity | TRUE | 0.31719807 | 0.30762604 | 0.07800756 | NA | 0.355 |
+| 040057283 | Berlin | TRUE | 0.36113155 | NA | 0.07056365 | 0.43647248 | 0.121 |
+| 041143337 | Art | FALSE | 0.49477395 | 0.22454967 | 0.05172485 | NA | 0.150 |
+| 040778045 | Urban Design | TRUE | 0.54210848 | 0.22112384 | 0.05332217 | 0.40142271 | 0.219 |
+| 040334228 | Arts | TRUE | NA | NA | NA | NA | NA |
+| 040567338 | Urban Geography | TRUE | NA | NA | NA | NA | NA |
+| 04268059X | Culture economy | TRUE | NA | NA | NA | NA | NA |
+| 040567540 | Urban Planning | FALSE | NA | 0.29041576 | NA | NA | NA |
+| 040567303 | Urban development | FALSE | NA | NA | 0.04738772 | NA | NA |
+| 041911253 | Future expectation | FALSE | NA | NA | NA | 0.10301682 | NA |
+| 041328779 | Future Planning | FALSE | NA | NA | NA | 0.28373721 | NA |
+| 040680975 | Future | FALSE | NA | NA | NA | 0.49127367 | NA |
+| 1149279583 - Was ist besser? 1945-1965: Wie es wirklich war! |  |  |  |  |  |  |  |
+| 041394046 | Goods | FALSE | 0.05739328 | NA | NA | NA | NA |
+| 040663809 | Reality | FALSE | 0.10689719 | NA | NA | NA | NA |
+| 040013073 | Daily life | TRUE | NA | NA | NA | NA | NA |
+| 040118827 | Germany | TRUE | NA | 0.26746377 | 0.10488939 | NA | 0.082 |
+| 040118894 | Germany (Federal Republic) | FALSE | NA | 0.05507484 | NA | NA | NA |
+| 041900812 | Economic Miracle | FALSE | NA | 0.05519071 | NA | NA | NA |
+| 040205177 | History | FALSE | NA | 0.06399128 | NA | NA | NA |
+| 948411694 | Post-war period | FALSE | NA | 0.35231987 | NA | NA | NA |
+| 040288145 | Jewish persecution | FALSE | NA | NA | 0.04704222 | NA | NA |
+| 040432718 | Austria | FALSE | NA | NA | 0.04716158 | NA | NA |
+| 041227824 | Everyday Culture | FALSE | NA | NA | 0.04806859 | NA | 0.035 |
+| 042071860 | Groß-Lüder | FALSE | NA | NA | 0.04973334 | NA | 0.073 |
+| 041360559 | American Civil War (1861-1865) | FALSE | NA | NA | NA | 0.02764216 | NA |
+| 040087840 | Civil war | FALSE | NA | NA | NA | 0.03618289 | NA |
+| 043163815 | Past | FALSE | NA | NA | NA | 0.12463379 | NA |
+| 043261310 | Good Times - Bad Times | FALSE | NA | NA | NA | 0.12642516 | NA |
+| 04061672X | Commemoration of the past | FALSE | NA | NA | NA | 0.30247298 | NA |
+| 040468402 | Portrait photography | FALSE | NA | NA | NA | NA | 0.029 |
+| 040436659 | Optimism | FALSE | NA | NA | NA | NA | 0.031 |
+| 1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful Implementation |  |  |  |  |  |  |  |
+| 950251194 | Transformation | FALSE | 0.05997121 | NA | NA | NA | NA |
+| 041316657 | Claim | FALSE | 0.31719807 | NA | NA | 0.18597430 | NA |
+| 04126892X | School development | TRUE | NA | NA | 0.11813986 | 0.47994795 | 0.858 |
+| 041351487 | Organizing the Class | TRUE | NA | NA | NA | NA | NA |
+| 1000723437 | Inclusive School | TRUE | NA | 0.29270390 | 0.04837416 | 0.72401166 | 0.066 |
+| 965002845 | Inclusion (Sociology) | TRUE | NA | 0.19996907 | 0.06500251 | NA | 0.148 |
+| 041276612 | School development planning | FALSE | NA | 0.12761976 | NA | NA | NA |
+| 04053474X | School | FALSE | NA | 0.13852690 | NA | NA | NA |
+| 100072185X | Inclusive Pedagogy | FALSE | NA | 0.16562288 | 0.04911679 | 0.69988042 | 0.041 |
+| 041351754 | Educational research | FALSE | NA | NA | 0.04595719 | NA | NA |
+| 123322929X | Inclusive teaching | FALSE | NA | NA | NA | 0.30149797 | NA |
+| 040118827 | Germany | FALSE | NA | NA | NA | NA | 0.099 |
+| 1220297135 - The Enchantment of the World A Cultural History of Christianity |  |  |  |  |  |  |  |
+| 96355123X | Enchantment | FALSE | 0.31719807 | NA | NA | 0.05300185 | NA |
+| 04010074X | Christianity | TRUE | 0.56590599 | 0.60737634 | 0.05565031 | NA | 0.255 |
+| 041256980 | Culture | TRUE | NA | NA | 0.05168247 | NA | 0.054 |
+| 040493962 | Religion | FALSE | NA | 0.07313728 | NA | NA | NA |
+| 040307204 | Church History | FALSE | NA | 0.08597670 | NA | NA | NA |
+| 040205177 | History | FALSE | NA | 0.08827944 | NA | NA | NA |
+| 040349292 | Lifeworld | FALSE | NA | NA | 0.04947460 | NA | NA |
+| 040653528 | Worldview | FALSE | NA | NA | 0.04968721 | NA | 0.059 |
+| 040277437 | Islam | FALSE | NA | NA | 0.05197397 | NA | 0.091 |
+| 04010110X | Christian Literature | FALSE | NA | NA | NA | 0.02210998 | NA |
+| 042261309 | Cultural history writing | FALSE | NA | NA | NA | 0.07228480 | NA |
+| 040205266 | Historical Consciousness | FALSE | NA | NA | NA | 0.11119287 | NA |
+| 041256719 | History of Culture (Field of Study) | FALSE | NA | NA | NA | 0.20801027 | NA |
+| 040013286 | Alps | FALSE | NA | NA | NA | NA | 0.039 |
+| 1255811684 - Media habitus and biographical legendWriterly performance practices in the age of digitalization |  |  |  |  |  |  |  |
+| 042030196 | Age | FALSE | 0.07579290 | NA | NA | NA | NA |
+| 040227243 | Habitus | FALSE | 0.31719807 | NA | 0.05817489 | 0.15841071 | 0.351 |
+| 041230655 | Digitalization | FALSE | 0.31719807 | 0.37469912 | NA | 0.64681196 | 0.322 |
+| 040350282 | Legend | FALSE | 0.31719807 | NA | NA | 0.14183481 | NA |
+| 041223497 | Self-presentation | TRUE | NA | NA | NA | NA | NA |
+| 041305450 | Authorship | TRUE | NA | 0.08664088 | 0.05726333 | NA | 0.122 |
+| 040359646 | Literature | FALSE | NA | 0.12004970 | 0.06323440 | NA | 0.109 |
+| 040272230 | Performance | FALSE | NA | 0.28547052 | NA | NA | NA |
+| 040533093 | Writer | FALSE | NA | 0.30383539 | NA | NA | NA |
+| 041383966 | Self-reference | FALSE | NA | NA | 0.05596432 | NA | NA |
+| 041132920 | German | FALSE | NA | NA | 0.06490613 | NA | NA |
+| 1038714850 | Digital Humanities | FALSE | NA | NA | NA | 0.13120206 | NA |
+| 041969103 | New Media | FALSE | NA | NA | NA | 0.29255560 | 0.112 |
 
 </div>
 

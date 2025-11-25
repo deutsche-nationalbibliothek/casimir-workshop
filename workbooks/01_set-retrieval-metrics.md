@@ -115,7 +115,6 @@ kable(caption = paste0("Set retrieval metrics for all methods (k = ", K, ")"))
 | charming-cello      | doc-avg | 0.3483506 | 0.3011289 | 0.5167074 | 0.5378927 |
 | dreamy-didgeridoo   | doc-avg | 0.2578584 | 0.2155991 | 0.4130448 | 0.4260111 |
 | embracing-euphonium | doc-avg | 0.3345450 | 0.2897207 | 0.4944938 | 0.5149772 |
-| fantastic-flute     | doc-avg | 0.3080582 | 0.2645752 | 0.4669618 | 0.4851891 |
 
 Set retrieval metrics for all methods (k = 5)
 

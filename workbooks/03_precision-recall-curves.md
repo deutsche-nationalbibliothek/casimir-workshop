@@ -381,14 +381,13 @@ f1_opt |>
   kable(caption = "Optimal F1-scores for all methods")
 ```
 
-| method   | f1_max |
-|:---------|-------:|
-| method-A |  0.297 |
-| method-B |  0.412 |
-| method-C |  0.449 |
-| method-D |  0.318 |
-| method-E |  0.404 |
-| method-F |  0.374 |
+| method              | f1_max |
+|:--------------------|-------:|
+| artful-accordion    |  0.297 |
+| bold-bassoon        |  0.412 |
+| charming-cello      |  0.449 |
+| dreamy-didgeridoo   |  0.318 |
+| embracing-euphonium |  0.404 |
 
 Optimal F1-scores for all methods
 
@@ -397,14 +396,13 @@ pr_auc |>
   kable(caption = "Area under the precision-recall curve (pr-AUC) for all methods")
 ```
 
-| method   | pr_auc |
-|:---------|-------:|
-| method-A |  0.172 |
-| method-B |  0.349 |
-| method-C |  0.399 |
-| method-D |  0.244 |
-| method-E |  0.362 |
-| method-F |  0.343 |
+| method              | pr_auc |
+|:--------------------|-------:|
+| artful-accordion    |  0.172 |
+| bold-bassoon        |  0.349 |
+| charming-cello      |  0.399 |
+| dreamy-didgeridoo   |  0.244 |
+| embracing-euphonium |  0.362 |
 
 Area under the precision-recall curve (pr-AUC) for all methods
 
@@ -491,7 +489,7 @@ pr_auc_fused
     # A tibble: 1 × 1
       pr_auc
        <dbl>
-    1  0.450
+    1  0.441
 
 This sort of fusion is only the very simplest form of ensemble learning.
 More sophisticated methods could weight different methods differently,

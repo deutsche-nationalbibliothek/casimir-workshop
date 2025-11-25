@@ -137,26 +137,26 @@ res_at_5_by_sg_all_methods  |>
   kable(caption = "F1-scores at rank 5 for all methods stratified by subject groups.")
 ```
 
-| sg | sg_label_ger | sg_label_eng | metric | artful-accordion | bold-bassoon | charming-cello | dreamy-didgeridoo | embracing-euphonium | fantastic-flute |
-|:---|:---|:---|:---|---:|---:|---:|---:|---:|---:|
-| 004 | Informatik | Computer Science | f1 | 0.211 | 0.333 | 0.312 | 0.303 | 0.295 | 0.294 |
-| 100 | Philosophie | Philosophy | f1 | 0.338 | 0.420 | 0.373 | 0.269 | 0.372 | 0.328 |
-| 150 | Psychologie | Psychology | f1 | 0.264 | 0.320 | 0.350 | 0.257 | 0.335 | 0.312 |
-| 230 | Theologie, Christentum | Theology, Christianity | f1 | 0.305 | 0.365 | 0.363 | 0.232 | 0.356 | 0.322 |
-| 300 | Sozialwissenschaften, Soziologie, Anthropologie | Social Sciences, Sociology, Anthropology | f1 | 0.241 | 0.324 | 0.327 | 0.222 | 0.313 | 0.269 |
-| 320 | Politik | Politics | f1 | 0.288 | 0.396 | 0.371 | 0.257 | 0.358 | 0.329 |
-| 330 | Wirtschaft | Economics | f1 | 0.291 | 0.365 | 0.352 | 0.281 | 0.339 | 0.307 |
-| 340 | Recht | Law | f1 | 0.263 | 0.362 | 0.445 | 0.250 | 0.422 | 0.392 |
-| 370 | Erziehung, Schul- und Bildungswesen | Education, School and Educational System | f1 | 0.267 | 0.365 | 0.370 | 0.262 | 0.360 | 0.316 |
-| 530 | Physik | Physics | f1 | 0.388 | 0.349 | 0.308 | 0.279 | 0.300 | 0.291 |
-| 570 | Biowissenschaften, Biologie | Life Sciences, Biology | f1 | 0.349 | 0.350 | 0.259 | 0.282 | 0.250 | 0.247 |
-| 610 | Medizin, Gesundheit | Medicine, Health | f1 | 0.303 | 0.350 | 0.352 | 0.301 | 0.348 | 0.332 |
-| 620 | Ingenieurwissenschaften und Maschinenbau | Engineering and Mechanical Engineering | f1 | 0.229 | 0.316 | 0.300 | 0.266 | 0.285 | 0.270 |
-| 630 | Landwirtschaft, Veterinärmedizin | Agriculture, Veterinary Medicine | f1 | 0.259 | 0.352 | 0.344 | 0.273 | 0.320 | 0.305 |
-| 650 | Management | Management | f1 | 0.252 | 0.335 | 0.378 | 0.298 | 0.363 | 0.334 |
-| 700 | Künste, Bildende Kunst allgemein | Arts, Fine Arts (General) | f1 | 0.303 | 0.357 | 0.324 | 0.226 | 0.309 | 0.277 |
-| 800 | Literatur, Rhetorik, Literaturwissenschaft | Literature, Rhetoric, Literary Studies | f1 | 0.239 | 0.297 | 0.312 | 0.185 | 0.290 | 0.255 |
-| 940/943 | Geschichte Deutschlands und Europas | History of Germany and Europe | f1 | 0.289 | 0.366 | 0.356 | 0.219 | 0.340 | 0.317 |
+| sg | sg_label_ger | sg_label_eng | metric | artful-accordion | bold-bassoon | charming-cello | dreamy-didgeridoo | embracing-euphonium |
+|:---|:---|:---|:---|---:|---:|---:|---:|---:|
+| 004 | Informatik | Computer Science | f1 | 0.211 | 0.333 | 0.312 | 0.303 | 0.295 |
+| 100 | Philosophie | Philosophy | f1 | 0.338 | 0.420 | 0.373 | 0.269 | 0.372 |
+| 150 | Psychologie | Psychology | f1 | 0.264 | 0.320 | 0.350 | 0.257 | 0.335 |
+| 230 | Theologie, Christentum | Theology, Christianity | f1 | 0.305 | 0.365 | 0.363 | 0.232 | 0.356 |
+| 300 | Sozialwissenschaften, Soziologie, Anthropologie | Social Sciences, Sociology, Anthropology | f1 | 0.241 | 0.324 | 0.327 | 0.222 | 0.313 |
+| 320 | Politik | Politics | f1 | 0.288 | 0.396 | 0.371 | 0.257 | 0.358 |
+| 330 | Wirtschaft | Economics | f1 | 0.291 | 0.365 | 0.352 | 0.281 | 0.339 |
+| 340 | Recht | Law | f1 | 0.263 | 0.362 | 0.445 | 0.250 | 0.422 |
+| 370 | Erziehung, Schul- und Bildungswesen | Education, School and Educational System | f1 | 0.267 | 0.365 | 0.370 | 0.262 | 0.360 |
+| 530 | Physik | Physics | f1 | 0.388 | 0.349 | 0.308 | 0.279 | 0.300 |
+| 570 | Biowissenschaften, Biologie | Life Sciences, Biology | f1 | 0.349 | 0.350 | 0.259 | 0.282 | 0.250 |
+| 610 | Medizin, Gesundheit | Medicine, Health | f1 | 0.303 | 0.350 | 0.352 | 0.301 | 0.348 |
+| 620 | Ingenieurwissenschaften und Maschinenbau | Engineering and Mechanical Engineering | f1 | 0.229 | 0.316 | 0.300 | 0.266 | 0.285 |
+| 630 | Landwirtschaft, Veterinärmedizin | Agriculture, Veterinary Medicine | f1 | 0.259 | 0.352 | 0.344 | 0.273 | 0.320 |
+| 650 | Management | Management | f1 | 0.252 | 0.335 | 0.378 | 0.298 | 0.363 |
+| 700 | Künste, Bildende Kunst allgemein | Arts, Fine Arts (General) | f1 | 0.303 | 0.357 | 0.324 | 0.226 | 0.309 |
+| 800 | Literatur, Rhetorik, Literaturwissenschaft | Literature, Rhetoric, Literary Studies | f1 | 0.239 | 0.297 | 0.312 | 0.185 | 0.290 |
+| 940/943 | Geschichte Deutschlands und Europas | History of Germany and Europe | f1 | 0.289 | 0.366 | 0.356 | 0.219 | 0.340 |
 
 F1-scores at rank 5 for all methods stratified by subject groups.
 
@@ -243,12 +243,12 @@ head(res_at_5_by_sg_artful_accordion_ci)
     # A tibble: 6 × 9
       sg    sg_label_ger   sg_label_eng metric mode  value ci_lower ci_upper support
       <fct> <fct>          <fct>        <chr>  <chr> <dbl>    <dbl>    <dbl>   <dbl>
-    1 004   Informatik     Computer Sc… f1     doc-… 0.211    0.192    0.227     500
-    2 100   Philosophie    Philosophy   f1     doc-… 0.338    0.324    0.351     500
-    3 150   Psychologie    Psychology   f1     doc-… 0.264    0.246    0.282     500
-    4 230   Theologie, Ch… Theology, C… f1     doc-… 0.305    0.294    0.321     500
-    5 300   Sozialwissens… Social Scie… f1     doc-… 0.241    0.227    0.255     499
-    6 320   Politik        Politics     f1     doc-… 0.288    0.277    0.304     500
+    1 004   Informatik     Computer Sc… f1     doc-… 0.211    0.195    0.226     500
+    2 100   Philosophie    Philosophy   f1     doc-… 0.338    0.324    0.352     500
+    3 150   Psychologie    Psychology   f1     doc-… 0.264    0.246    0.280     500
+    4 230   Theologie, Ch… Theology, C… f1     doc-… 0.305    0.291    0.319     500
+    5 300   Sozialwissens… Social Scie… f1     doc-… 0.241    0.228    0.257     499
+    6 320   Politik        Politics     f1     doc-… 0.288    0.272    0.303     500
 
 ``` r
 plan(sequential) # reset to sequential processing
@@ -329,12 +329,12 @@ head(res_at_5_by_entity_type_all_methods)
     # A tibble: 6 × 9
       Method   label_entitytype_ger label_entitytype_eng metric mode  value ci_lower
       <chr>    <chr>                <chr>                <chr>  <chr> <dbl>    <dbl>
-    1 method-A Geografikum          geographic name      f1     micro 0.343   0.321 
-    2 method-A Konferenz            conference           f1     micro 0.211   0     
-    3 method-A Körperschaft         corporation          f1     micro 0.247   0.213 
-    4 method-A NA                   NA                   f1     micro 0.25    0.0861
-    5 method-A Person (individuali… person (individuali… f1     micro 0.359   0.333 
-    6 method-A Sachbegriff          subject term         f1     micro 0.259   0.254 
+    1 artful-… Geografikum          geographic name      f1     micro 0.343   0.324 
+    2 artful-… Konferenz            conference           f1     micro 0.211   0     
+    3 artful-… Körperschaft         corporation          f1     micro 0.247   0.220 
+    4 artful-… NA                   NA                   f1     micro 0.25    0.0270
+    5 artful-… Person (individuali… person (individuali… f1     micro 0.359   0.336 
+    6 artful-… Sachbegriff          subject term         f1     micro 0.259   0.254 
     # ℹ 2 more variables: ci_upper <dbl>, support <dbl>
 
 **Note:** Here we set the `mode` parameter to `"micro"` to compute

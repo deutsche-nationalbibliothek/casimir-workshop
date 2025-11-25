@@ -158,7 +158,6 @@ The algorithms are referred to as
   * charming cello
   * dreamy didgeridoo
   * embracing euphonium
-  * fantastic flute
 
 Each of the prediction datasets follows the same format:
 
