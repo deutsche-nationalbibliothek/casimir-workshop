@@ -194,8 +194,9 @@ We will now use these label weights to compute weighted set retrieval
 metrics that emphasize the performance on infrequent labels. CASIMiR
 takes an additional argument `propensity_scored = TRUE` in the function
 `compute_set_retrieval_scores()` (and also for the functions
-`compute_pr_auc()` and
-`compute_pr_curve()). This will require that you also pass a data frame with the label distribution in the training data (as we have already loaded above in`train_freqs\`).
+`compute_pr_auc()` and `compute_pr_curve()`). This will require that you
+also pass a data frame with the label distribution in the training data
+(as we have already loaded above in `train_freqs`).
 
 ``` r
 res_propensity <- map_dfr(
@@ -310,7 +311,7 @@ entry-spacing="0">
 <div id="ref-PfastreXML" class="csl-entry">
 
 Jain, Himanshu, Yashoteja Prabhu, and Manik Varma. 2016. “Extreme
-Multi-Label Loss Functions for Recommendation, Tagging, Ranking &Amp;
+Multi-Label Loss Functions for Recommendation, Tagging, Ranking and
 Other Missing Label Applications.” In *Proceedings of the 22nd ACM
 SIGKDD International Conference on Knowledge Discovery and Data Mining*,
 13-17-Augu:935–44. ACM. <https://doi.org/10.1145/2939672.2939756>.

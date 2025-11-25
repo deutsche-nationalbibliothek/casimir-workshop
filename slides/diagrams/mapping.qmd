@@ -1,0 +1,33 @@
+<div style="display: flex; justify-content: center; margin-bottom: 1em;">
+  <svg width="900" height="450" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="100%" height="100%" fill="#fff" />
+    <!-- Nodes -->
+    <circle cx="100" cy="80" r="40" fill="#a7d1ab" stroke="#333" stroke-width="1" />
+    <text x="100" y="85" font-family="Arial" font-size="12" text-anchor="middle">S₁</text>
+    <circle cx="100" cy="180" r="40" fill="#a7d1ab" stroke="#333" stroke-width="1" />
+    <text x="100" y="185" font-family="Arial" font-size="12" text-anchor="middle">S₂</text>
+    <circle cx="100" cy="280" r="40" fill="#a7d1ab" stroke="#333" stroke-width="1" />
+    <text x="100" y="285" font-family="Arial" font-size="12" text-anchor="middle">S₃</text>
+    <circle cx="700" cy="80" r="40" fill="#f0e68c" stroke="#333" stroke-width="1" />
+    <text x="700" y="85" font-family="Arial" font-size="12" text-anchor="middle">E₁₁</text>
+    <circle cx="700" cy="180" r="40" fill="#f0e68c" stroke="#333" stroke-width="1" />
+    <text x="700" y="185" font-family="Arial" font-size="12" text-anchor="middle">E₁₂</text>
+    <circle cx="700" cy="280" r="40" fill="#f0e68c" stroke="#333" stroke-width="1" />
+    <text x="700" y="285" font-family="Arial" font-size="12" text-anchor="middle">E₁₃</text>
+    <!-- Text Labels -->
+    <text x="300" y="50" font-family="Arial" font-size="14" text-anchor="middle">Mapping (Hybrid Search)</text>
+    <text x="550" y="50" font-family="Arial" font-size="14">Controlled Vocab</text>
+    <text x="20" y="30" font-family="Arial" font-size="14">LLM-Generated Keywords</text>
+    <rect x="300" y="70" width="250" height="230" fill="#d4711fff" stroke="#333" stroke-width="1" rx="10" />
+    <text x="310" y="200" font-family="Arial" font-size="14" text-anchor="left"><tspan font-weight="bold">Vector-Storage with Vocab-</tspan></text>
+    <text x="320" y="220" font-family="Arial" font-size="14" text-anchor="left"><tspan font-weight="bold">Embeddings</tspan> (E₁₁, E₁₂, E₁₃)</text>
+    <!-- Lines -->
+    <line x1="140" y1="80" x2="300" y2="80" stroke="#333" stroke-width="2" />
+    <line x1="140" y1="180" x2="300" y2="180" stroke="#333" stroke-width="2" />
+    <line x1="140" y1="280" x2="300" y2="280" stroke="#333" stroke-width="2" />
+    <line x1="550" y1="80" x2="660" y2="80" stroke="#333" stroke-width="2" />
+    <line x1="550" y1="180" x2="660" y2="180" stroke="#333" stroke-width="2" />
+    <line x1="550" y1="280" x2="660" y2="280" stroke="#333" stroke-width="2" />
+  </svg>
+</div>

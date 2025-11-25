@@ -1,0 +1,34 @@
+<div style="display: flex; justify-content: center; margin-bottom: 1em;">
+  <svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="100%" height="100%" fill="#fff" />
+    <!-- Left Box (Prompt) -->
+    <rect x="50" y="50" width="300" height="300" fill="#ffda63" stroke="#333" stroke-width="1" rx="10" />
+    <text x="60" y="70" font-family="Arial" font-size="20" font-weight="bold">Prompt</text>
+    <text x="60" y="95" font-family="Arial" font-size="16">Extract keywords from a text.</text>
+    <text x="60" y="120" font-family="Arial" font-size="16"><tspan font-weight="bold">Text:</tspan> Some Sample text</text>
+    <text x="60" y="145" font-family="Arial" font-size="16"><tspan font-weight="bold">Keywords:</tspan> Some Example Keywords</text>
+    <text x="60" y="170" font-family="Arial" font-size="16">###</text>
+    <text x="60" y="195" font-family="Verbatim" font-size="16">[...possibly more examples ...]</text>
+    <text x="60" y="220" font-family="Arial" font-size="16">###</text>
+    <text x="60" y="250" font-family="Arial" font-size="16"><tspan font-weight="bold">Text:</tspan> Test Text</text>
+    <text x="60" y="285" font-family="Arial" font-size="16"><tspan font-weight="bold">Keywords:</tspan> </text>
+    <!-- Right Box (LLM) -->
+    <rect x="450" y="100" width="200" height="150" fill="#90ee90" stroke="#333" stroke-width="1" rx="10" />
+    <text x="550" y="130" font-family="Arial" font-size="20" text-anchor="middle"><tspan font-weight="bold">Language Model</tspan></text>
+    <!-- Bottom Box (Generated Text) -->
+    <rect x="60" y="300" width="280" height="40" fill="#d4711fff" stroke="#333" stroke-width="1" rx="10" />
+    <text x="70" y="320" font-family="Arial" font-size="16">Generated Keywords</text>
+    <!-- Arrow -->
+    <path d="M300,100 C350,100 350,80 450,120" stroke="#333" stroke-width="3" fill="transparent" marker-end="url(#arrowhead)" />
+    <!-- Arrowhead Definition -->
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="8" refY="3.5" orient="auto">
+        <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+      </marker>
+    </defs>
+    <!-- Second Arrow -->
+    <path d="M450,200 C350,270 350,270 300,300" stroke="#333" stroke-width="3" fill="transparent" marker-end="url(#arrowhead)" />
+    
+  </svg>
+</div>

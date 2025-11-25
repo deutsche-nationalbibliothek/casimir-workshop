@@ -44,7 +44,7 @@ Three complementary approaches:
 ## An Overview
 
 Before the advent of Deep Learning:
-<br><br>
+<br>
 
   * Lexical Matching [^1]^,^[^2]  
 
@@ -60,7 +60,6 @@ start using open source subject indexing methods.
     Human-competitive tagging using automatic keyphrase extraction. 
 [^2]: Maui-like Lexical Matching  
     https://github.com/NatLibFi/Annif/wiki/Backend%3A-MLLM
-
 [^3]: Schultheis, E. and Babbar, R. (2021) “Speeding-up One-vs-All Training for Extreme Classification via Smart Initialization.” Available at: https://doi.org/10.48550/arxiv.2109.13122
 [^4]: Khandagale, S., Xiao, H., & Babbar, R. (2020). 
    Bonsai: diverse and shallow trees for extreme multi-label classification. 
@@ -72,31 +71,7 @@ start using open source subject indexing methods.
 
 ## Lexical Matching 
 
-<div style="display: flex; justify-content: center; margin-bottom: 1em;">
-  <svg width="800" height="300" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <marker id="arrowhead2" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto" markerUnits="strokeWidth">
-        <polygon points="0 0, 10 3.5, 0 7" fill="#0046c4" />
-      </marker>
-    </defs>
-    <!-- Text Rectangle -->
-    <rect x="30" y="60" width="250" height="80" fill="#e3f2fd" stroke="#333" stroke-width="1.5" rx="12" />
-    <text x="45" y="90" font-family="Arial" font-size="15" font-weight="bold">Text:</text>
-    <text x="45" y="115" font-family="Arial" font-size="14">The dog barked and the cat purred.</text>
-    <!-- Controlled Keywords Table -->
-    <rect x="400" y="40" width="220" height="120" fill="#fff" stroke="#333" stroke-width="1.5" rx="8" />
-    <text x="415" y="65" font-family="Arial" font-size="16" font-weight="bold">Controlled Vocabulary</text>
-    <text x="420" y="95" font-family="Arial" font-size="14">Dog</text>
-    <text x="420" y="120" font-family="Arial" font-size="14">Cat</text>
-    <text x="420" y="145" font-family="Arial" font-size="14">Mouse</text>
-    <!-- Arrows for matches -->
-    <path d="M90,110 C150,70 350,70 420,90" stroke="#0046c4" stroke-width="3" fill="transparent" marker-end="url(#arrowhead2)" />
-    <path d="M210,120 C300,130 370,120 420,115" stroke="#0046c4" stroke-width="3" fill="transparent" marker-end="url(#arrowhead2)" />
-    <!-- Labels for arrows -->
-    <text x="250" y="70" font-family="Arial" font-size="12" fill="#0046c4">"dog" → Dog</text>
-    <text x="290" y="140" font-family="Arial" font-size="12" fill="#0046c4">"cat" → Cat</text>
-  </svg>
-</div>
+{{< include diagrams/lexical-matching.qmd >}}
 
   * can match any keyword in the vocabulary
   * heuritstics like frequency, position, etc. are used to rank the keywords after matching
@@ -105,74 +80,7 @@ start using open source subject indexing methods.
 
 ## Statistical Methods
 
-<div style="display: flex; justify-content: center; margin-bottom: 1em;">
-  <svg width="900" height="400" xmlns="http://www.w3.org/2000/svg">
-    <rect width="100%" height="100%" fill="#f9f9f9" />
-    <!-- Document Boxes -->
-    <rect x="20" y="60" width="260" height="80" fill="#a7d1ab" stroke="#333" stroke-width="1.5" rx="14" />
-    <text x="35" y="85" font-family="Arial" font-size="15" font-weight="bold">Title: barking and barking</text>
-    <text x="35" y="105" font-family="Arial" font-size="15">Subject Headings: Dog</text>
-    <text x="35" y="125" font-family="Arial" font-size="16" font-weight="bold">Doc_1</text>
-    <rect x="20" y="170" width="260" height="80" fill="#a7d1ab" stroke="#333" stroke-width="1.5" rx="14" />
-    <text x="35" y="195" font-family="Arial" font-size="15" font-weight="bold">Title: purring, purring and purring</text>
-    <text x="35" y="215" font-family="Arial" font-size="15">Subject Headings: Cat</text>
-    <text x="35" y="235" font-family="Arial" font-size="16" font-weight="bold">Doc_2</text>
-    <rect x="20" y="280" width="260" height="80" fill="#a7d1ab" stroke="#333" stroke-width="1.5" rx="14" />
-    <text x="35" y="305" font-family="Arial" font-size="15" font-weight="bold">Title: barking and meowing</text>
-    <text x="35" y="325" font-family="Arial" font-size="15">Subject Headings: Dog, Cat, Mouse</text>
-    <text x="35" y="345" font-family="Arial" font-size="16" font-weight="bold">Doc_3</text>
-    <!-- Feature Matrix Table (SVG) - TOP -->
-    <!-- Feature Matrix Table (SVG) - TOP -->
-    <rect x="470" y="20" width="300" height="120" fill="#fff" stroke="#333" stroke-width="1" rx="5" />
-    <text x="480" y="40" font-family="Arial" font-size="16" font-weight="bold">Feature-Matrix (TFIDF)</text>
-    <text x="520" y="65" font-family="Arial" font-size="13" font-weight="bold">barking</text>
-    <text x="590" y="65" font-family="Arial" font-size="13" font-weight="bold">purring</text>
-    <text x="480" y="90" font-family="Arial" font-size="13" font-weight="bold">Doc_1</text>
-    <text x="530" y="90" font-family="Arial" font-size="13">0.6</text>
-    <text x="600" y="90" font-family="Arial" font-size="13">0</text>
-    <text x="480" y="110" font-family="Arial" font-size="13" font-weight="bold">Doc_2</text>
-    <text x="530" y="110" font-family="Arial" font-size="13">0</text>
-    <text x="600" y="110" font-family="Arial" font-size="13">0.7</text>
-    <text x="480" y="130" font-family="Arial" font-size="13" font-weight="bold">Doc_3</text>
-    <text x="530" y="130" font-family="Arial" font-size="13">0.7</text>
-    <text x="600" y="130" font-family="Arial" font-size="13">0.7</text>
-    <!-- Document-Label Matrix Table (SVG) - BELOW -->
-    <rect x="470" y="220" width="300" height="120" fill="#fff" stroke="#333" stroke-width="1" rx="5" />
-    <text x="480" y="240" font-family="Arial" font-size="16" font-weight="bold">Document-Label-Matrix</text>
-    <text x="520" y="265" font-family="Arial" font-size="13" font-weight="bold" fill="#228B22">Dog</text>
-    <text x="590" y="265" font-family="Arial" font-size="13" font-weight="bold" fill="#228B22">Cat</text>
-    <text x="660" y="265" font-family="Arial" font-size="13" font-weight="bold" fill="#228B22">Mouse</text>
-    <text x="480" y="290" font-family="Arial" font-size="13" font-weight="bold">Doc_1</text>
-    <text x="530" y="290" font-family="Arial" font-size="13">1</text>
-    <text x="600" y="290" font-family="Arial" font-size="13">0</text>
-    <text x="670" y="290" font-family="Arial" font-size="13">0</text>
-    <text x="480" y="310" font-family="Arial" font-size="13" font-weight="bold">Doc_2</text>
-    <text x="530" y="310" font-family="Arial" font-size="13">0</text>
-    <text x="600" y="310" font-family="Arial" font-size="13">1</text>
-    <text x="670" y="310" font-family="Arial" font-size="13">0</text>
-    <text x="480" y="330" font-family="Arial" font-size="13" font-weight="bold">Doc_3</text>
-    <text x="530" y="330" font-family="Arial" font-size="13">1</text>
-    <text x="600" y="330" font-family="Arial" font-size="13">1</text>
-    <text x="670" y="330" font-family="Arial" font-size="13">1</text>
-    <!-- Arrows (adjusted for new layout) -->
-    <defs>
-      <marker id="arrowheadorange" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto" markerUnits="strokeWidth">
-        <polygon points="0 0, 10 3.5, 0 7" fill="orange" />
-      </marker>
-    </defs>
-    <defs>
-      <marker id="arrowheadgreen" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto" markerUnits="strokeWidth">
-        <polygon points="0 0, 10 3.5, 0 7" fill="green" />
-      </marker>
-    </defs>
-    <line x1="220" y1="85" x2="470" y2="90" stroke="orange" stroke-width="3" marker-end="url(#arrowheadorange)" />
-    <line x1="220" y1="195" x2="470" y2="110" stroke="orange" stroke-width="3" marker-end="url(#arrowheadorange)" />
-    <line x1="220" y1="305" x2="470" y2="120" stroke="orange" stroke-width="3" marker-end="url(#arrowheadorange)" />
-    <line x1="220" y1="105" x2="470" y2="290" stroke="green" stroke-width="3" marker-end="url(#arrowheadgreen)" />
-    <line x1="220" y1="215" x2="470" y2="310" stroke="green" stroke-width="3" marker-end="url(#arrowheadgreen)" />
-    <line x1="220" y1="325" x2="470" y2="330" stroke="green" stroke-width="3" marker-end="url(#arrowheadgreen)" />
-  </svg>
-</div>
+{{< include diagrams/statistical-learning.qmd >}}
 
 * statistical apporaches learn correlations between feature matrix and document-label matrix
 * statistical apporaches don't need prefLabels: they do not interpret the description of labels
@@ -203,40 +111,7 @@ Going for generative LLM-powered methods:
 
 ## The idea of few shot prompting
 
-<div style="display: flex; justify-content: center; margin-bottom: 1em;">
-  <svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
-    <!-- Background -->
-    <rect width="100%" height="100%" fill="#fff" />
-    <!-- Left Box (Prompt) -->
-    <rect x="50" y="50" width="300" height="300" fill="#ffda63" stroke="#333" stroke-width="1" rx="10" />
-    <text x="60" y="70" font-family="Arial" font-size="20" font-weight="bold">Prompt</text>
-    <text x="60" y="95" font-family="Arial" font-size="16">Extract keywords from a text.</text>
-    <text x="60" y="120" font-family="Arial" font-size="16"><tspan font-weight="bold">Text:</tspan> Some Sample text</text>
-    <text x="60" y="145" font-family="Arial" font-size="16"><tspan font-weight="bold">Keywords:</tspan> Some Example Keywords</text>
-    <text x="60" y="170" font-family="Arial" font-size="16">###</text>
-    <text x="60" y="195" font-family="Verbatim" font-size="16">[...possibly more examples ...]</text>
-    <text x="60" y="220" font-family="Arial" font-size="16">###</text>
-    <text x="60" y="250" font-family="Arial" font-size="16"><tspan font-weight="bold">Text:</tspan> Test Text</text>
-    <text x="60" y="285" font-family="Arial" font-size="16"><tspan font-weight="bold">Keywords:</tspan> </text>
-    <!-- Right Box (LLM) -->
-    <rect x="450" y="100" width="200" height="150" fill="#90ee90" stroke="#333" stroke-width="1" rx="10" />
-    <text x="550" y="130" font-family="Arial" font-size="20" text-anchor="middle"><tspan font-weight="bold">Language Model</tspan></text>
-    <!-- Bottom Box (Generated Text) -->
-    <rect x="50" y="290" width="250" height="40" fill="#d4711fff" stroke="#333" stroke-width="1" rx="10" />
-    <text x="60" y="320" font-family="Arial" font-size="16">Generated Keywords</text>
-    <!-- Arrow -->
-    <path d="M300,100 C350,100 350,80 450,120" stroke="#333" stroke-width="3" fill="transparent" marker-end="url(#arrowhead)" />
-    <!-- Arrowhead Definition -->
-    <defs>
-      <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="8" refY="3.5" orient="auto">
-        <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
-      </marker>
-    </defs>
-    <!-- Second Arrow -->
-    <path d="M450,200 C350,270 350,270 300,300" stroke="#333" stroke-width="3" fill="transparent" marker-end="url(#arrowhead)" />
-    
-  </svg>
-</div>
+{{< include diagrams/few-shot-prompting.qmd >}}
 
   * exploits world knowledge in LLMs
   * needs only few training examples
@@ -247,39 +122,9 @@ Going for generative LLM-powered methods:
   * maps generated keywords to controlled vocabulary
   * hybrid search: lexical matching + embedding based matching powered by vector storage
 
-<div style="display: flex; justify-content: center; margin-bottom: 1em;">
-  <svg width="900" height="450" xmlns="http://www.w3.org/2000/svg">
-    <!-- Background -->
-    <rect width="100%" height="100%" fill="#fff" />
-    <!-- Nodes -->
-    <circle cx="100" cy="80" r="40" fill="#a7d1ab" stroke="#333" stroke-width="1" />
-    <text x="100" y="85" font-family="Arial" font-size="12" text-anchor="middle">S₁</text>
-    <circle cx="100" cy="180" r="40" fill="#a7d1ab" stroke="#333" stroke-width="1" />
-    <text x="100" y="185" font-family="Arial" font-size="12" text-anchor="middle">S₂</text>
-    <circle cx="100" cy="280" r="40" fill="#a7d1ab" stroke="#333" stroke-width="1" />
-    <text x="100" y="285" font-family="Arial" font-size="12" text-anchor="middle">S₃</text>
-    <circle cx="700" cy="80" r="40" fill="#f0e68c" stroke="#333" stroke-width="1" />
-    <text x="700" y="85" font-family="Arial" font-size="12" text-anchor="middle">E₁₁</text>
-    <circle cx="700" cy="180" r="40" fill="#f0e68c" stroke="#333" stroke-width="1" />
-    <text x="700" y="185" font-family="Arial" font-size="12" text-anchor="middle">E₁₂</text>
-    <circle cx="700" cy="280" r="40" fill="#f0e68c" stroke="#333" stroke-width="1" />
-    <text x="700" y="285" font-family="Arial" font-size="12" text-anchor="middle">E₁₃</text>
-    <!-- Text Labels -->
-    <text x="300" y="50" font-family="Arial" font-size="14" text-anchor="middle">Mapping (Hybrid Search)</text>
-    <text x="550" y="50" font-family="Arial" font-size="14">Controlled Vocab</text>
-    <text x="20" y="30" font-family="Arial" font-size="14">LLM-Generated Keywords</text>
-    <rect x="300" y="70" width="250" height="230" fill="#d4711fff" stroke="#333" stroke-width="1" rx="10" />
-    <text x="310" y="200" font-family="Arial" font-size="14" text-anchor="left"><tspan font-weight="bold">Vector-Storage with Vocab-</tspan></text>
-    <text x="320" y="220" font-family="Arial" font-size="14" text-anchor="left"><tspan font-weight="bold">Embeddings</tspan> (E₁₁, E₁₂, E₁₃)</text>
-    <!-- Lines -->
-    <line x1="140" y1="80" x2="300" y2="80" stroke="#333" stroke-width="2" />
-    <line x1="140" y1="180" x2="300" y2="180" stroke="#333" stroke-width="2" />
-    <line x1="140" y1="280" x2="300" y2="280" stroke="#333" stroke-width="2" />
-    <line x1="550" y1="80" x2="660" y2="80" stroke="#333" stroke-width="2" />
-    <line x1="550" y1="180" x2="660" y2="180" stroke="#333" stroke-width="2" />
-    <line x1="550" y1="280" x2="660" y2="280" stroke="#333" stroke-width="2" />
-  </svg>
-</div>
+{{< include diagrams/mapping.qmd >}}
+
+
 
 ::: {.notes}
 Speaker notes go here.
