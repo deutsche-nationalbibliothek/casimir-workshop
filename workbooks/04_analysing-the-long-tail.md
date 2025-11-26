@@ -4,7 +4,7 @@ Maximilian Kähler, DNB
 - [Analyse performance by label frequency, binned frequency
   groups](#analyse-performance-by-label-frequency-binned-frequency-groups)
 - [Your turn](#your-turn)
-- [Bonus: propensity scoring](#bonus-propensity-scoring)
+- [Bonus: Propensity Scoring](#bonus-propensity-scoring)
   - [Conditional label weights](#conditional-label-weights)
   - [Your turn](#your-turn-1)
 - [References](#references)
@@ -102,7 +102,7 @@ Based on the plot above, answer the following questions:
 - Which method performs best on frequent labels (\>1000 training
   instances)?
 
-## Bonus: propensity scoring
+## Bonus: Propensity Scoring
 
 Above analysis shows huge differences between the methods and strata of
 frequency groups. However, it is difficult to summarize this
@@ -138,7 +138,8 @@ incompleteness of the gold standard by introducing propensity scores for
 each label $\lambda$. The propensity score $p_{\lambda}$ models the
 probability that a relevant label $\lambda$ is actually annotated,
 assuming it should be annotated (this is called a marginal probability).
-
+Jain et al. propose the following formula for modeling the propensity
+score:
 $$p_{\lambda} = \frac{1}{1 + C\cdot exp(-A\cdot log(N_{\lambda} + B))}$$
 
 Here, $N_{\lambda}$ is the number of training instances for label
@@ -213,7 +214,8 @@ res_propensity <- map_dfr(
 )
 ```
 
-The following table shows the results:
+The following table shows the results, where ps-f1@5 denotes the
+propensity scored f1@5 score.
 
 ``` r
 res_propensity  |>
@@ -253,13 +255,22 @@ just as bad as having a wrong infrequent label. However, when it comes
 to false negatives, i.e. missing a label that should have been assigned
 to a document, we might want to weight missing infrequent labels higher
 than missing frequent labels, still holding to the assumption that
-infrequent labels are more specific and informative. So we assume the
+infrequent labels are more specific and informative. Same goes for true
+positives: we want to reward the correct assignment of infrequent labels
+higher than the correct assignment of frequent labels. So we assume the
 following costs: $$C_{\text{tp}} = C_{\text{fn}} = w_{\lambda},$$ (with
 $w_{\lambda}$ the label weight derived from the propensity score as
 $1/p_{\lambda}$) and $C_{\text{fp}} = \textit{const}$.
 
-CASIMiR supports this by allowing to pass different a constant for false
-positives:
+CASIMiR supports this by allowing to pass a constant cost for false
+positives. It provides some predefined strategies for setting this
+constant via the argument `cost_fp_constant =` that can take the
+following values:
+
+- `"mean"`: mean of the gold-standard label weights
+- `"max"`: maximum of the gold-standard label weights
+- `"min"`: minimum of the gold-standard label weights
+- numeric value: a custom numeric value
 
 ``` r
 res_propensity <- map_dfr(
