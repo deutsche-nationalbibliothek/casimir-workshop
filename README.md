@@ -8,6 +8,7 @@ the Fantastic Futures-Conference 2025 on Dec 3rd at the British National Library
 
 ## Update:
 
+  * 2025-11-26: simplified conda install 
   * 2025-11-25: add workbook `04` on long tail metrics
   * 2025-11-21: add workbook `03` and data with training frequencies
   * 2025-11-20: add workbook `02`, simplify install instructions
@@ -55,7 +56,7 @@ To install conda use the [miniforge installer](https://docs.conda.io/en/latest/#
 
 To create a conda environment with all necessary tools use:
 ```bash
-conda create --name my_env -c conda-forge r-base r-tidyverse r-gt r-collapse r-options r-rsample r-furrr r-remotes rstudio-desktop
+conda create --name my_env -c conda-forge r-tidyverse r-gt r-casimir quarto rstudio-desktop
 conda activate my_env
 ```
 
@@ -64,7 +65,7 @@ conda, you may ommit `rstudio-desktop` from your environment specs.
 
 ## Install CASIMiR
 
-Regardless how you arrived at a working R environment, to install the [CASMiR
+If not already installed, to install the [CASMiR
 package](https://github.com/deutsche-nationalbibliothek/casimir) featured in 
 this workshop and all other required packages use the following command 
 inside your R session:
