@@ -1,13 +1,12 @@
 # Workshop on Evaluating Automated Subject Indexing Methods
 
-# 🚧 **Under Development** 🚧
-
 This is the official repository hosting all meterial needed for the 
 Workshop **Evaluating Automated Subject Indexing Methods** hosted at 
 the Fantastic Futures-Conference 2025 on Dec 3rd at the British National Library in London. 
 
 ## Update:
 
+  * 2025-11-28: all workbooks ready 
   * 2025-11-26: simplified conda install 
   * 2025-11-25: add workbook `04` on long tail metrics
   * 2025-11-21: add workbook `03` and data with training frequencies

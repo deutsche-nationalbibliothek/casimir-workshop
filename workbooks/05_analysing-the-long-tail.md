@@ -17,7 +17,7 @@ The following picture shows the frequency distribution of GND labels in
 the training data.
 
 ``` r
- # compute binned frequency groups
+# compute binned frequency groups
 freq_groups <- train_freqs  |>               
                 mutate(freq_group = cut(x = label_freq,
                           breaks = c(0, 1, 10, 100, 1000, 10000, Inf),
@@ -31,11 +31,15 @@ freq_groups <- train_freqs  |>
                           right = FALSE, include_lowest = TRUE))  |>
                   select(-label_freq)
 
-freq_groups |> 
+# count labels along frequency groups
+count_freq_groups <- freq_groups |> 
+  # remove zero-shot predictions
   filter(freq_group != "x == 0") |>
   group_by(freq_group) |> 
-  summarise(n_labels = n()) |> 
-  ggplot(aes(x = freq_group, y = n_labels)) + 
+  summarise(n_labels = n()) 
+
+# visualize frequency distribution
+ggplot(count_freq_groups, aes(x = freq_group, y = n_labels)) + 
   geom_col(fill = "lightblue", color = "black") +
   labs(
     title = "Frequency distribution of GND labels in the training data",
@@ -63,14 +67,17 @@ by groups defined in the label space. We now use the same method, but
 use the freq_groups derived from the training distribution above.
 
 ``` r
+# iterate over all methods and compute set retrieval scores
+# with binned frequency groups
 res_by_train_freq <- map_dfr(
   predictions,
   ~ compute_set_retrieval_scores(
     predicted = .x,
     gold_standard = gold_standard,
-    mode = "micro",
+    # micro-averages work best for stratification along label groups
+    mode = "micro", 
     k = 5,
-    label_groups = freq_groups
+    label_groups = freq_groups # use frequency groups defined above
   ),  .id = "method"
 )
 ```
@@ -78,6 +85,7 @@ res_by_train_freq <- map_dfr(
 We can visualize that in a plot:
 
 ``` r
+# plot precision, recall and f1 by frequency group and method
 res_by_train_freq |> 
   filter(metric != "rprec", freq_group != "NA")  |>
   ggplot(aes(x = freq_group, y = value, fill = method)) + 
@@ -152,8 +160,13 @@ the corresponding label weight (inversly proportional to the propensity
 score).
 
 ``` r
+# define range of label frequencies to compute propensity scores for
 N_l <- 10^seq(0,6,0.5)
 
+# function to compute propensity scores
+# N_l: number of training instances per label
+# N: total number of training instances
+# A, B: hyperparameters
 p_l <- function(N_l, N = 3e6, A = 0.55, B = 1.5)
  {
   C <- (log(N) - 1)*(B + 1)^A
@@ -162,7 +175,7 @@ p_l <- function(N_l, N = 3e6, A = 0.55, B = 1.5)
   return(p_l)
 }
 
-
+# create data frame for plotting
 df <- expand.grid(
   N_l = N_l,
   N = c(1e7)
@@ -170,6 +183,7 @@ df <- expand.grid(
 rowwise() %>% 
   mutate(p_l = p_l(N_l, N))
 
+# plot label weights (inversly proportional to propensity scores)
 ggplot(df, aes(x = N_l, y = 1/p_l, color = factor(N))) + 
   geom_point() + 
   geom_smooth(se = FALSE) + 

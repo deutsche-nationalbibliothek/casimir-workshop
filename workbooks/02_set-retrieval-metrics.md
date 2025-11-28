@@ -56,8 +56,8 @@ labels should be considered for the computation of the metrics.
 compute_set_retrieval_scores(
   predicted = predictions[["artful-accordion"]],
   gold_standard = gold_standard,
-  k = 5,
-  rename_metrics = TRUE
+  k = 5, # use top-5-predictions per document
+  rename_metrics = TRUE # adds the suffix "@5" to the metric names
 )
 ```
 
@@ -86,6 +86,7 @@ frame.
 ``` r
 K <- 5
 
+# iterate over all methods and compute set retrieval scores
 results <- map_dfr(
   predictions,
   ~ compute_set_retrieval_scores(
@@ -121,6 +122,7 @@ Set retrieval metrics for all methods (k = 5)
 Let’s make a first visualization using R\`s ggplot package
 
 ``` r
+# visualize results and create facet plot by metric
 ggplot(results, aes(x = Method, y = value, fill = Method)) +
   geom_bar(stat = "identity") +
   ylim(0, 1) +
@@ -176,17 +178,21 @@ for `artful-accordion`.
 label_texts <- read_csv("../data/gnd_pref-labels_w-translation.csv",
                         col_select = c("label_id", "label_text_eng"))
 
+# join predictions with gold standard for one method
 comp <- create_comparison(
   predicted = predictions[["artful-accordion"]],
   gold_standard = gold_standard
 )
 
+# compute intermediate results on label level
 intermed <- compute_intermediate_results(
   gold_vs_pred = comp,
   grouping_var = "label_id"
 )$results_table |> 
+# join with label texts for better interpretability
   left_join(label_texts, by = "label_id")
 
+# show table of label-wise results
 intermed |>
   filter(n_gold > 20) |> 
   arrange(desc(f1)) |> 
@@ -302,7 +308,7 @@ compute_set_retrieval_scores(
   predicted = predictions[["artful-accordion"]],
   gold_standard = gold_standard,
   k = 5,
-  mode = "subj-avg",
+  mode = "subj-avg", # macro averaging on label level
   rename_metrics = TRUE,
   replace_zero_division_with = 0 # set to NA for default behaviour
 )

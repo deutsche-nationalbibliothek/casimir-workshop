@@ -99,6 +99,7 @@ often more convenient to compute the stratified results for all methods
 in one go.
 
 ``` r
+# iterate over all methods and compute set retrieval scores by subject groups
 res_at_5_by_sg_all_methods <- map_dfr(
   predictions,
   ~ compute_set_retrieval_scores(
@@ -233,7 +234,7 @@ res_at_5_by_sg_artful_accordion_ci <- compute_set_retrieval_scores(
   doc_groups = subject_groups,
   k = 5,
   compute_bootstrap_ci = TRUE,
-  n_bt = 100L,
+  n_bt = 100L, # number of bootstrap samples for confidence intervals
   progress = TRUE
 )
 
@@ -243,12 +244,12 @@ head(res_at_5_by_sg_artful_accordion_ci)
     # A tibble: 6 × 9
       sg    sg_label_ger   sg_label_eng metric mode  value ci_lower ci_upper support
       <fct> <fct>          <fct>        <chr>  <chr> <dbl>    <dbl>    <dbl>   <dbl>
-    1 004   Informatik     Computer Sc… f1     doc-… 0.211    0.196    0.225     500
-    2 100   Philosophie    Philosophy   f1     doc-… 0.338    0.322    0.351     500
-    3 150   Psychologie    Psychology   f1     doc-… 0.264    0.248    0.282     500
-    4 230   Theologie, Ch… Theology, C… f1     doc-… 0.305    0.291    0.318     500
-    5 300   Sozialwissens… Social Scie… f1     doc-… 0.241    0.225    0.253     499
-    6 320   Politik        Politics     f1     doc-… 0.288    0.276    0.304     500
+    1 004   Informatik     Computer Sc… f1     doc-… 0.211    0.192    0.224     500
+    2 100   Philosophie    Philosophy   f1     doc-… 0.338    0.324    0.356     500
+    3 150   Psychologie    Psychology   f1     doc-… 0.264    0.245    0.281     500
+    4 230   Theologie, Ch… Theology, C… f1     doc-… 0.305    0.293    0.317     500
+    5 300   Sozialwissens… Social Scie… f1     doc-… 0.241    0.228    0.255     499
+    6 320   Politik        Politics     f1     doc-… 0.288    0.274    0.302     500
 
 ``` r
 plan(sequential) # reset to sequential processing
@@ -260,6 +261,7 @@ and upper bounds of the confidence intervals (`ci_lower` and
 estimates in a plot:
 
 ``` r
+# plot results with confidence intervals
 ggplot(
   res_at_5_by_sg_artful_accordion_ci,
   aes(x = sg, y = value, ymin = ci_lower, ymax = ci_upper)
@@ -312,8 +314,8 @@ res_at_5_by_entity_type_all_methods <- map_dfr(
   ~ compute_set_retrieval_scores(
     predicted = .x,
     gold_standard = gold_standard,
-    label_groups = gnd_entity_types,
-    mode = "micro",
+    label_groups = gnd_entity_types, # stratify by label entity types
+    mode = "micro", # use micro-averaging for label_groups
     compute_bootstrap_ci = TRUE,
     n_bt = 100L,
     k = 5,
@@ -329,11 +331,11 @@ head(res_at_5_by_entity_type_all_methods)
     # A tibble: 6 × 9
       Method   label_entitytype_ger label_entitytype_eng metric mode  value ci_lower
       <chr>    <chr>                <chr>                <chr>  <chr> <dbl>    <dbl>
-    1 artful-… Geografikum          geographic name      f1     micro 0.343   0.323 
+    1 artful-… Geografikum          geographic name      f1     micro 0.343   0.324 
     2 artful-… Konferenz            conference           f1     micro 0.211   0     
-    3 artful-… Körperschaft         corporation          f1     micro 0.247   0.219 
-    4 artful-… NA                   NA                   f1     micro 0.25    0.0667
-    5 artful-… Person (individuali… person (individuali… f1     micro 0.359   0.339 
+    3 artful-… Körperschaft         corporation          f1     micro 0.247   0.215 
+    4 artful-… NA                   NA                   f1     micro 0.25    0.0345
+    5 artful-… Person (individuali… person (individuali… f1     micro 0.359   0.330 
     6 artful-… Sachbegriff          subject term         f1     micro 0.259   0.255 
     # ℹ 2 more variables: ci_upper <dbl>, support <dbl>
 

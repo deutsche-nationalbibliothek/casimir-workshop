@@ -6,6 +6,9 @@ toc: true
 editor: source
 ---
 
+**Note:** If you run out of time, you can also skip this workbook
+and go directly to the workbook 5 on long-tail analysis.
+
 So far we have studied set retrieval metrics: metrics that assume a fixed
 set of predictions. In most exercises we have already used that, in practice, 
 many indexing methods produce ranked lists of candidates. We previously applied
@@ -85,9 +88,11 @@ plot the results:
 #| label: plot-prec-rec-rank
 #| cache: true
 
+# define a range of limits to compute precision and recall for
 k_range <- 1:20
+# apply function to all limits and combine results into a data frame
 prec_rec_rank_df <- map_dfr(k_range, prec_rec_rank)
-
+# visualize point estimates as precision-recall curve
 ggplot(prec_rec_rank_df, aes(x = rec, y = prec)) +
   geom_path() +
   geom_point() +
@@ -107,6 +112,7 @@ at **varying confidence score thresholds**:
 ```{r}
 #| label: define-prec_rec_threshold
 
+# compute precision and recall at a given threshold for method artful-accordion
 prec_rec_threshold <- function(threshold) {
   # filter predictions by threshold
   predictions_thresholded <- predictions[["artful-accordion"]] |>
@@ -128,7 +134,7 @@ prec_rec_threshold <- function(threshold) {
 
   res
 }
-
+# show example computation for threshold 0.1
 prec_rec_threshold(0.1)
 ```
 
@@ -138,9 +144,11 @@ and plot the results:
 #| label: plot-prec-rec-threshold
 #| cache: true
 
+# .define a range of thresholds to compute precision and recall for
 threshold_range <- seq(0, 1, by = 0.1)
+# apply function to all thresholds and combine results into a data frame
 prec_rec_threshold_df <- map_dfr(threshold_range, prec_rec_threshold)
-
+# visualize point estimates as precision-recall curve
 ggplot(prec_rec_threshold_df, aes(x = rec, y = prec)) +
   geom_path() +
   geom_point() +
@@ -174,12 +182,13 @@ to compute precision-recall curves directly:
 #| label: prec-rec-casimir
 #| cache: true
 
+# compute precision-recall curve for one method using CASIMiR
 pr_curve <- compute_pr_curve(
   predicted = predictions[["artful-accordion"]],
   gold_standard = gold_standard,
   steps = 10
 )
-
+# visualize pr-curve
 ggplot(pr_curve$plot_data, aes(x = rec, y = prec_cummax)) +
   geom_point() +
   geom_path() +
@@ -208,6 +217,8 @@ will have a low area below it.
 CASIMiR offers a function to compute the pr-AUC directly from the pr-curve data:
 ```{r}
 #| label: compute-auc 
+
+# compute area under the precision-recall curve from pr-curve, using CASIMiR
 pr_auc <- compute_pr_auc_from_curve(pr_curve)
 
 pr_auc
@@ -218,6 +229,9 @@ gold standard without computing the full pr-curve first:
 ```{r}
 #| label: compute-auc-direct
 #| cache: true
+
+# direct computation of pr-AUC from predictions and gold standard 
+# (skips outputting pr-curve)
 pr_auc_direct <- compute_pr_auc(
   predicted = predictions[["artful-accordion"]],
   gold_standard = gold_standard,
@@ -250,13 +264,14 @@ pr_curve_with_cutoff <- compute_pr_curve(
   predicted = predictions[["artful-accordion"]],
   gold_standard = gold_standard, 
   steps = 10,
-  limit_range = 1:10,
-  optimize_cutoff = TRUE,
+  limit_range = 1:10, # include limits in addition to thresholds
+  optimize_cutoff = TRUE, # find optimal cutoff based on F1-score
   progress = TRUE
 )
 
 plan(sequential) # reset to sequential processing
 
+# visualize pr-curve with optimal cutoff highlighted
 ggplot(pr_curve_with_cutoff$plot_data, aes(x = rec, y = prec_cummax)) +
   geom_point(
     data = pr_curve_with_cutoff$opt_cutoff,
@@ -317,6 +332,7 @@ Finally, we can compare the PR-curves of multiple methods:
 
 plan(multicore)
 
+# iterate over all methods and compute pr-curve for each
 pr_curves <- map(
   predictions,
   ~ compute_pr_curve(
@@ -354,6 +370,7 @@ pr_auc <- map_dfr(
   .id = "method"
 )
 
+# visualize all pr-curves together with optimal f1-scores highlighted
 ggplot(all_curves, aes(x = rec, y = prec_cummax, color = method)) +
   geom_point(
     data = f1_opt,
@@ -401,6 +418,7 @@ fuse_predictions <- function(x, y) {
 
   full_join(x,y, by = c("doc_id", "label_id"))  |>
     mutate(
+      # add scores with equal weighting, treating missing scores as 0
       score = coalesce(score.x, 0) + coalesce(score.y, 0)
     )  |>
     select(doc_id, label_id, score)

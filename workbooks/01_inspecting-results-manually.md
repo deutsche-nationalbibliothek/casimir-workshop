@@ -157,8 +157,11 @@ files <- list(
   "embracing-euphonium" = "../data/test-set_predictions/embracing-euphonium.csv"
 )
 
+# apply function read_csv to all files and store results in a named list
 predictions <- files |> 
   map(read_csv) 
+
+# show example predictions for one method  
 head(predictions[["artful-accordion"]])
 ```
 
@@ -185,6 +188,7 @@ indexing methods.
 CASIMiR offers a basic method to construct a comparison table:
 
 ``` r
+# join predictions with gold standard for one method
 comp <- create_comparison(
   predicted = predictions[["artful-accordion"]],
   gold_standard = gold_standard
@@ -223,10 +227,15 @@ need more context in form of text descriptions. Below code wraps up a
 lot of data wrangling to bring the tables into an instructive format:
 
 ``` r
+# take a sample of 5 documents to inspect
 set.seed(42)
 sample_docs <- sample_n(doc_titles, size = 5)
+# instead of random sampling, you can also specify specific doc_ids like this:
+# sample_docs <- data.frame(
+#   doc_id = c("1128159244", "1223180417", "1168229987")
+# )
 
-# modify `_eng` to `_ger` to see german original texts
+# modify `_eng` to `_ger` to see German original texts
 qual_table <- create_qualitative_table(
   predicted = predictions,
   gold_standard = gold_standard,
