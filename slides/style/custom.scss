@@ -29,6 +29,12 @@ $presentation-heading-color: #000 !default;
   line-height: 1.3em;
 }
 
+.reveal .cell-output-display pre, 
+.reveal .cell-code pre, 
+.reveal pre.sourceCode {
+  font-size: 1.1em; /* or any desired size */
+}
+
 .reveal .slide-logo {
   top: 20px !important;
   right: 20px !important;

@@ -1,8 +1,8 @@
-<div style="display: flex; justify-content: center; margin-bottom: 1em;">
+<div style="display: flex; justify-content: center; margin-bottom: 1em; transform: scale(1.5); transform-origin: top center;">
   <svg width="800" height="300" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <marker id="arrowhead2" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto" markerUnits="strokeWidth">
-        <polygon points="0 0, 10 3.5, 0 7" fill="#0046c4" />
+      <marker id="arrowhead2" markerWidth="12" markerHeight="7" refX="10" refY="3.5" orient="auto" markerUnits="strokeWidth">
+        <polygon points="0 0, 12 3.5, 0 7" fill="#0046c4" />
       </marker>
     </defs>
     <!-- Text Rectangle -->
@@ -16,8 +16,8 @@
     <text x="420" y="120" font-family="Arial" font-size="14">Cat</text>
     <text x="420" y="145" font-family="Arial" font-size="14">Mouse</text>
     <!-- Arrows for matches -->
-    <path d="M90,110 C150,70 350,70 420,90" stroke="#0046c4" stroke-width="3" fill="transparent" marker-end="url(#arrowhead2)" />
-    <path d="M210,120 C300,130 370,120 420,115" stroke="#0046c4" stroke-width="3" fill="transparent" marker-end="url(#arrowhead2)" />
+    <path d="M90,110 C150,70 350,70 410,90" stroke="#0046c4" stroke-width="3" fill="transparent" marker-end="url(#arrowhead2)" />
+    <path d="M210,120 C300,130 370,120 410,115" stroke="#0046c4" stroke-width="3" fill="transparent" marker-end="url(#arrowhead2)" />
     <!-- Labels for arrows -->
     <text x="250" y="70" font-family="Arial" font-size="12" fill="#0046c4">"dog" → Dog</text>
     <text x="290" y="140" font-family="Arial" font-size="12" fill="#0046c4">"cat" → Cat</text>
