@@ -1,4 +1,4 @@
-# Workbook 1: Set Retrieval Metrics
+# Workbook 2: Set Retrieval Metrics
 Maximilian Kähler, DNB
 
 - [Computing overall set retrieval
@@ -136,7 +136,7 @@ ggplot(results, aes(x = Method, y = value, fill = Method)) +
   )
 ```
 
-![](figures/01_set-retrieval-metrics/plot-metrics-1.png)
+![](figures/02_set-retrieval-metrics/plot-metrics-1.png)
 
 <details>
 

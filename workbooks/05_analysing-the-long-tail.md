@@ -1,4 +1,4 @@
-# Workbook 4: Analysing the long-tail
+# Workbook 5: Analysing the long-tail
 Maximilian Kähler, DNB
 
 - [Analyse performance by label frequency, binned frequency
@@ -44,7 +44,7 @@ freq_groups |>
   )
 ```
 
-![](figures/04_analysing-the-long-tail/plot-frequency-distribution-1.png)
+![](figures/05_analysing-the-long-tail/plot-frequency-distribution-1.png)
 
 The overwhelming majority of labels in the training data are very
 infrequent, i.e., they occur less than 10 times. This is a common
@@ -91,7 +91,7 @@ res_by_train_freq |>
     )
 ```
 
-![](figures/04_analysing-the-long-tail/plot-performance-by-frequency-group-1.png)
+![](figures/05_analysing-the-long-tail/plot-performance-by-frequency-group-1.png)
 
 ## Your turn
 
@@ -183,7 +183,7 @@ ggplot(df, aes(x = N_l, y = 1/p_l, color = factor(N))) +
   )
 ```
 
-![](figures/04_analysing-the-long-tail/plot-propensity-scores-1.png)
+![](figures/05_analysing-the-long-tail/plot-propensity-scores-1.png)
 
 Rare labels receive much higher weights than frequent ones.
 
@@ -313,6 +313,11 @@ the top notch in workbook 1, come closer to the other methods, whereas
   stratified by frequency groups above. Do they tell a similar story?
 - use the argument `cost_fp_constant =` to manipulate the false positive
   cost. Try different strategies and observe the changes in the results.
+- compare the results with the standard (non-propensity scored) metrics:
+  How do the rankings of the methods change? Use the following code
+  snippet to help you with the comparison:
+
+![](figures/05_analysing-the-long-tail/compare-propensity-vs-non-propensity-metrics-1.png)
 
 ## References
 

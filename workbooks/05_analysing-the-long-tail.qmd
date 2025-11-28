@@ -1,5 +1,5 @@
 ---
-title: "Workbook 4: Analysing the long-tail"
+title: "Workbook 5: Analysing the long-tail"
 author: "Maximilian Kähler, DNB"
 format: gfm
 toc: true
@@ -19,7 +19,7 @@ the case that some subjects are much more frequent than others.
 #| echo: FALSE
 knitr::opts_chunk$set(
   echo = TRUE, message = FALSE, warning = FALSE,
-  fig.path = "figures/04_analysing-the-long-tail/"
+  fig.path = "figures/05_analysing-the-long-tail/"
   )
 
 library(knitr)
@@ -320,5 +320,61 @@ still stands out as the best method.
     stratified by frequency groups above. Do they tell a similar story?
   * use the argument `cost_fp_constant = ` to manipulate the false positive cost.
     Try different strategies and observe the changes in the results.
+  * compare the results with the standard (non-propensity scored) metrics:  How do the rankings of the methods change? Use the following code snippet to help you with the comparison:
+
+```{r}
+#| label: compare-propensity-vs-non-propensity-metrics
+#| cache: true
+#| echo: false
+
+# calculate results with propensity scoring
+# and constant false positive cost
+res_propensity <- map_dfr(
+  predictions,
+  ~ compute_set_retrieval_scores(
+    predicted = .x,
+    gold_standard = gold_standard,
+    mode = "doc-avg",
+    k = 5,
+    propensity_scored = TRUE,
+    label_distribution = train_freqs,
+    cost_fp_constant = "mean"
+  ),  .id = "method"
+)  |>
+  filter(metric == "f1") 
+
+# calculate results without propensity scoring
+res_no_weights <- map_dfr(
+  predictions,
+  ~ compute_set_retrieval_scores(
+    predicted = .x,
+    gold_standard = gold_standard,
+    mode = "doc-avg",
+    k = 5,
+  ),  .id = "method"
+)  |>
+  filter(metric == "f1") 
+
+# reshape data for plotting
+plot_data <- bind_rows(
+  res_propensity  |>
+    mutate(weighting = "weighted"),
+  res_no_weights  |>
+    mutate(weighting = "not_weighted")
+)  |>
+  pivot_wider(names_from = weighting, values_from = value)
+
+# plot comparison
+ggplot(plot_data, aes(x = not_weighted, y = weighted, color = method, label = method)) +
+  geom_point() +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "gray") +
+  geom_text() +
+  coord_fixed(xlim = c(0, 0.5), ylim = c(0, 0.5)) +
+  labs(
+    title = "F1@5 with and without propensity scoring",
+    x = "F1@5 without weighting",
+    y = "F1@5 with propensity scoring"
+  )
+```
 
 ## References

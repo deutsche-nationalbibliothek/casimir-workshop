@@ -27,7 +27,7 @@ format:
 #| echo: FALSE
 knitr::opts_chunk$set(
   echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE,
-  fig.path = "figures/01_set-retrieval-metrics/"
+  fig.path = "figures/"
   )
 
 library(knitr)
@@ -315,7 +315,7 @@ Can you guess which method is behind which file name?
 
 ## Practical I
 
-  **Practical:** Go to `workbooks/00_inspecting-results-manually.qmd` to inspect the
+  **Practical:** Go to `workbooks/01_inspecting-results-manually.qmd` to inspect the
    data formats and datasets provided.
 
 ::: {style="background: #e62e2e; color: white; padding: 20px; border-radius: 10px; font-size: 1.2em; margin: 20px 0;"}
@@ -452,7 +452,7 @@ $$
 
 ## Practical II
 
-  **Practical:** Go to `workbooks/01_set-retrieval-metrics.qmd` to compute
+  **Practical:** Go to `workbooks/02_set-retrieval-metrics.qmd` to compute
    retrieval metrics for the provided subject indexing methods.
 
 Example: Compute Precision, Recall, and F1-Score for `artful-accordion` method
@@ -486,7 +486,7 @@ Alternatively: Stratify along **vocabulary-based** dimensions:
   * hierarchical levels
   * frequent vs. rare labels
 
-**Practical:** Go to `workbooks/02_stratified-set-retrieval-metrics.qmd` to explore
+**Practical:** Go to `workbooks/03_stratified-set-retrieval-metrics.qmd` to explore
  stratified evaluation using different dimensions of the provided datasets.
 
 ## Practical III: Example
@@ -643,7 +643,7 @@ Precision-Recall curves show the trade-off between precision and recall at diffe
 
 ## Practical IV: Precision Recall Curves
 
-  **Practical:** Go to `workbooks/03_precision-recall-curves.qmd` to compute
+  **Practical:** Go to `workbooks/04_precision-recall-curves.qmd` to compute
    precision-recall curves for the provided subject indexing methods.
 
 Example: Compute Precision-Recall Curve with CASIMiR
@@ -708,12 +708,12 @@ freq_groups |>
 
 ## Practical V: Long Tail Analysis
 
-  **Practical:** Go to `workbooks/04_analysing-the-long-tail.qmd` to analyse
+  **Practical:** Go to `workbooks/05_analysing-the-long-tail.qmd` to analyse
    performance of subject indexing methods on frequent vs. rare labels.
 
 ## Practical VI: Final Assignment
 
-  **Practical:** Go to `workbooks/05_final-assignment.qmd` and try to solve todays quiz:
+  **Practical:** Go to `workbooks/06_final-assignment.qmd` and try to solve todays quiz:
 
   **Your task:** identify which method is behind which anonymised name[^credit-icons]
 

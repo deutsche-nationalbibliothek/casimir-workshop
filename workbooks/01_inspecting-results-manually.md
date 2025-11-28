@@ -1,4 +1,4 @@
-# Inspecting Automatic Indexing Results Manually
+# Workbook 1:Inspecting Automatic Indexing Results Manually
 Maximilian Kähler, DNB
 
 - [Looking at Data-Formats](#looking-at-data-formats)
@@ -37,8 +37,7 @@ tree ../data
 │   ├── bold-bassoon.csv
 │   ├── charming-cello.csv
 │   ├── dreamy-didgeridoo.csv
-│   ├── embracing-euphonium.csv
-│   └── fantastic-flute.csv
+│   └── embracing-euphonium.csv
 ├── test-set_subject-group-mapping.csv
 └── training-frequency-distribution.csv
 ```
@@ -193,21 +192,25 @@ comp <- create_comparison(
 ```
 
     Warning in create_comparison(predicted = predictions[["artful-accordion"]], :
-    gold standard data contains documents that are not in predicted set
+    Gold standard data contains documents that are not in predicted set.
 
 ``` r
-kable(filter(comp, doc_id == "1122545479"))
+# display table for a specific document
+comp  |>
+  filter(doc_id == "1122545479")  |>
+  select(-relevance)  |>
+  kable()
 ```
 
-| doc_id     | label_id  | gold  |     score | suggested | relevance |
-|:-----------|:----------|:------|----------:|:----------|----------:|
-| 1122545479 | 041321634 | TRUE  |        NA | FALSE     |         0 |
-| 1122545479 | 041321650 | TRUE  |        NA | FALSE     |         0 |
-| 1122545479 | 041608607 | TRUE  | 0.3171981 | TRUE      |         0 |
-| 1122545479 | 042388120 | TRUE  |        NA | FALSE     |         0 |
-| 1122545479 | 042718368 | TRUE  |        NA | FALSE     |         0 |
-| 1122545479 | 043049168 | TRUE  |        NA | FALSE     |         0 |
-| 1122545479 | 040550729 | FALSE | 0.7565188 | TRUE      |         0 |
+| doc_id     | label_id  | gold  |     score | suggested |
+|:-----------|:----------|:------|----------:|:----------|
+| 1122545479 | 041321634 | TRUE  |        NA | FALSE     |
+| 1122545479 | 041321650 | TRUE  |        NA | FALSE     |
+| 1122545479 | 041608607 | TRUE  | 0.3171981 | TRUE      |
+| 1122545479 | 042388120 | TRUE  |        NA | FALSE     |
+| 1122545479 | 042718368 | TRUE  |        NA | FALSE     |
+| 1122545479 | 043049168 | TRUE  |        NA | FALSE     |
+| 1122545479 | 040550729 | FALSE | 0.7565188 | TRUE      |
 
 Note, CASIMiR informs you that apparently not all documents were indexed
 by “artful-accordion”. When working with larger data, that is quite

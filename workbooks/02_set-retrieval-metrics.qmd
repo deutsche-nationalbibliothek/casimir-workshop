@@ -1,5 +1,5 @@
 ---
-title: "Workbook 1: Set Retrieval Metrics"
+title: "Workbook 2: Set Retrieval Metrics"
 author: "Maximilian Kähler, DNB"
 format: gfm
 toc: true
@@ -18,7 +18,7 @@ to find the best and worst performing subject terms.
 #| echo: FALSE
 knitr::opts_chunk$set(
   echo = TRUE, message = FALSE, warning = FALSE,
-  fig.path = "figures/01_set-retrieval-metrics/"
+  fig.path = "figures/02_set-retrieval-metrics/"
   )
 
 library(knitr)

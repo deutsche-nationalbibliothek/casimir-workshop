@@ -1,5 +1,5 @@
 ---
-title: "Workbook 3: Precision Recall Curves"
+title: "Workbook 4: Precision Recall Curves"
 author: "Maximilian Kähler, DNB"
 format: gfm
 toc: true
@@ -26,7 +26,7 @@ trade-off for different for different methods.
 #| echo: FALSE
 knitr::opts_chunk$set(
   echo = TRUE, message = FALSE, warning = FALSE,
-  fig.path = "figures/03_precision-recall-curves/"
+  fig.path = "figures/04_precision-recall-curves/"
   )
 
 library(knitr)

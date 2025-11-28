@@ -1,4 +1,4 @@
-# Workbook 3: Precision Recall Curves
+# Workbook 4: Precision Recall Curves
 Maximilian Kähler, DNB
 
 - [The idea of precision-recall
@@ -83,7 +83,7 @@ ggplot(prec_rec_rank_df, aes(x = rec, y = prec)) +
   )
 ```
 
-![](figures/03_precision-recall-curves/plot-prec-rec-rank-1.png)
+![](figures/04_precision-recall-curves/plot-prec-rec-rank-1.png)
 
 The same idea can be applied not to the **rank** but to the **confidence
 score**. Let’s define a function that computes precision and recall for
@@ -139,7 +139,7 @@ ggplot(prec_rec_threshold_df, aes(x = rec, y = prec)) +
   )
 ```
 
-![](figures/03_precision-recall-curves/plot-prec-rec-threshold-1.png)
+![](figures/04_precision-recall-curves/plot-prec-rec-threshold-1.png)
 
 If you increase the number of steps,
 e.g. `threshold_range <- seq(0, 1, by = 0.05)`, you may note some
@@ -172,7 +172,7 @@ ggplot(pr_curve$plot_data, aes(x = rec, y = prec_cummax)) +
   ggtitle("Precision-Recall Curve for artful-accordion, computed with CASIMiR")
 ```
 
-![](figures/03_precision-recall-curves/prec-rec-casimir-1.png)
+![](figures/04_precision-recall-curves/prec-rec-casimir-1.png)
 
 By default, CASIMiR computes the pr-curve using thresholding over
 confidence scores. The threshold range is controlled by the `steps`
@@ -278,7 +278,7 @@ ggplot(pr_curve_with_cutoff$plot_data, aes(x = rec, y = prec_cummax)) +
   )
 ```
 
-![](figures/03_precision-recall-curves/find-optimal-cutoff-1.png)
+![](figures/04_precision-recall-curves/find-optimal-cutoff-1.png)
 
 CASIMiR also tells you at what limit and threshold the optimnal F1-score
 is achieved:
@@ -373,7 +373,7 @@ ggplot(all_curves, aes(x = rec, y = prec_cummax, color = method)) +
   coord_fixed(xlim = c(0, 1), ylim = c(0, 1))
 ```
 
-![](figures/03_precision-recall-curves/plot-multiple-pr-curves-1.png)
+![](figures/04_precision-recall-curves/plot-multiple-pr-curves-1.png)
 
 ``` r
 f1_opt |>
@@ -478,7 +478,7 @@ ggplot(fused_pr_curve$plot_data, aes(x = rec, y = prec_cummax)) +
   )
 ```
 
-![](figures/03_precision-recall-curves/plot-fused-pr-curve-1.png)
+![](figures/04_precision-recall-curves/plot-fused-pr-curve-1.png)
 
 ``` r
 pr_auc_fused <- compute_pr_auc_from_curve(fused_pr_curve)

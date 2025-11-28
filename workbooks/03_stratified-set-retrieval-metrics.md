@@ -1,4 +1,4 @@
-# Workbook 2: Stratified Set Retrieval Metrics
+# Workbook 3: Stratified Set Retrieval Metrics
 Maximilian Kähler, DNB
 
 - [Stratified results by document
@@ -186,7 +186,7 @@ res_at_5_by_sg_all_methods  |>
   )
 ```
 
-![](figures/02_stratified-set-retrieval-metrics/stratified-subject-groups-plot-1.png)
+![](figures/03_stratified-set-retrieval-metrics/stratified-subject-groups-plot-1.png)
 
 ## Your turn
 
@@ -243,12 +243,12 @@ head(res_at_5_by_sg_artful_accordion_ci)
     # A tibble: 6 × 9
       sg    sg_label_ger   sg_label_eng metric mode  value ci_lower ci_upper support
       <fct> <fct>          <fct>        <chr>  <chr> <dbl>    <dbl>    <dbl>   <dbl>
-    1 004   Informatik     Computer Sc… f1     doc-… 0.211    0.195    0.226     500
-    2 100   Philosophie    Philosophy   f1     doc-… 0.338    0.324    0.352     500
-    3 150   Psychologie    Psychology   f1     doc-… 0.264    0.246    0.280     500
-    4 230   Theologie, Ch… Theology, C… f1     doc-… 0.305    0.291    0.319     500
-    5 300   Sozialwissens… Social Scie… f1     doc-… 0.241    0.228    0.257     499
-    6 320   Politik        Politics     f1     doc-… 0.288    0.272    0.303     500
+    1 004   Informatik     Computer Sc… f1     doc-… 0.211    0.196    0.225     500
+    2 100   Philosophie    Philosophy   f1     doc-… 0.338    0.322    0.351     500
+    3 150   Psychologie    Psychology   f1     doc-… 0.264    0.248    0.282     500
+    4 230   Theologie, Ch… Theology, C… f1     doc-… 0.305    0.291    0.318     500
+    5 300   Sozialwissens… Social Scie… f1     doc-… 0.241    0.225    0.253     499
+    6 320   Politik        Politics     f1     doc-… 0.288    0.276    0.304     500
 
 ``` r
 plan(sequential) # reset to sequential processing
@@ -278,7 +278,7 @@ ggplot(
   )
 ```
 
-![](figures/02_stratified-set-retrieval-metrics/stratified-subject-groups-ci-display-1.png)
+![](figures/03_stratified-set-retrieval-metrics/stratified-subject-groups-ci-display-1.png)
 
 **Note:** You can also modify the previous bar-chart to include
 confidence intervals by using the same approach as shown. Add the
@@ -329,12 +329,12 @@ head(res_at_5_by_entity_type_all_methods)
     # A tibble: 6 × 9
       Method   label_entitytype_ger label_entitytype_eng metric mode  value ci_lower
       <chr>    <chr>                <chr>                <chr>  <chr> <dbl>    <dbl>
-    1 artful-… Geografikum          geographic name      f1     micro 0.343   0.324 
+    1 artful-… Geografikum          geographic name      f1     micro 0.343   0.323 
     2 artful-… Konferenz            conference           f1     micro 0.211   0     
-    3 artful-… Körperschaft         corporation          f1     micro 0.247   0.220 
-    4 artful-… NA                   NA                   f1     micro 0.25    0.0270
-    5 artful-… Person (individuali… person (individuali… f1     micro 0.359   0.336 
-    6 artful-… Sachbegriff          subject term         f1     micro 0.259   0.254 
+    3 artful-… Körperschaft         corporation          f1     micro 0.247   0.219 
+    4 artful-… NA                   NA                   f1     micro 0.25    0.0667
+    5 artful-… Person (individuali… person (individuali… f1     micro 0.359   0.339 
+    6 artful-… Sachbegriff          subject term         f1     micro 0.259   0.255 
     # ℹ 2 more variables: ci_upper <dbl>, support <dbl>
 
 **Note:** Here we set the `mode` parameter to `"micro"` to compute
@@ -368,7 +368,7 @@ res_at_5_by_entity_type_all_methods  |>
   )
 ```
 
-![](figures/02_stratified-set-retrieval-metrics/stratified-label-groups-plot-1.png)
+![](figures/03_stratified-set-retrieval-metrics/stratified-label-groups-plot-1.png)
 
 Observe how the confidence intervals show extreme ranges for entity
 types with very few observed labels (e.g. conferences), and very narrow

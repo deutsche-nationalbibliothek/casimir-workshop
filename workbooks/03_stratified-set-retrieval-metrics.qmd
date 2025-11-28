@@ -1,5 +1,5 @@
 ---
-title: "Workbook 2: Stratified Set Retrieval Metrics"
+title: "Workbook 3: Stratified Set Retrieval Metrics"
 author: "Maximilian Kähler, DNB"
 format: gfm
 toc: true
@@ -18,7 +18,7 @@ or subjects.
 #| echo: FALSE
 knitr::opts_chunk$set(
   echo = TRUE, message = FALSE, warning = FALSE,
-  fig.path = "figures/02_stratified-set-retrieval-metrics/"
+  fig.path = "figures/03_stratified-set-retrieval-metrics/"
   )
 
 library(knitr)

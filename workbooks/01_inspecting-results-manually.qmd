@@ -1,5 +1,5 @@
 ---
-title: "Inspecting Automatic Indexing Results Manually"
+title: "Workbook 1:Inspecting Automatic Indexing Results Manually"
 author: "Maximilian Kähler, DNB"
 format: gfm
 toc: true
@@ -19,7 +19,8 @@ library(knitr)
 library(tidyverse)
 library(casimir)
 
-opts_chunk$set(echo = TRUE, message = FALSE)
+opts_chunk$set(echo = TRUE, message = FALSE, 
+               fig.path = "figures/01_inspecting-results-manually/")
 
 # load some helper functions for data visualization 
 source("../src/create_qual_table.r")
@@ -48,8 +49,7 @@ tree ../data
 │   ├── bold-bassoon.csv
 │   ├── charming-cello.csv
 │   ├── dreamy-didgeridoo.csv
-│   ├── embracing-euphonium.csv
-│   └── fantastic-flute.csv
+│   └── embracing-euphonium.csv
 ├── test-set_subject-group-mapping.csv
 └── training-frequency-distribution.csv
 ```
@@ -145,7 +145,11 @@ comp <- create_comparison(
   gold_standard = gold_standard
 )
 
-kable(filter(comp, doc_id == "1122545479"))
+# display table for a specific document
+comp  |>
+  filter(doc_id == "1122545479")  |>
+  select(-relevance)  |>
+  kable()
 
 ```
 

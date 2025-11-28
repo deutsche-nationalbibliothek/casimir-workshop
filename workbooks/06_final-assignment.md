@@ -1,0 +1,26 @@
+# Workbook 6: Final Assignment and Conclusion
+Maximilian Kähler, DNB
+
+It is now time to wrap up the results of this workshop and to reveal the
+true origin of the predictions we analyzed in the previous workbooks. Go
+back to the section on different methods introduced in the slides
+(`slides/slides.qmd`). Can you guess which “instrument” maps to which of
+the methods? As a reminder: the five methods we have in our pool are:
+
+- **Omikuji**: A statistical approach that learns subject suggestions
+  from label correlations between the tfidf-feature-matrix and the
+  document-label matrix.
+- **X-transformer**: A statistical approach that not only relies on the
+  tfidf-feature-matrix, but also works with transformer-based text
+  features.
+- **MLLM**: A lexical indexing method
+- **EBM**: Embedding based matching
+- **LLM-Ensemble**: An ensmble of LLMs used with a few-shot-prompting
+  approach
+
+Hint: The frequency based analysis in workbook 04 is key to this. But
+going back to the qualitative comparison in workbook 00 might also help
+to discern the methods.
+
+What are your conclusions? Which method would you choose for a
+production system?
