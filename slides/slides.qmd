@@ -78,7 +78,7 @@ source("../src/load_data.r")
 
 ## Why Automated Subject Indexing?
 
-![Annual Publication Volume@DNB](diagrams/annual-publication-volume.png)
+![Annual Publication Volume@DNB](figures/annual-publication-volume.png)
 
   * increasing publication volume
   * limited human resources for manual subject indexing
@@ -159,7 +159,7 @@ Before the advent of Deep Learning and transformers:
 
 ## Lexical Matching 
 
-{{< include diagrams/lexical-matching.qmd >}}
+{{< include figures/lexical-matching.qmd >}}
 
   * can match any keyword in the vocabulary
   * heuritstics like frequency, position, etc. are used to rank the keywords after matching
@@ -168,7 +168,7 @@ Before the advent of Deep Learning and transformers:
 
 ## Statistical Methods
 
-{{< include diagrams/statistical-learning.qmd >}}
+{{< include figures/statistical-learning.qmd >}}
 
 * statistical apporaches learn correlations between feature matrix and document-label matrix
 * statistical apporaches don't need prefLabels: they do not interpret the description of labels
@@ -211,7 +211,7 @@ Going for generative LLM-powered methods:
 
 ## The idea of few shot prompting
 
-{{< include diagrams/few-shot-prompting.qmd >}}
+{{< include figures/few-shot-prompting.qmd >}}
 
   * exploits world knowledge in LLMs
   * needs only few training examples
@@ -222,7 +222,7 @@ Going for generative LLM-powered methods:
   * extra step maps generated keywords to controlled vocabulary
   * hybrid search: lexical matching + embedding based matching powered by vector storage
 
-{{< include diagrams/mapping.qmd >}}
+{{< include figures/mapping.qmd >}}
 
 ## Advanced LLM-based methods
 
@@ -241,29 +241,29 @@ Few-shot prompting and mapping alone do not yield satisfactory results yet
 
 5 Methods we work with today:
 
-  ![](diagrams/5-methods.png){width="80%"}
+  ![](figures/5-methods.png){width="80%"}
 
 **Your task:** identify which method is behind which anonymised name[^credit-icons]
 
 <div style="display: flex; justify-content: center; align-items: flex-end; gap: 32px; margin-top: 2em; margin-bottom: 2em;">
   <figure style="text-align: center;">
-    <img src="diagrams/accordion.png" alt="Accordion" style="height: 80px;">
+    <img src="figures/accordion.png" alt="Accordion" style="height: 80px;">
     <figcaption>Artful Accordion</figcaption>
   </figure>
   <figure style="text-align: center;">
-    <img src="diagrams/bassoon.png" alt="Bassoon" style="height: 80px;">
+    <img src="figures/bassoon.png" alt="Bassoon" style="height: 80px;">
     <figcaption>Bold Bassoon</figcaption>
   </figure>
   <figure style="text-align: center;">
-    <img src="diagrams/cello.png" alt="Cello" style="height: 80px;">
+    <img src="figures/cello.png" alt="Cello" style="height: 80px;">
     <figcaption>Charming Cello</figcaption>
   </figure>
   <figure style="text-align: center;">
-    <img src="diagrams/didgeridoo.png" alt="Didgeridoo" style="height: 80px;">
+    <img src="figures/didgeridoo.png" alt="Didgeridoo" style="height: 80px;">
     <figcaption>Dreamy Didgeridoo</figcaption>
   </figure>
   <figure style="text-align: center;">
-    <img src="diagrams/euphonium.png" alt="Euphonium" style="height: 80px;">
+    <img src="figures/euphonium.png" alt="Euphonium" style="height: 80px;">
     <figcaption>Embracing Euphonium</figcaption>
   </figure>
 </div>
@@ -412,7 +412,7 @@ Consider the following example document title:
 :::: {.columns}
 
 ::: {.column width="80%"}
-{{< include diagrams/example-table.qmd >}}
+{{< include figures/example-table.qmd >}}
 :::
 
 ::: {.column width="20%"}
@@ -719,23 +719,23 @@ freq_groups |>
 
 <div style="display: flex; justify-content: center; align-items: flex-end; gap: 32px; margin-top: 2em; margin-bottom: 2em;">
   <figure style="text-align: center;">
-    <img src="diagrams/accordion.png" alt="Accordion" style="height: 80px;">
+    <img src="figures/accordion.png" alt="Accordion" style="height: 80px;">
     <figcaption>Artful Accordion</figcaption>
   </figure>
   <figure style="text-align: center;">
-    <img src="diagrams/bassoon.png" alt="Bassoon" style="height: 80px;">
+    <img src="figures/bassoon.png" alt="Bassoon" style="height: 80px;">
     <figcaption>Bold Bassoon</figcaption>
   </figure>
   <figure style="text-align: center;">
-    <img src="diagrams/cello.png" alt="Cello" style="height: 80px;">
+    <img src="figures/cello.png" alt="Cello" style="height: 80px;">
     <figcaption>Charming Cello</figcaption>
   </figure>
   <figure style="text-align: center;">
-    <img src="diagrams/didgeridoo.png" alt="Didgeridoo" style="height: 80px;">
+    <img src="figures/didgeridoo.png" alt="Didgeridoo" style="height: 80px;">
     <figcaption>Dreamy Didgeridoo</figcaption>
   </figure>
   <figure style="text-align: center;">
-    <img src="diagrams/euphonium.png" alt="Euphonium" style="height: 80px;">
+    <img src="figures/euphonium.png" alt="Euphonium" style="height: 80px;">
     <figcaption>Embracing Euphonium</figcaption>
   </figure>
 </div>
@@ -757,7 +757,7 @@ Haven't found your favourite method?
 Consider combining them into **ensembles** for improved performance![^orchestra-icon]
 
 <div style="display: flex; justify-content: center;">
-  <img src="diagrams/symphony.png" alt="Symphony" style="width:40%;">
+  <img src="figures/symphony.png" alt="Symphony" style="width:40%;">
 </div>
 
 [^orchestra-icon]:<a href="https://www.flaticon.com/free-icons/orchestra" title="orchestra icons">Orchestra icons created by mia elysia - Flaticon</a>
@@ -848,7 +848,7 @@ Revisit the earlier example document title:
  Writerly performance practices in the age of digitalization
 
 
-{{< include diagrams/example-table.qmd >}}
+{{< include figures/example-table.qmd >}}
 
 
 
@@ -870,7 +870,7 @@ Graded relevance levels can be used to model this, e.g.:
 | wrong  | 
 </div>
 
-![](diagrams/graded-relevance-results.png){width="90%"}
+![](figures/graded-relevance-results.png){width="90%"}
 
 ## Generalized Precision and Recall
 
@@ -911,7 +911,7 @@ with $\Delta_{rel} = \sum_{i \in false\ positives} r_i$  with metric relevance r
 
 Generalised precision-recall curves can be computed similarly to standard precision-recall curves (also supported in CASIMiR):
 
-![](diagrams/generalised-pr-curves.png)
+![](figures/generalised-pr-curves.png)
 
 # Discussion
 

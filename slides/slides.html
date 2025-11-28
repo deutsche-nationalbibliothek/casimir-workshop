@@ -1,0 +1,2357 @@
+<!DOCTYPE html>
+<html lang="en-UK"><head>
+<script src="slides_files/libs/clipboard/clipboard.min.js"></script>
+<script src="slides_files/libs/quarto-html/tabby.min.js"></script>
+<script src="slides_files/libs/quarto-html/popper.min.js"></script>
+<script src="slides_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="slides_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="slides_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="slides_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.26">
+
+  <meta name="author" content="Maximilian Kähler">
+  <meta name="dcterms.date" content="2025-12-03">
+  <title>Workshop</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="slides_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="slides_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="slides_files/libs/revealjs/dist/theme/quarto-847fd1119461911a4f9ae32216069dbc.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+  <link href="slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="slides_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="slides_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Workshop</h1>
+  <p class="subtitle">Evaluating Automated Subject Indexing Methods</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Maximilian Kähler 
+</div>
+        <p class="quarto-title-affiliation">
+            German National Library
+          </p>
+    </div>
+</div>
+
+  <p class="date">2025-12-03</p>
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#/introduction" id="/toc-introduction">Introduction</a></li>
+<li><a href="#/methods-for-subject-indexing" id="/toc-methods-for-subject-indexing">Methods for Subject Indexing</a></li>
+<li><a href="#/datasets-for-this-workshop" id="/toc-datasets-for-this-workshop">Datasets for this Workshop</a></li>
+<li><a href="#/evaluation-of-subject-indexing-methods" id="/toc-evaluation-of-subject-indexing-methods">Evaluation of Subject Indexing Methods</a></li>
+<li><a href="#/advanced-topics" id="/toc-advanced-topics">Advanced Topics</a></li>
+<li><a href="#/discussion" id="/toc-discussion">Discussion</a></li>
+<li><a href="#/the-end" id="/toc-the-end">The End</a></li>
+</ul>
+</nav>
+</section>
+<section>
+<section id="introduction" class="title-slide slide level1 center">
+<h1>Introduction</h1>
+
+</section>
+<section id="welcome" class="slide level2">
+<h2>Welcome</h2>
+<p>Welcome to the Workshop on <strong>Evaluating Automated Subject Indexing Methods</strong></p>
+<div style="display: flex; gap: 40px; justify-content: center; margin-bottom: 2em;">
+<div style="background: white; color: black; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); min-width: 391px; max-width: 460px; height: 410px;">
+<p><strong>About me:</strong></p>
+<ul>
+<li>Maximilian Kähler, German National Library (DNB)</li>
+<li>education: mathematics &amp; theoretical physics</li>
+<li>project lead for DNB-AI-Project on advancing automated subject indexing</li>
+</ul>
+</div>
+<div style="background: white; color: black; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); min-width: 391px; max-width: 460px; height: 410px;">
+<p><strong>About this Workshop:</strong></p>
+<ul>
+<li>Explore evaluation techniques for evaluating automated subject indexing methods, focusing on practical applications using the <strong>CASIMiR</strong><sup>1</sup> package.</li>
+<li>Created as part DNB-AI-Project, funded by the German Federal Commissioner for Culture and Media (BKM) <sup>2</sup></li>
+<li>All workshop materials are available online<sup>3</sup></li>
+</ul>
+</div>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn1"><p><a href="https://github.com/deutsche-nationalbibliothek/casimir">https://github.com/deutsche-nationalbibliothek/casimir</a></p></li><li id="fn2"><p><a href="https://kulturstaatsminister.de/#">https://kulturstaatsminister.de/#</a></p></li><li id="fn3"><p><a href="https://github.com/deutsche-nationalbibliothek/casimir-workshop">https://github.com/deutsche-nationalbibliothek/casimir-workshop</a></p></li></ol></aside></section>
+<section id="why-automated-subject-indexing" class="slide level2">
+<h2>Why Automated Subject Indexing?</h2>
+
+<img data-src="figures/annual-publication-volume.png" class="r-stretch quarto-figure-center"><p class="caption">Annual Publication Volume@DNB</p><ul>
+<li>increasing publication volume</li>
+<li>limited human resources for manual subject indexing</li>
+<li>need for consistent and scalable indexing methods</li>
+</ul>
+</section>
+<section id="automated-subject-indexingdnb" class="slide level2">
+<h2>Automated Subject Indexing@DNB</h2>
+<ul>
+<li>In production since 2014</li>
+<li>Complete refactorization of software architecture in 04/2022 <sup>1</sup></li>
+<li>Core component is the open source library <a href="https://annif.org/" style="vertical-align:middle;"><img src="style/images/annif-RGB.svg" alt="Annif logo" style="height:1.5em; vertical-align:middle; margin-bottom:0.9em;"></a><sup>2</sup></li>
+<li>Annual throughput of ~170.000 publications per year</li>
+<li>Our target vocabulary is the Integrated Authority File<sup>3</sup> (GND) containing &gt;1.4M potential concepts</li>
+</ul>
+<aside><ol class="aside-footnotes"><li id="fn4"><p>Poley etal. 2025. “Automatic Subject Cataloguing at the German National Library.” <br> <a href="https://doi.org/10.53377/lq.19422">https://doi.org/10.53377/lq.19422</a></p></li><li id="fn5"><p>Suominen 2019. “Annif: DIY Automated Subject Indexing Using Multiple Algorithms.” <br> <a href="https://doi.org/10.18352/lq.10285">https://doi.org/10.18352/lq.10285</a>.</p></li><li id="fn6"><p>https://gnd.network/</p></li></ol></aside></section>
+<section id="why-subject-indexing-is-hard" class="slide level2">
+<h2>Why subject Indexing is hard</h2>
+<ul>
+<li>very large label sets (thousands to millions of labels)</li>
+<li>very sparse label assignments (only few correct labels per document)</li>
+<li>incomplete ground truth (not all correct labels are assigned in manual indexing)</li>
+<li>hierarchical relationships between labels (some labels are more general/specific than others)</li>
+<li>varying importance of labels (some labels are more important than others for a given document)</li>
+</ul>
+</section>
+<section id="improving-automated-subject-indexing" class="slide level2">
+<h2>Improving Automated Subject Indexing</h2>
+<p>Three complementary approaches: <br><br></p>
+<div class="r-vstack">
+<div data-id="box1" data-auto-animate-delay="0" style="background: #0046c4; width: 800px; height: 150px; margin: 10px; display: flex; align-items: center; padding-left: 40px;">
+<p>Find and write better algorithms for keyword extraction</p>
+</div>
+<div data-id="box2" data-auto-animate-delay="0.1" style="background: #a4b900; width: 800px; height: 150px; margin: 10px; align-items: center; display: flex; padding-left: 40px;">
+<p>Reduce the complexity of the problem</p>
+</div>
+<div data-id="box3" data-auto-animate-delay="0.2" style="background: #e62e2e; width: 800px; height: 150px; margin: 10px; align-items: center; display: flex; padding-left: 40px;">
+<p>Get better at diagnosing good keyword extraction</p>
+</div>
+</div>
+</section></section>
+<section>
+<section id="methods-for-subject-indexing" class="title-slide slide level1 center">
+<h1>Methods for Subject Indexing</h1>
+
+</section>
+<section id="an-overview" class="slide level2">
+<h2>An Overview</h2>
+<p>Before the advent of Deep Learning and transformers: <br></p>
+<ul>
+<li><p>Lexical Matching <sup>1</sup><sup>,</sup><sup>2</sup></p></li>
+<li><p>Statistical Methods for Extreme Multi-Label Classification (XMLC):<sup>3</sup><sup>,</sup><sup>4</sup></p>
+<ul>
+<li>1vsAll classifiers <sup>5</sup></li>
+<li>Partitioned Label Trees <sup>6</sup><sup>,</sup><sup>7</sup><sup>,</sup><sup>8</sup></li>
+</ul></li>
+</ul>
+<p>2 and 6 are backends of <a href="https://annif.org/" style="vertical-align:middle;"><img src="style/images/annif-RGB.svg" alt="Annif logo" style="height:1.5em; vertical-align:middle; margin-bottom:0.9em;"></a><br></p>
+<aside><ol class="aside-footnotes"><li id="fn7"><p>Medelyan, O., Frank, E., &amp; Witten, I. H. (2009). Human-competitive tagging using automatic keyphrase extraction.</p></li><li id="fn8"><p>Maui-like Lexical Matching<br>
+<a href="https://github.com/NatLibFi/Annif/wiki/Backend%3A-MLLM">https://github.com/NatLibFi/Annif/wiki/Backend%3A-MLLM</a></p></li><li id="fn9"><p>Bhatia etal. 2016. “The Extreme Classification Repository: Multi-Label Datasets and Code.” <a href="http://manikvarma.org/downloads/XC/XMLRepository.html">http://manikvarma.org/downloads/XC/XMLRepository.html</a>.</p></li><li id="fn10"><p>Dasguptaetal. 2023. “Review of Extreme Multilabel Classification,” February. <a href="https://arxiv.org/abs/2302.05971v2">https://arxiv.org/abs/2302.05971v2</a>.</p></li><li id="fn11"><p>Schultheis, E. and Babbar, R. (2021) “Speeding-up One-vs-All Training for Extreme Classification via Smart Initialization.” Available at: <a href="https://doi.org/10.48550/arxiv.2109.13122">https://doi.org/10.48550/arxiv.2109.13122</a></p></li><li id="fn12"><p>Khandagale, S., Xiao, H., &amp; Babbar, R. (2020). Bonsai: diverse and shallow trees for extreme multi-label classification.</p></li><li id="fn13"><p>Prabhu, Y., Kag, A., Harsola, S., Agrawal, R., &amp; Varma, M. (2018). Parabel: Partitioned label trees for extreme classification with application to dynamic search advertising</p></li><li id="fn14"><p>Omikuji Rust-Library: <a href="https://github.com/tomtung/omikuji">https://github.com/tomtung/omikuji</a></p></li></ol></aside></section>
+<section id="lexical-matching" class="slide level2">
+<h2>Lexical Matching</h2>
+<div style="display: flex; justify-content: center; margin-bottom: 1em; transform: scale(1.5); transform-origin: top center;">
+<p><svg width="800" height="300" xmlns="http://www.w3.org/2000/svg"> <defs> <marker id="arrowhead2" markerwidth="12" markerheight="7" refx="10" refy="3.5" orient="auto" markerunits="strokeWidth"> <polygon points="0 0, 12 3.5, 0 7" fill="#0046c4"></polygon> </marker> </defs> <!-- Text Rectangle --> <rect x="30" y="60" width="250" height="80" fill="#e3f2fd" stroke="#333" stroke-width="1.5" rx="12"></rect> <text x="45" y="90" font-family="Arial" font-size="15" font-weight="bold">Text:</text> <text x="45" y="115" font-family="Arial" font-size="14">The dog barked and the cat purred.</text> <!-- Controlled Keywords Table --> <rect x="400" y="40" width="220" height="120" fill="#fff" stroke="#333" stroke-width="1.5" rx="8"></rect> <text x="415" y="65" font-family="Arial" font-size="16" font-weight="bold">Controlled Vocabulary</text> <text x="420" y="95" font-family="Arial" font-size="14">Dog</text> <text x="420" y="120" font-family="Arial" font-size="14">Cat</text> <text x="420" y="145" font-family="Arial" font-size="14">Mouse</text> <!-- Arrows for matches --> <path d="M90,110 C150,70 350,70 410,90" stroke="#0046c4" stroke-width="3" fill="transparent" marker-end="url(#arrowhead2)"></path> <path d="M210,120 C300,130 370,120 410,115" stroke="#0046c4" stroke-width="3" fill="transparent" marker-end="url(#arrowhead2)"></path> <!-- Labels for arrows --> <text x="250" y="70" font-family="Arial" font-size="12" fill="#0046c4">“dog” → Dog</text> <text x="290" y="140" font-family="Arial" font-size="12" fill="#0046c4">“cat” → Cat</text> </svg></p>
+</div>
+<ul>
+<li>can match any keyword in the vocabulary</li>
+<li>heuritstics like frequency, position, etc. are used to rank the keywords after matching</li>
+</ul>
+</section>
+<section id="statistical-methods" class="slide level2">
+<h2>Statistical Methods</h2>
+<div style="display: flex; justify-content: center; margin-bottom: 1em;">
+<p><svg width="900" height="400" xmlns="http://www.w3.org/2000/svg"> <rect width="100%" height="100%" fill="#f9f9f9"></rect> <!-- Document Boxes --> <rect x="20" y="60" width="260" height="80" fill="#a7d1ab" stroke="#333" stroke-width="1.5" rx="14"></rect> <text x="35" y="85" font-family="Arial" font-size="15" font-weight="bold">Title: barking and barking</text> <text x="35" y="105" font-family="Arial" font-size="15">Subject Headings: Dog</text> <text x="35" y="125" font-family="Arial" font-size="16" font-weight="bold">Doc_1</text> <rect x="20" y="170" width="260" height="80" fill="#a7d1ab" stroke="#333" stroke-width="1.5" rx="14"></rect> <text x="35" y="195" font-family="Arial" font-size="15" font-weight="bold">Title: purring, purring and purring</text> <text x="35" y="215" font-family="Arial" font-size="15">Subject Headings: Cat</text> <text x="35" y="235" font-family="Arial" font-size="16" font-weight="bold">Doc_2</text> <rect x="20" y="280" width="260" height="80" fill="#a7d1ab" stroke="#333" stroke-width="1.5" rx="14"></rect> <text x="35" y="305" font-family="Arial" font-size="15" font-weight="bold">Title: barking and purring</text> <text x="35" y="325" font-family="Arial" font-size="15">Subject Headings: Dog, Cat, Mouse</text> <text x="35" y="345" font-family="Arial" font-size="16" font-weight="bold">Doc_3</text> <!-- Feature Matrix Table (SVG) - TOP --> <!-- Feature Matrix Table (SVG) - TOP --> <rect x="470" y="20" width="300" height="120" fill="#fff" stroke="#333" stroke-width="1" rx="5"></rect> <text x="480" y="40" font-family="Arial" font-size="16" font-weight="bold">Feature-Matrix (TFIDF)</text> <text x="520" y="65" font-family="Arial" font-size="13" font-weight="bold">barking</text> <text x="590" y="65" font-family="Arial" font-size="13" font-weight="bold">purring</text> <text x="480" y="90" font-family="Arial" font-size="13" font-weight="bold">Doc_1</text> <text x="530" y="90" font-family="Arial" font-size="13">0.6</text> <text x="600" y="90" font-family="Arial" font-size="13">0</text> <text x="480" y="110" font-family="Arial" font-size="13" font-weight="bold">Doc_2</text> <text x="530" y="110" font-family="Arial" font-size="13">0</text> <text x="600" y="110" font-family="Arial" font-size="13">0.7</text> <text x="480" y="130" font-family="Arial" font-size="13" font-weight="bold">Doc_3</text> <text x="530" y="130" font-family="Arial" font-size="13">0.7</text> <text x="600" y="130" font-family="Arial" font-size="13">0.7</text> <!-- Document-Label Matrix Table (SVG) - BELOW --> <rect x="470" y="220" width="300" height="120" fill="#fff" stroke="#333" stroke-width="1" rx="5"></rect> <text x="480" y="240" font-family="Arial" font-size="16" font-weight="bold">Document-Label-Matrix</text> <text x="520" y="265" font-family="Arial" font-size="13" font-weight="bold" fill="black">Dog</text> <text x="590" y="265" font-family="Arial" font-size="13" font-weight="bold" fill="black">Cat</text> <text x="660" y="265" font-family="Arial" font-size="13" font-weight="bold" fill="black">Mouse</text> <text x="480" y="290" font-family="Arial" font-size="13" font-weight="bold">Doc_1</text> <text x="530" y="290" font-family="Arial" font-size="13">1</text> <text x="600" y="290" font-family="Arial" font-size="13">0</text> <text x="670" y="290" font-family="Arial" font-size="13">0</text> <text x="480" y="310" font-family="Arial" font-size="13" font-weight="bold">Doc_2</text> <text x="530" y="310" font-family="Arial" font-size="13">0</text> <text x="600" y="310" font-family="Arial" font-size="13">1</text> <text x="670" y="310" font-family="Arial" font-size="13">0</text> <text x="480" y="330" font-family="Arial" font-size="13" font-weight="bold">Doc_3</text> <text x="530" y="330" font-family="Arial" font-size="13">1</text> <text x="600" y="330" font-family="Arial" font-size="13">1</text> <text x="670" y="330" font-family="Arial" font-size="13">1</text> <!-- Arrows (adjusted for new layout) --> <defs> <marker id="arrowheadorange" markerwidth="12" markerheight="7" refx="10" refy="3.5" orient="auto" markerunits="strokeWidth"> <polygon points="0 0, 12 3.5, 0 7" fill="orange"></polygon> </marker> </defs> <defs> <marker id="arrowheadgreen" markerwidth="12" markerheight="7" refx="10" refy="3.5" orient="auto" markerunits="strokeWidth"> <polygon points="0 0, 12 3.5, 0 7" fill="green"></polygon> </marker> </defs> <line x1="220" y1="80" x2="470" y2="85" stroke="orange" stroke-width="3" marker-end="url(#arrowheadorange)"></line> <line x1="275" y1="190" x2="470" y2="110" stroke="orange" stroke-width="3" marker-end="url(#arrowheadorange)"></line> <line x1="220" y1="300" x2="470" y2="130" stroke="orange" stroke-width="3" marker-end="url(#arrowheadorange)"></line> <line x1="220" y1="105" x2="470" y2="280" stroke="green" stroke-width="3" marker-end="url(#arrowheadgreen)"></line> <line x1="220" y1="215" x2="470" y2="300" stroke="green" stroke-width="3" marker-end="url(#arrowheadgreen)"></line> <line x1="220" y1="325" x2="470" y2="320" stroke="green" stroke-width="3" marker-end="url(#arrowheadgreen)"></line> </svg></p>
+</div>
+<ul>
+<li>statistical apporaches learn correlations between feature matrix and document-label matrix</li>
+<li>statistical apporaches don’t need prefLabels: they do not interpret the description of labels</li>
+</ul>
+</section>
+<section id="after-the-invention-of-transformers-i" class="slide level2">
+<h2>After the invention of transformers I</h2>
+<p>Refitting old methods with transformers:</p>
+<ul>
+<li>Lexical Matching → Embedding Based Matching <sup>1</sup>
+<ul>
+<li>performs matching in embedding space rather than lexically</li>
+</ul></li>
+<li>Statistical Methods:
+<ul>
+<li>Partitioned Label Trees → X-Transformer <sup>2</sup></li>
+<li>represent document features with transformer embeddings rather than only TFIDF</li>
+</ul></li>
+</ul>
+<aside><ol class="aside-footnotes"><li id="fn15"><p>DND-Prototype: <a href="https://github.com/deutsche-nationalbibliothek/ebm4subjects">https://github.com/deutsche-nationalbibliothek/ebm4subjects</a></p></li><li id="fn16"><p>Zhang etal. (2021). Fast Multi-Resolution Transformer Fine-tuning for Extreme Multi-label Text Classification. <a href="https://arxiv.org/abs/2110.00685v2">https://arxiv.org/abs/2110.00685v2</a></p></li></ol></aside></section>
+<section id="after-the-invention-of-transformers-ii" class="slide level2">
+<h2>After the invention of transformers II</h2>
+<p>Going for generative LLM-powered methods:</p>
+<ul>
+<li>prompt LLMs to generate keywords for documents</li>
+<li>use few-shot prompting to guide LLMs towards desired behavious</li>
+<li>map generated keywords to controlled vocabulary</li>
+</ul>
+<div style="display: flex; align-items: center; justify-content: center; gap: 48px; margin: 2em 0;">
+<div style="background: #0046c4; color: white; padding: 32px 48px; border-radius: 16px; font-size: 1.5em; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+<pre><code>Few-Shot-Prompting</code></pre>
+</div>
+<div style="font-size: 2.5em; font-weight: bold; color: #222;">
++
+</div>
+<div style="background: #a4b900; color: black; padding: 32px 48px; border-radius: 16px; font-size: 1.5em; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+<pre><code>Mapping</code></pre>
+</div>
+</div>
+</section>
+<section id="the-idea-of-few-shot-prompting" class="slide level2">
+<h2>The idea of few shot prompting</h2>
+<div style="display: flex; justify-content: center; margin-bottom: 1em;">
+<p><svg width="800" height="400" xmlns="http://www.w3.org/2000/svg"> <!-- Background --> <rect width="100%" height="100%" fill="#fff"></rect> <!-- Left Box (Prompt) --> <rect x="50" y="50" width="300" height="300" fill="#ffda63" stroke="#333" stroke-width="1" rx="10"></rect> <text x="60" y="70" font-family="Arial" font-size="20" font-weight="bold">Prompt</text> <text x="60" y="95" font-family="Arial" font-size="16">Extract keywords from a text.</text> <text x="60" y="120" font-family="Arial" font-size="16"><tspan font-weight="bold">Text:</tspan> Some Sample text</text> <text x="60" y="145" font-family="Arial" font-size="16"><tspan font-weight="bold">Keywords:</tspan> Some Example Keywords</text> <text x="60" y="170" font-family="Arial" font-size="16">###</text> <text x="60" y="195" font-family="Verbatim" font-size="16">[…possibly more examples …]</text> <text x="60" y="220" font-family="Arial" font-size="16">###</text> <text x="60" y="250" font-family="Arial" font-size="16"><tspan font-weight="bold">Text:</tspan> Test Text</text> <text x="60" y="285" font-family="Arial" font-size="16"><tspan font-weight="bold">Keywords:</tspan> </text> <!-- Right Box (LLM) --> <rect x="450" y="100" width="200" height="150" fill="#90ee90" stroke="#333" stroke-width="1" rx="10"></rect> <text x="550" y="130" font-family="Arial" font-size="20" text-anchor="middle"><tspan font-weight="bold">Language Model</tspan></text> <!-- Bottom Box (Generated Text) --> <rect x="60" y="300" width="280" height="40" fill="#d4711fff" stroke="#333" stroke-width="1" rx="10"></rect> <text x="70" y="320" font-family="Arial" font-size="16">Generated Keywords</text> <!-- Arrow --> <path d="M300,100 C350,100 350,80 450,120" stroke="#333" stroke-width="3" fill="transparent" marker-end="url(#arrowhead)"></path> <!-- Arrowhead Definition --> <defs> <marker id="arrowhead" markerwidth="10" markerheight="7" refx="8" refy="3.5" orient="auto"> <polygon points="0 0, 10 3.5, 0 7" fill="#333"></polygon> </marker> </defs> <!-- Second Arrow --> <path d="M450,200 C350,270 350,270 300,300" stroke="#333" stroke-width="3" fill="transparent" marker-end="url(#arrowhead)"></path></svg></p>
+<p></p>
+</div>
+<ul>
+<li>exploits world knowledge in LLMs</li>
+<li>needs only few training examples</li>
+</ul>
+</section>
+<section id="mapping" class="slide level2">
+<h2>Mapping</h2>
+<ul>
+<li>LLM has no knowledge of controlled vocabulary</li>
+<li>extra step maps generated keywords to controlled vocabulary</li>
+<li>hybrid search: lexical matching + embedding based matching powered by vector storage</li>
+</ul>
+<div style="display: flex; justify-content: center; margin-bottom: 1em; transform: scale(1.2); transform-origin: top center;">
+<p><svg width="900" height="450" xmlns="http://www.w3.org/2000/svg"> <!-- Background --> <rect width="100%" height="100%" fill="#fff"></rect> <!-- Nodes --> <circle cx="100" cy="80" r="40" fill="#a7d1ab" stroke="#333" stroke-width="1"></circle> <text x="100" y="85" font-family="Arial" font-size="16" text-anchor="middle">S₁</text> <circle cx="100" cy="180" r="40" fill="#a7d1ab" stroke="#333" stroke-width="1"></circle> <text x="100" y="185" font-family="Arial" font-size="16" text-anchor="middle">S₂</text> <circle cx="100" cy="280" r="40" fill="#a7d1ab" stroke="#333" stroke-width="1"></circle> <text x="100" y="285" font-family="Arial" font-size="16" text-anchor="middle">S₃</text> <circle cx="700" cy="80" r="40" fill="#f0e68c" stroke="#333" stroke-width="1"></circle> <text x="700" y="85" font-family="Arial" font-size="16" text-anchor="middle">Eᵢ₁</text> <circle cx="700" cy="180" r="40" fill="#f0e68c" stroke="#333" stroke-width="1"></circle> <text x="700" y="185" font-family="Arial" font-size="16" text-anchor="middle">Eᵢ₂</text> <circle cx="700" cy="280" r="40" fill="#f0e68c" stroke="#333" stroke-width="1"></circle> <text x="700" y="285" font-family="Arial" font-size="16" text-anchor="middle">Eᵢ₃</text> <!-- Text Labels --> <text x="300" y="50" font-family="Arial" font-size="18" text-anchor="middle">Mapping witch Hybrid Matching)</text> <text x="550" y="30" font-family="Arial" font-size="18">Controlled Subject Terms</text> <text x="20" y="30" font-family="Arial" font-size="18">LLM-Generated Keywords</text> <rect x="300" y="70" width="250" height="230" fill="#d4711fff" stroke="#333" stroke-width="1" rx="10"></rect> <text x="310" y="200" font-family="Arial" font-size="18" text-anchor="left"><tspan font-weight="bold">Vector-Storage with Vocab-</tspan></text> <text x="320" y="220" font-family="Arial" font-size="18" text-anchor="left"><tspan font-weight="bold">Embeddings</tspan> (E₁, E₂, E₃, …, Eₗ)</text> <!-- Lines --> <line x1="140" y1="80" x2="300" y2="80" stroke="#333" stroke-width="2"></line> <line x1="140" y1="180" x2="300" y2="180" stroke="#333" stroke-width="2"></line> <line x1="140" y1="280" x2="300" y2="280" stroke="#333" stroke-width="2"></line> <line x1="550" y1="80" x2="660" y2="80" stroke="#333" stroke-width="2"></line> <line x1="550" y1="180" x2="660" y2="180" stroke="#333" stroke-width="2"></line> <line x1="550" y1="280" x2="660" y2="280" stroke="#333" stroke-width="2"></line> </svg></p>
+</div>
+</section>
+<section id="advanced-llm-based-methods" class="slide level2">
+<h2>Advanced LLM-based methods</h2>
+<p>Few-shot prompting and mapping alone do not yield satisfactory results yet</p>
+<p>–&gt; Advanced methods:</p>
+<ul>
+<li>combine multiple LLM-based methods into an <strong>LLM-ensemble</strong><sup>1</sup></li>
+<li>use LLMs to Rank and filter candidate labels from multiple methods</li>
+<li>use retrieval to augment LLM prompts with relevant context<sup>2</sup></li>
+</ul>
+<aside><ol class="aside-footnotes"><li id="fn17"><p>Kluge, L. and Kähler, M. (2025) “DNB-AI-Project at SemEval-2025 Task 5: An LLM-Ensemble Approach for Automated Subject Indexing,” <a href="https://aclanthology.org/2025.semeval-1.148/">https://aclanthology.org/2025.semeval-1.148/</a>.</p></li><li id="fn18"><p>Kähler, M., Kluge, L. and Konermann, K. (2025) “DNB-AI-Project at the GermEval-2025 LLMs4Subjects Task: KIFSPrompt - Knowledge-Injected Few-Shot Prompting,” <a href="https://aclanthology.org/2025.konvens-2.42/">https://aclanthology.org/2025.konvens-2.42/</a>.</p></li></ol></aside></section>
+<section id="methods-summary" class="slide level2">
+<h2>Methods: Summary</h2>
+<p>5 Methods we work with today:</p>
+<p><img data-src="figures/5-methods.png" style="width:80.0%"></p>
+<p><strong>Your task:</strong> identify which method is behind which anonymised name<sup>1</sup></p>
+<div style="display: flex; justify-content: center; align-items: flex-end; gap: 32px; margin-top: 2em; margin-bottom: 2em;">
+<figure style="text-align: center;">
+<img src="figures/accordion.png" alt="Accordion" style="height: 80px;">
+<figcaption>
+Artful Accordion
+</figcaption>
+</figure>
+<figure style="text-align: center;">
+<img src="figures/bassoon.png" alt="Bassoon" style="height: 80px;">
+<figcaption>
+Bold Bassoon
+</figcaption>
+</figure>
+<figure style="text-align: center;">
+<img src="figures/cello.png" alt="Cello" style="height: 80px;">
+<figcaption>
+Charming Cello
+</figcaption>
+</figure>
+<figure style="text-align: center;">
+<img src="figures/didgeridoo.png" alt="Didgeridoo" style="height: 80px;">
+<figcaption>
+Dreamy Didgeridoo
+</figcaption>
+</figure>
+<figure style="text-align: center;">
+<img src="figures/euphonium.png" alt="Euphonium" style="height: 80px;">
+<figcaption>
+Embracing Euphonium
+</figcaption>
+</figure>
+</div>
+<aside class="notes">
+<p>Speaker notes go here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><ol class="aside-footnotes"><li id="fn19"><p><a href="https://www.flaticon.com/free-icons/" title="cello icons">Icons created by Freepik - Flaticon</a></p></li></ol></aside></section></section>
+<section>
+<section id="datasets-for-this-workshop" class="title-slide slide level1 center">
+<h1>Datasets for this Workshop</h1>
+
+</section>
+<section id="titles-and-vocabulary" class="slide level2">
+<h2>Titles and Vocabulary</h2>
+<p>Document Titles:</p>
+<ul>
+<li>German National Library (DNB) Test Set
+<ul>
+<li>8.415 document titles with manual subject indexing</li>
+<li>German scientific literature from 18 selected subject groups in equal proportions</li>
+</ul></li>
+<li>Available at: <code>data/</code> folder in this repository</li>
+<li><code>data/README.md</code> contains descriptions of all dataset files</li>
+</ul>
+<p>Vocabulary:</p>
+<ul>
+<li>~200K unique concepts, subsetted from the Integrated Authority File (GND)<sup>1</sup></li>
+<li>each subject heading has a unique identifier (<code>label_id</code>) and a preferred label (<code>label_text</code>)</li>
+<li>the GND includes subject headings, geographic headings, personal names, corporate names, and more</li>
+</ul>
+<aside><ol class="aside-footnotes"><li id="fn20"><p>https://gnd.network/</p></li></ol></aside></section>
+<section id="predictions" class="slide level2">
+<h2>Predictions</h2>
+<ul>
+<li>methods are anonymized for unbiased evaluation</li>
+<li>Predictions from 5 different methods provided under <code>data/test-set_predictions/</code>:
+<ul>
+<li><code>artful-accordion.csv</code></li>
+<li><code>bold-bassoon.csv</code></li>
+<li><code>charming-cello.csv</code></li>
+<li><code>dreamy-didgeridoo.csv</code></li>
+<li><code>embracing-euphonium.csv</code></li>
+</ul></li>
+<li>key-columns are <code>doc_id</code> for document identifiers and <code>label_id</code> for GND subject headings, which are expected by CASIMiR functions</li>
+<li>every suggested label also has a <code>score</code> between 0 and 1 indicating the confidence of the method</li>
+</ul>
+<div style="background: #ff9800; color: black; padding: 20px; border-radius: 10px; font-size: 1.2em; margin: 20px 0;">
+<p><strong>Workshop Game:</strong></p>
+<p>Can you guess which method is behind which file name?</p>
+</div>
+</section>
+<section id="practical-i" class="slide level2">
+<h2>Practical I</h2>
+<p><strong>Practical:</strong> Go to <code>workbooks/01_inspecting-results-manually.qmd</code> to inspect the data formats and datasets provided.</p>
+<div style="background: #e62e2e; color: white; padding: 20px; border-radius: 10px; font-size: 1.2em; margin: 20px 0;">
+<p><strong>Warning</strong>: English translations of document titles and GND subject labels are created by generative AI and provided for convenience only. They may contain errors or inaccuracies. Keyword-Suggestions are all based on subject indexing methods applied to German text and German labels.</p>
+</div>
+<div style="background: white; color: black; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin: 24px 0;">
+<p><span style="font-size: 2em;">💡</span> If you speak German use the <code>_ger</code> column names in the code examples instead of the <code>_eng</code> variants to see the original German texts.</p>
+</div>
+</section>
+<section id="practical-i-example" class="slide level2">
+<h2>Practical I: Example</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="yjdrzqoxgd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yjdrzqoxgd table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#yjdrzqoxgd thead, #yjdrzqoxgd tbody, #yjdrzqoxgd tfoot, #yjdrzqoxgd tr, #yjdrzqoxgd td, #yjdrzqoxgd th {
+  border-style: none;
+}
+
+#yjdrzqoxgd p {
+  margin: 0;
+  padding: 0;
+}
+
+#yjdrzqoxgd .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#yjdrzqoxgd .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#yjdrzqoxgd .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#yjdrzqoxgd .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#yjdrzqoxgd .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#yjdrzqoxgd .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yjdrzqoxgd .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#yjdrzqoxgd .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#yjdrzqoxgd .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#yjdrzqoxgd .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#yjdrzqoxgd .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#yjdrzqoxgd .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#yjdrzqoxgd .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#yjdrzqoxgd .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#yjdrzqoxgd .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#yjdrzqoxgd .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#yjdrzqoxgd .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#yjdrzqoxgd .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#yjdrzqoxgd .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yjdrzqoxgd .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#yjdrzqoxgd .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#yjdrzqoxgd .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#yjdrzqoxgd .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yjdrzqoxgd .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#yjdrzqoxgd .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#yjdrzqoxgd .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yjdrzqoxgd .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yjdrzqoxgd .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#yjdrzqoxgd .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yjdrzqoxgd .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#yjdrzqoxgd .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yjdrzqoxgd .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#yjdrzqoxgd .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yjdrzqoxgd .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#yjdrzqoxgd .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yjdrzqoxgd .gt_left {
+  text-align: left;
+}
+
+#yjdrzqoxgd .gt_center {
+  text-align: center;
+}
+
+#yjdrzqoxgd .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#yjdrzqoxgd .gt_font_normal {
+  font-weight: normal;
+}
+
+#yjdrzqoxgd .gt_font_bold {
+  font-weight: bold;
+}
+
+#yjdrzqoxgd .gt_font_italic {
+  font-style: italic;
+}
+
+#yjdrzqoxgd .gt_super {
+  font-size: 65%;
+}
+
+#yjdrzqoxgd .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#yjdrzqoxgd .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#yjdrzqoxgd .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#yjdrzqoxgd .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#yjdrzqoxgd .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#yjdrzqoxgd .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#yjdrzqoxgd .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#yjdrzqoxgd .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#yjdrzqoxgd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<td colspan="8" class="gt_heading gt_title gt_font_normal gt_bottom_border">Qualitative Method Comparison</td>
+</tr>
+<tr class="gt_col_headings even">
+<th id="label_id" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">label_id</th>
+<th id="label_text" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">label_text</th>
+<th id="gold" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">gold</th>
+<th id="score_artful-accordion" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">score_artful-accordion</th>
+<th id="score_bold-bassoon" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">score_bold-bassoon</th>
+<th id="score_charming-cello" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">score_charming-cello</th>
+<th id="score_dreamy-didgeridoo" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">score_dreamy-didgeridoo</th>
+<th id="score_embracing-euphonium" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">score_embracing-euphonium</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="gt_group_heading_row odd">
+<th colspan="8" id="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful Implementation</th>
+</tr>
+<tr class="gt_row_group_first even">
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_id">950251194</td>
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_text">Transformation</td>
+<td class="gt_row gt_center" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  gold">FALSE</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_artful-accordion">0.05997121</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_bold-bassoon">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_charming-cello">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_dreamy-didgeridoo">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_embracing-euphonium">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_id">041316657</td>
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_text">Claim</td>
+<td class="gt_row gt_center" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  gold">FALSE</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_artful-accordion">0.31719807</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_bold-bassoon">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_charming-cello">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_dreamy-didgeridoo">0.1859743</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_embracing-euphonium">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_id">04126892X</td>
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_text">School development</td>
+<td class="gt_row gt_center" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  gold">TRUE</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_artful-accordion" style="background-color: #FF0000">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_bold-bassoon" style="background-color: #FF0000">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_charming-cello" style="background-color: #00FF00">0.11813986</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_dreamy-didgeridoo" style="background-color: #00FF00">0.4799480</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_embracing-euphonium" style="background-color: #00FF00">0.858</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_id">041351487</td>
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_text">Organizing the Class</td>
+<td class="gt_row gt_center" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  gold">TRUE</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_artful-accordion" style="background-color: #FF0000">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_bold-bassoon" style="background-color: #FF0000">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_charming-cello" style="background-color: #FF0000">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_dreamy-didgeridoo" style="background-color: #FF0000">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_embracing-euphonium" style="background-color: #FF0000">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_id">1000723437</td>
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_text">Inclusive School</td>
+<td class="gt_row gt_center" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  gold">TRUE</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_artful-accordion" style="background-color: #FF0000">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_bold-bassoon" style="background-color: #00FF00">0.2927039</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_charming-cello" style="background-color: #00FF00">0.04837416</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_dreamy-didgeridoo" style="background-color: #00FF00">0.7240117</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_embracing-euphonium" style="background-color: #00FF00">0.066</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_id">965002845</td>
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_text">Inclusion (Sociology)</td>
+<td class="gt_row gt_center" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  gold">TRUE</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_artful-accordion" style="background-color: #FF0000">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_bold-bassoon" style="background-color: #00FF00">0.1999691</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_charming-cello" style="background-color: #00FF00">0.06500251</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_dreamy-didgeridoo" style="background-color: #FF0000">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_embracing-euphonium" style="background-color: #00FF00">0.148</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_id">041276612</td>
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_text">School development planning</td>
+<td class="gt_row gt_center" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  gold">FALSE</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_artful-accordion">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_bold-bassoon">0.1276198</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_charming-cello">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_dreamy-didgeridoo">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_embracing-euphonium">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_id">04053474X</td>
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_text">School</td>
+<td class="gt_row gt_center" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  gold">FALSE</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_artful-accordion">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_bold-bassoon">0.1385269</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_charming-cello">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_dreamy-didgeridoo">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_embracing-euphonium">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_id">100072185X</td>
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_text">Inclusive Pedagogy</td>
+<td class="gt_row gt_center" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  gold">FALSE</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_artful-accordion">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_bold-bassoon">0.1656229</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_charming-cello">0.04911679</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_dreamy-didgeridoo">0.6998804</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_embracing-euphonium">0.041</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_id">041351754</td>
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_text">Educational research</td>
+<td class="gt_row gt_center" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  gold">FALSE</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_artful-accordion">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_bold-bassoon">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_charming-cello">0.04595719</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_dreamy-didgeridoo">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_embracing-euphonium">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_id">123322929X</td>
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_text">Inclusive teaching</td>
+<td class="gt_row gt_center" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  gold">FALSE</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_artful-accordion">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_bold-bassoon">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_charming-cello">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_dreamy-didgeridoo">0.3014980</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_embracing-euphonium">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_id">040118827</td>
+<td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  label_text">Germany</td>
+<td class="gt_row gt_center" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  gold">FALSE</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_artful-accordion">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_bold-bassoon">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_charming-cello">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_dreamy-didgeridoo">NA</td>
+<td class="gt_row gt_right" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation  score_embracing-euphonium">0.099</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="evaluation-of-subject-indexing-methods" class="title-slide slide level1 center">
+<h1>Evaluation of Subject Indexing Methods</h1>
+<!-- ## Evaluation Checklist
+
+  * which methods to compare
+  * which data to use for evaluation
+    * training data/test data split
+    * dimensions of data (subject groups, languages, document types)
+  * which metrics to use for evaluation  -->
+</section>
+<section id="metric-basics" class="slide level2">
+<h2>Metric Basics</h2>
+<p>We work mostly in the <strong>binary relevance scenario</strong>: Comparing predictions to a goldstandard</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 31%">
+<col style="width: 35%">
+<col style="width: 3%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Goldstandard yes</th>
+<th>Goldstandard no</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Prediction<br> yes</strong></td>
+<td>true positives (<code>tp</code>)</td>
+<td>false positives (<code>fp</code>)</td>
+<td><span style="color: #0046c4; white-space: nowrap;"><span class="math inline">\mathrm{Prec} = \frac{tp}{tp + fp}</span></span></td>
+</tr>
+<tr class="even">
+<td><strong>Prediction<br> no</strong></td>
+<td>false negatives (<code>fn</code>)</td>
+<td>true negatives (<code>tn</code>)</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><span style="color: #a4b900;"><span class="math inline">\mathrm{Rec} = \frac{tp}{tp + fn}</span></span></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<div style="display: flex; justify-content: center; gap: 40px;">
+<div style="background: #a4b900; color: black; padding: 20px; border-radius: 10px; min-width: 320px; max-width: 320px; display: flex; flex-direction: column; align-items: center;">
+<p><strong>Recall</strong></p>
+<p>How many of the expected gold standard labels were actually suggested?</p>
+</div>
+<div style="background: #0046c4; color: white; padding: 20px; border-radius: 10px; min-width: 320px; max-width: 320px; display: flex; flex-direction: column; align-items: center;">
+<p><strong>Precision</strong></p>
+<p>How many of the suggested labels are actually correct?</p>
+</div>
+</div>
+</section>
+<section id="example-document-level-precision-and-recall" class="slide level2">
+<h2>Example: Document Level Precision and Recall</h2>
+<p>Consider the following example document title:</p>
+<blockquote>
+<p>Media habitus and biographical legend - <br> Writerly performance practices in the age of digitalization</p>
+</blockquote>
+<div class="columns">
+<div class="column" style="width:80%;">
+<table style="border-collapse: collapse; width: 50%;">
+<thead>
+<tr>
+<th style="border-bottom: 1px solid #ccc;">
+label_id
+</th>
+<th style="border-bottom: 1px solid #ccc;">
+label_text
+</th>
+<th style="border-bottom: 1px solid #ccc;">
+goldstandard
+</th>
+<th style="border-bottom: 1px solid #ccc;">
+suggested
+</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background-color: #d4edda;">
+<td>
+041305450
+</td>
+<td>
+Authorship
+</td>
+<td>
+TRUE
+</td>
+<td>
+TRUE
+</td>
+</tr>
+<tr style="background-color: #e2e3e5;">
+<td>
+040359646
+</td>
+<td>
+Literature
+</td>
+<td>
+FALSE
+</td>
+<td>
+TRUE
+</td>
+</tr>
+<tr style="background-color: #e2e3e5;">
+<td>
+040272230
+</td>
+<td>
+Performance
+</td>
+<td>
+FALSE
+</td>
+<td>
+TRUE
+</td>
+</tr>
+<tr style="background-color: #e2e3e5;">
+<td>
+040533093
+</td>
+<td>
+Writer
+</td>
+<td>
+FALSE
+</td>
+<td>
+TRUE
+</td>
+</tr>
+<tr style="background-color: #e2e3e5;">
+<td>
+041230655
+</td>
+<td>
+Digitalization
+</td>
+<td>
+FALSE
+</td>
+<td>
+TRUE
+</td>
+</tr>
+<tr style="background-color: #f8d7da;">
+<td>
+041223497
+</td>
+<td>
+Self-presentation
+</td>
+<td>
+TRUE
+</td>
+<td>
+FALSE
+</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="width:20%;">
+<p><span class="math display">
+\mathrm{Prec} = \frac{1}{1 + 4} = 0.2
+</span> <span class="math display">
+\mathrm{Rec} = \frac{1}{1 + 1} = 0.5
+</span></p>
+</div></div>
+<ul>
+<li>tp = 1 (Authorship)</li>
+<li>fp = 4 (Literature, Performance, Writer, Digitalization)</li>
+<li>fn = 1 (Self-presentation)</li>
+<li>tn = Vocab-Size - 6 (all other labels not suggested and not in goldstandard)</li>
+</ul>
+</section>
+<section id="metrics-basics-continued" class="slide level2">
+<h2>Metrics Basics: continued</h2>
+<ul>
+<li>Precision and Recall can be computed on different aggregation levels:
+<ul>
+<li>per document</li>
+<li>per label</li>
+<li>overall (micro/macro averaged)</li>
+</ul></li>
+<li>Precision and Recall can be combined into F1-Score:</li>
+</ul>
+<p><span class="math display">\mathrm{F1} = 2 \cdot \frac{\mathrm{Prec} \cdot \mathrm{Rec}}{\mathrm{Prec} + \mathrm{Rec}}</span></p>
+<ul>
+<li>In subject indexing, when results are ranked by a confidence score,we are often interested in top-k suggestions:
+<ul>
+<li>Precision@k, Recall@k, F1@k</li>
+<li>e.g.&nbsp;how many of the top-5 suggestions are correct?</li>
+</ul></li>
+</ul>
+<p><!-- * Precision and Recall are often referred to as "Set Retrieval Metrics" as they do
+    not account for the ranking of the suggested labels 
+  * "Ranked Retrieval Metrics" like Mean Average Precision (MAP) or Normalized Discounted Cumulative Gain (NDCG) can be used to evaluate the ranking of suggested labels (not covered in this workshop) --></p>
+</section>
+<section id="practical-ii" class="slide level2">
+<h2>Practical II</h2>
+<p><strong>Practical:</strong> Go to <code>workbooks/02_set-retrieval-metrics.qmd</code> to compute retrieval metrics for the provided subject indexing methods.</p>
+<p>Example: Compute Precision, Recall, and F1-Score for <code>artful-accordion</code> method</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">compute_set_retrieval_scores</span>(</span>
+<span id="cb3-2"><a href=""></a>  <span class="at">predicted =</span> predictions[[<span class="st">"artful-accordion"</span>]],</span>
+<span id="cb3-3"><a href=""></a>  <span class="at">gold_standard =</span> gold_standard,</span>
+<span id="cb3-4"><a href=""></a>  <span class="at">k =</span> <span class="dv">5</span>, <span class="co"># limit to top-5 suggestions</span></span>
+<span id="cb3-5"><a href=""></a>  <span class="at">rename_metrics =</span> <span class="cn">TRUE</span></span>
+<span id="cb3-6"><a href=""></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 4
+  metric  mode    value support
+  &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1 f1@5    doc-avg 0.277    8415
+2 prec@5  doc-avg 0.289    8197
+3 rec@5   doc-avg 0.349    8415
+4 rprec@5 doc-avg 0.414    8197</code></pre>
+</div>
+</div>
+</section>
+<section id="practical-iii-dimensions-of-evaluation" class="slide level2">
+<h2>Practical III: Dimensions of Evaluation</h2>
+<p>Datasets often have multiple <strong>document-based</strong> dimensions that can be used for stratified evaluation:</p>
+<ul>
+<li>subject groups</li>
+<li>document types</li>
+<li>languages</li>
+<li>publication years</li>
+</ul>
+<p>Alternatively: Stratify along <strong>vocabulary-based</strong> dimensions:</p>
+<ul>
+<li>entity types (e.g., topics, places, persons)</li>
+<li>subject groups</li>
+<li>hierarchical levels</li>
+<li>frequent vs.&nbsp;rare labels</li>
+</ul>
+<p><strong>Practical:</strong> Go to <code>workbooks/03_stratified-set-retrieval-metrics.qmd</code> to explore stratified evaluation using different dimensions of the provided datasets.</p>
+</section>
+<section id="practical-iii-example" class="slide level2">
+<h2>Practical III: Example</h2>
+<p>Given the mapping table <code>subject_groups</code> that assigns each document to a subject group, we can compute stratified retrieval scores:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>res_at_5_by_sg_artful_accordion <span class="ot">&lt;-</span> <span class="fu">compute_set_retrieval_scores</span>(</span>
+<span id="cb5-2"><a href=""></a>  <span class="at">predicted =</span> predictions[[<span class="st">"artful-accordion"</span>]],</span>
+<span id="cb5-3"><a href=""></a>  <span class="at">gold_standard =</span> gold_standard,</span>
+<span id="cb5-4"><a href=""></a>  <span class="at">doc_groups =</span> subject_groups,</span>
+<span id="cb5-5"><a href=""></a>  <span class="at">k =</span> <span class="dv">5</span></span>
+<span id="cb5-6"><a href=""></a>)</span>
+<span id="cb5-7"><a href=""></a></span>
+<span id="cb5-8"><a href=""></a><span class="fu">kable</span>(<span class="fu">head</span>(res_at_5_by_sg_artful_accordion, <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 19%">
+<col style="width: 25%">
+<col style="width: 10%">
+<col style="width: 11%">
+<col style="width: 14%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">sg</th>
+<th style="text-align: left;">sg_label_ger</th>
+<th style="text-align: left;">sg_label_eng</th>
+<th style="text-align: left;">metric</th>
+<th style="text-align: left;">mode</th>
+<th style="text-align: right;">value</th>
+<th style="text-align: right;">support</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">004</td>
+<td style="text-align: left;">Informatik</td>
+<td style="text-align: left;">Computer Science</td>
+<td style="text-align: left;">f1</td>
+<td style="text-align: left;">doc-avg</td>
+<td style="text-align: right;">0.2111046</td>
+<td style="text-align: right;">500</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">100</td>
+<td style="text-align: left;">Philosophie</td>
+<td style="text-align: left;">Philosophy</td>
+<td style="text-align: left;">f1</td>
+<td style="text-align: left;">doc-avg</td>
+<td style="text-align: right;">0.3383969</td>
+<td style="text-align: right;">500</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">150</td>
+<td style="text-align: left;">Psychologie</td>
+<td style="text-align: left;">Psychology</td>
+<td style="text-align: left;">f1</td>
+<td style="text-align: left;">doc-avg</td>
+<td style="text-align: right;">0.2642708</td>
+<td style="text-align: right;">500</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="precision-recall-curves" class="slide level2">
+<h2>Precision-Recall Curves</h2>
+<p>So far: set retrieval metrics at fixed <code>k = 5</code></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="figures/define-prec-rec-rank-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="figures/define-prec_rec_threshold-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<p>Precision-Recall curves show the trade-off between precision and recall at different thresholds</p>
+</section>
+<section id="practical-iv-precision-recall-curves" class="slide level2">
+<h2>Practical IV: Precision Recall Curves</h2>
+<p><strong>Practical:</strong> Go to <code>workbooks/04_precision-recall-curves.qmd</code> to compute precision-recall curves for the provided subject indexing methods.</p>
+<p>Example: Compute Precision-Recall Curve with CASIMiR</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a>pr_curve <span class="ot">&lt;-</span> <span class="fu">compute_pr_curve</span>(</span>
+<span id="cb6-2"><a href=""></a>  <span class="at">predicted =</span> predictions[[<span class="st">"artful-accordion"</span>]],</span>
+<span id="cb6-3"><a href=""></a>  <span class="at">gold_standard =</span> gold_standard,</span>
+<span id="cb6-4"><a href=""></a>  <span class="at">steps =</span> <span class="dv">10</span> <span class="co"># number of thresholds to evaluate</span></span>
+<span id="cb6-5"><a href=""></a>)</span>
+<span id="cb6-6"><a href=""></a></span>
+<span id="cb6-7"><a href=""></a><span class="fu">ggplot</span>(pr_curve<span class="sc">$</span>plot_data, <span class="fu">aes</span>(<span class="at">x =</span> rec, <span class="at">y =</span> prec_cummax)) <span class="sc">+</span></span>
+<span id="cb6-8"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb6-9"><a href=""></a>  <span class="fu">geom_path</span>() <span class="sc">+</span></span>
+<span id="cb6-10"><a href=""></a>  <span class="fu">coord_fixed</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb6-11"><a href=""></a>  <span class="fu">ggtitle</span>(<span class="st">"Precision-Recall Curve for artful-accordion, computed with CASIMiR"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="analysing-the-long-tail" class="slide level2">
+<h2>Analysing the long tail</h2>
+
+<img data-src="figures/plot-long-tail-1.png" width="768" class="r-stretch"></section>
+<section id="practical-v-long-tail-analysis" class="slide level2">
+<h2>Practical V: Long Tail Analysis</h2>
+<p><strong>Practical:</strong> Go to <code>workbooks/05_analysing-the-long-tail.qmd</code> to analyse performance of subject indexing methods on frequent vs.&nbsp;rare labels.</p>
+</section>
+<section id="practical-vi-final-assignment" class="slide level2">
+<h2>Practical VI: Final Assignment</h2>
+<p><strong>Practical:</strong> Go to <code>workbooks/06_final-assignment.qmd</code> and try to solve todays quiz:</p>
+<p><strong>Your task:</strong> identify which method is behind which anonymised name<sup>1</sup></p>
+<div style="display: flex; justify-content: center; align-items: flex-end; gap: 32px; margin-top: 2em; margin-bottom: 2em;">
+<figure style="text-align: center;">
+<img src="figures/accordion.png" alt="Accordion" style="height: 80px;">
+<figcaption>
+Artful Accordion
+</figcaption>
+</figure>
+<figure style="text-align: center;">
+<img src="figures/bassoon.png" alt="Bassoon" style="height: 80px;">
+<figcaption>
+Bold Bassoon
+</figcaption>
+</figure>
+<figure style="text-align: center;">
+<img src="figures/cello.png" alt="Cello" style="height: 80px;">
+<figcaption>
+Charming Cello
+</figcaption>
+</figure>
+<figure style="text-align: center;">
+<img src="figures/didgeridoo.png" alt="Didgeridoo" style="height: 80px;">
+<figcaption>
+Dreamy Didgeridoo
+</figcaption>
+</figure>
+<figure style="text-align: center;">
+<img src="figures/euphonium.png" alt="Euphonium" style="height: 80px;">
+<figcaption>
+Embracing Euphonium
+</figcaption>
+</figure>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn21"><p><a href="https://www.flaticon.com/free-icons/" title="cello icons">Icons created by Freepik - Flaticon</a></p></li></ol></aside></section>
+<section id="solution-methods-revealed" class="slide level2">
+<h2>Solution: Methods Revealed</h2>
+<div style="font-size: 0.7em;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Instrument</th>
+<th>Method Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Artful Accordion</td>
+<td>Lexical Matching</td>
+</tr>
+<tr class="even">
+<td>Bold Bassoon</td>
+<td>LLM-Ensemble</td>
+</tr>
+<tr class="odd">
+<td>Charming Cello</td>
+<td>X-Transformer</td>
+</tr>
+<tr class="even">
+<td>Dreamy Didgeridoo</td>
+<td>Embedding Based Matching</td>
+</tr>
+<tr class="odd">
+<td>Embracing Euphonium</td>
+<td>Omikuji (TFIDF-based Statistical Method)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Haven’t found your favourite method?</p>
+<p>Consider combining them into <strong>ensembles</strong> for improved performance!<sup>1</sup></p>
+<div style="display: flex; justify-content: center;">
+<p><img src="figures/symphony.png" alt="Symphony" style="width:40%;"></p>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn22"><p><a href="https://www.flaticon.com/free-icons/orchestra" title="orchestra icons">Orchestra icons created by mia elysia - Flaticon</a></p></li></ol></aside></section></section>
+<section>
+<section id="advanced-topics" class="title-slide slide level1 center">
+<h1>Advanced Topics</h1>
+
+</section>
+<section id="bonus-conditional-label-weights" class="slide level2">
+<h2>Bonus: Conditional label weights</h2>
+<p>Do true, positives, false positive and false negatives mean the same to us?</p>
+<p>We can assign different costs to different types of errors:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 32%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Goldstandard yes</th>
+<th>Goldstandard no</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Prediction yes</strong></td>
+<td><span class="math inline">C_{\text{tp}}\cdot \text{tp}</span></td>
+<td><span class="math inline">C_{\text{fp}}\cdot\text{fp}</span></td>
+</tr>
+<tr class="even">
+<td><strong>Prediction no</strong></td>
+<td><span class="math inline">C_{\text{fn}}\cdot\text{fn}</span></td>
+<td><span class="math inline">C_{\text{tn}}\cdot\text{tn}</span></td>
+</tr>
+</tbody>
+</table>
+<p>Assume label dependent costs for true positives and false negatives:</p>
+<p><span class="math display">C_{\text{tp}} = C_{\text{fn}} = w_{\lambda},</span></p>
+<p>and constant costs for false positives:</p>
+<p><span class="math display">C_{\text{fp}} = \textit{const}</span></p>
+<p>where <span class="math inline">w_{\lambda}</span> is a weight depending on label <span class="math inline">\lambda</span>, inversely proportional to its frequency in the training data.</p>
+</section>
+<section id="bonus-conditional-label-weights-ii" class="slide level2">
+<h2>Bonus: Conditional label weights II</h2>
+
+<img data-src="figures/propensity-scored-metrics-conditional-1.png" width="960" class="r-stretch"></section>
+<section id="bonus-beyond-binary-relevance-i" class="slide level2">
+<h2>Bonus: Beyond binary relevance I</h2>
+<p>Revisit the earlier example document title:</p>
+<blockquote>
+<p>Media habitus and biographical legend - <br> Writerly performance practices in the age of digitalization</p>
+</blockquote>
+<table style="border-collapse: collapse; width: 50%;">
+<thead>
+<tr>
+<th style="border-bottom: 1px solid #ccc;">
+label_id
+</th>
+<th style="border-bottom: 1px solid #ccc;">
+label_text
+</th>
+<th style="border-bottom: 1px solid #ccc;">
+goldstandard
+</th>
+<th style="border-bottom: 1px solid #ccc;">
+suggested
+</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background-color: #d4edda;">
+<td>
+041305450
+</td>
+<td>
+Authorship
+</td>
+<td>
+TRUE
+</td>
+<td>
+TRUE
+</td>
+</tr>
+<tr style="background-color: #e2e3e5;">
+<td>
+040359646
+</td>
+<td>
+Literature
+</td>
+<td>
+FALSE
+</td>
+<td>
+TRUE
+</td>
+</tr>
+<tr style="background-color: #e2e3e5;">
+<td>
+040272230
+</td>
+<td>
+Performance
+</td>
+<td>
+FALSE
+</td>
+<td>
+TRUE
+</td>
+</tr>
+<tr style="background-color: #e2e3e5;">
+<td>
+040533093
+</td>
+<td>
+Writer
+</td>
+<td>
+FALSE
+</td>
+<td>
+TRUE
+</td>
+</tr>
+<tr style="background-color: #e2e3e5;">
+<td>
+041230655
+</td>
+<td>
+Digitalization
+</td>
+<td>
+FALSE
+</td>
+<td>
+TRUE
+</td>
+</tr>
+<tr style="background-color: #f8d7da;">
+<td>
+041223497
+</td>
+<td>
+Self-presentation
+</td>
+<td>
+TRUE
+</td>
+<td>
+FALSE
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Incomplete ground truth: not all correct labels are assigned in manual indexing</li>
+<li>false positives may actually still be helpful suggestions</li>
+</ul>
+</section>
+<section id="bonus-beyond-binary-relevance-ii" class="slide level2">
+<h2>Bonus: Beyond binary relevance II</h2>
+<p>Graded relevance levels can be used to model this, e.g.:</p>
+<div style="font-size: 0.6em;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Ordinal Relevance Level</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>very helpful</td>
+</tr>
+<tr class="even">
+<td>helpful</td>
+</tr>
+<tr class="odd">
+<td>slightly helpful</td>
+</tr>
+<tr class="even">
+<td>wrong</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<img data-src="figures/graded-relevance-results.png" style="width:90.0%" class="r-stretch"></section>
+<section id="generalized-precision-and-recall" class="slide level2">
+<h2>Generalized Precision and Recall</h2>
+<p>Graded relevance leads to the notion of <strong>generalised precision</strong> and <strong>generalised recall</strong><sup>1</sup></p>
+<div style="font-size: 0.6em;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Ordinal Relevance Level</th>
+<th>Metric Relevance Level <span class="math inline">r</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>very helpful</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>helpful</td>
+<td>2/3</td>
+</tr>
+<tr class="odd">
+<td>slightly helpful</td>
+<td>1/3</td>
+</tr>
+<tr class="even">
+<td>wrong</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="display: flex; gap: 40px; justify-content: center; margin: 2em 0;">
+<div style="background: #0046c4; color: white; padding: 24px; border-radius: 12px; min-width: 320px; text-align: center;">
+<p><strong>Generalised Precision</strong><br>
+<span class="math display">
+\frac{tp + \Delta_{rel}}{tp + fp}
+</span></p>
+</div>
+<div style="background: #a4b900; color: black; padding: 24px; border-radius: 12px; min-width: 320px; text-align: center;">
+<p><strong>Generalised Recall</strong><br>
+<span class="math display">
+\frac{tp + \Delta_{rel}}{tp + fn + \Delta_{rel}}
+</span></p>
+</div>
+</div>
+<p>with <span class="math inline">\Delta_{rel} = \sum_{i \in false\ positives} r_i</span> with metric relevance ratings <span class="math inline">0 \leq r_i \leq 1</span></p>
+<aside><ol class="aside-footnotes"><li id="fn23"><p>Kekäläinen, Jaana, and Kalervo Järvelin. 2002. “Using Graded Relevance Assessments in IR Evaluation.” Journal of the American Society for Information Science and Technology 53 (November): 1120–29. https://doi.org/10.1002/asi.10137.</p></li></ol></aside></section>
+<section id="generalized-precision-and-recall-curves" class="slide level2">
+<h2>Generalized Precision and Recall Curves</h2>
+<p>Generalised precision-recall curves can be computed similarly to standard precision-recall curves (also supported in CASIMiR):</p>
+
+<img data-src="figures/generalised-pr-curves.png" class="r-stretch"></section></section>
+<section>
+<section id="discussion" class="title-slide slide level1 center">
+<h1>Discussion</h1>
+
+</section>
+<section id="discussion-1" class="slide level2">
+<h2>Discussion</h2>
+<p><strong>Your opinion:</strong></p>
+<p>What other aspects of subject indexing methods should we evaluate?</p>
+<aside class="notes">
+<ul>
+<li>computational efficiency/ hardware requirements</li>
+<li>interpretability of results (easy algorithm vs.&nbsp;black-box LLM)</li>
+<li>open source vs.&nbsp;proprietary software</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="the-end" class="title-slide slide level1 center">
+<h1>The End</h1>
+
+</section>
+<section id="thank-you" class="slide level2">
+<h2>Thank you!</h2>
+<p><br><br></p>
+<h3 id="contact">Contact</h3>
+<p><strong>Maximilian Kähler</strong></p>
+<p>German National Library</p>
+<div class="column" style="width:50%;">
+<p><a href="mailto:m.kaehler@dnb.de">m.kaehler@dnb.de</a><br> <a href="https://www.dnb.de">https://www.dnb.de</a> <span class="fa fa-mastodon" aria-label="Mastodon" style="margin-right: 0.5em;"></span> <a href="https://openbiblio.social/@mfakaehler">@mfakaehler@openbiblio.social</a></p>
+</div></section></section>
+
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="style/images/dnb.png" class="slide-logo"></p>
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="slides_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="slides_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': false,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
