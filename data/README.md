@@ -170,3 +170,48 @@ Each of the prediction datasets follows the same format:
   - `doc_id`: Identifier for documents
   - `label_id`: Identifier for the GND label
   - `score`: Confidence score for the prediction (higher is better)
+
+## Graded Relevance Data
+
+In the subfolder `graded_relevance` there are four pairs of datasets, each
+containing machine based subject suggestions with graded relevance ratings
+and a file of gold-standard indexates. 
+
+  * `bold-bassoon_relevance-ratings.csv`
+  * `bold-bassoon_gold-standard.csv`
+  * `charming-cello_relevance-ratings.csv`
+  * `charming-cello_gold-standard.csv`
+  * `dreamy-didgeridoo_relevance-ratings.csv`
+  * `dreamy-didgeridoo_gold-standard.csv`
+  * `embracing-euphonium_relevance-ratings.csv`
+  * `embracing-euphonium_gold-standard.csv`
+
+Only top-five predictions per document where rated. Each method was rated on a
+ **distinct subset** of documents with no document overlap to the other methods.
+All relevance rating datasets follow the same 
+format:
+
+  * `doc_id`: Identifier for documents
+  * `label_id`: Identifier for the GND label
+  * `score`: Machine based confidence score for the prediction (higher is better)
+  * `relevance`: Manual expert rating on relevance
+
+Relevance ratings take values (0,1/3,2/3,1) corresponding to an ordinal rating
+of 
+
+  * `1`: very useful
+  * `2/3`: useful
+  * `1/3`: slightly useful
+  * `0`: wrong
+
+where the usefulness relates to how useful a subject suggestions would be for a
+user from the retrieval perspective. 
+
+Corresponding to the graded relevance data there are document titles and
+machine based translations in the file 
+`graded_relevance/doc_titles_w-translations.csv` that match the documents
+for the graded relvance sample. Columns:
+
+  - `doc_id`: DNB Identifier for documents
+  - `doc_title_ger`: German title of the document
+  - `doc_title_eng`: English translation of the document title (machine translated)

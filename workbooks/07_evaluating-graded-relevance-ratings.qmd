@@ -1,0 +1,42 @@
+---
+title: "Workbook 7 (Bonus): Evaluating Graded Relevance Ratings"
+author: "Maximilian Kähler, DNB"
+format: gfm
+toc: true
+editor: source
+---
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+#| echo: FALSE
+knitr::opts_chunk$set(
+  echo = TRUE, message = FALSE, warning = FALSE,
+  fig.path = "figures/07_evaluating-graded-relevance-ratings/"
+  )
+
+library(knitr)
+library(tidyverse)
+library(casimir)
+options(casimir.ignore_inconsistencies = TRUE)
+```
+
+In this bonus workbook we will explore how to evaluate graded relevance ratings
+using the CASIMiR package. Graded relevance ratings are useful when you want to
+capture more nuanced judgments about the relevance of subject terms beyond a
+simple binary relevant/ not relevant distinction. In binary relevance comparison,
+we often find false postives that are not entirely wrong. Also manual indexers
+can have some interrater disagreement, so that annotations are not always black and
+white. Graded relevance ratings allow us to capture these nuances by assigning
+different levels of relevance to machine based subject terms. This is the of 
+evaluation that comes with the highes cost, as it requires subject experts to
+manually rate the relevance of each suggested subject term.
+
+## Datasets
+
+In this workbook we use a different pair of data files for each method. For each
+method we have a file of predicted subject terms along with graded relevance 
+ratings assigned by subject experts and a gold standard file with binary relevance
+labels, that also contain false negatives.
+
