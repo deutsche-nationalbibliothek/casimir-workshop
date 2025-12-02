@@ -30,16 +30,18 @@ simple binary relevant/ not relevant distinction. In binary relevance comparison
 we often find false postives that are not entirely wrong. Also manual indexers
 can have some interrater disagreement, so that annotations are not always black and
 white. Graded relevance ratings allow us to capture these nuances by assigning
-different levels of relevance to machine based subject terms. This is the of 
+different levels of relevance to machine based subject terms. This is the form of 
 evaluation that comes with the highes cost, as it requires subject experts to
 manually rate the relevance of each suggested subject term.
 
 ## Datasets
 
 In this workbook we use a different pair of data files for each method. For each
-method we have a file of predicted subject terms along with graded relevance 
-ratings assigned by subject experts and a gold standard file with binary relevance
-labels, that also contain false negatives.
+method we have 
+
+  * a file of predicted subject terms along with graded relevance ratings (assigned by subject experts) and 
+  * a gold standard file with binary relevance labels (which also capture false negatives).
+
 
 ```{r}
 #| label: read-graded-data
@@ -95,19 +97,27 @@ example_table <- create_qualitative_table_single_model(
   group_by(doc_id, title_text)  |> 
   arrange(doc_id, gold, relevance) 
 
+```
+
+```{r}
+#| label: display-table
+#| echo: false
+
 apply_styles_single_model_graded_rel(example_table)
 
 ```
 
+
+
 ### Your turn:
 
-  * alter the seed to see more examples
+  * alter the seed in `set.seed()` to see more examples
   * try it out with other methods by changing the method name in the code above
   
 ## Graded Relevance Metrics
 
-It is possible to generalise the binary relevance metrics Precision and Recall
-to graded relevance ratings [@Kekalainen2002].
+It is possible to generalise the binary relevance metrics like precision and 
+recall to graded relevance ratings [@Kekalainen2002].
 
 **Generalised Precision**  
 
@@ -116,6 +126,7 @@ $$
 $$
 
 **Generalised Recall**  
+
 $$
 \mathrm{gRec} := \frac{tp + \Delta_{rel}}{tp + fn + \Delta_{rel}}
 $$
@@ -146,6 +157,7 @@ res <- compute_set_retrieval_scores(
 
 kable(
   res,
+  digits = 3,
   caption = "Graded relevance metrics for bold-bassoon"
 )
 
@@ -173,6 +185,12 @@ res_all_methods <- map2_dfr(
     names_from = metric,
     values_from = value
   ) 
+
+kable(
+  res_all_methods,
+  digits = 3,
+  caption = "Graded relevance metrics for all methods (k = 5)"
+)
 ```
 
 **Note:** Workbook 2 was on a different dataset and here all methods were tested

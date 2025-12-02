@@ -17,16 +17,19 @@ not entirely wrong. Also manual indexers can have some interrater
 disagreement, so that annotations are not always black and white. Graded
 relevance ratings allow us to capture these nuances by assigning
 different levels of relevance to machine based subject terms. This is
-the of evaluation that comes with the highes cost, as it requires
+the form of evaluation that comes with the highes cost, as it requires
 subject experts to manually rate the relevance of each suggested subject
 term.
 
 ## Datasets
 
 In this workbook we use a different pair of data files for each method.
-For each method we have a file of predicted subject terms along with
-graded relevance ratings assigned by subject experts and a gold standard
-file with binary relevance labels, that also contain false negatives.
+For each method we have
+
+- a file of predicted subject terms along with graded relevance ratings
+  (assigned by subject experts) and
+- a gold standard file with binary relevance labels (which also capture
+  false negatives).
 
 The graded relevance ratings are on an ordinal scale from 0 to 3:
 
@@ -70,8 +73,6 @@ example_table <- create_qualitative_table_single_model(
 ) |> 
   group_by(doc_id, title_text)  |> 
   arrange(doc_id, gold, relevance) 
-
-apply_styles_single_model_graded_rel(example_table)
 ```
 
 <div id="croixhbitn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -506,14 +507,14 @@ apply_styles_single_model_graded_rel(example_table)
 
 ### Your turn:
 
-- alter the seed to see more examples
+- alter the seed in `set.seed()` to see more examples
 - try it out with other methods by changing the method name in the code
   above
 
 ## Graded Relevance Metrics
 
-It is possible to generalise the binary relevance metrics Precision and
-Recall to graded relevance ratings (Kekäläinen and Järvelin 2002).
+It is possible to generalise the binary relevance metrics like precision
+and recall to graded relevance ratings (Kekäläinen and Järvelin 2002).
 
 **Generalised Precision**
 
@@ -521,7 +522,8 @@ $$
 \mathrm{gPrec} := \frac{tp + \Delta_{rel}}{tp + fp}
 $$
 
-**Generalised Recall**  
+**Generalised Recall**
+
 $$
 \mathrm{gRec} := \frac{tp + \Delta_{rel}}{tp + fn + \Delta_{rel}}
 $$
@@ -551,16 +553,17 @@ res <- compute_set_retrieval_scores(
 
 kable(
   res,
+  digits = 3,
   caption = "Graded relevance metrics for bold-bassoon"
 )
 ```
 
-| metric    | mode    |     value | support |
-|:----------|:--------|----------:|--------:|
-| g-f1@5    | doc-avg | 0.5666984 |    1132 |
-| g-prec@5  | doc-avg | 0.5916863 |    1132 |
-| g-rec@5   | doc-avg | 0.5794029 |    1132 |
-| g-rprec@5 | doc-avg | 0.6692180 |    1132 |
+| metric    | mode    | value | support |
+|:----------|:--------|------:|--------:|
+| g-f1@5    | doc-avg | 0.567 |    1132 |
+| g-prec@5  | doc-avg | 0.592 |    1132 |
+| g-rec@5   | doc-avg | 0.579 |    1132 |
+| g-rprec@5 | doc-avg | 0.669 |    1132 |
 
 Graded relevance metrics for bold-bassoon
 
@@ -584,7 +587,22 @@ res_all_methods <- map2_dfr(
     names_from = metric,
     values_from = value
   ) 
+
+kable(
+  res_all_methods,
+  digits = 3,
+  caption = "Graded relevance metrics for all methods (k = 5)"
+)
 ```
+
+| Method              | mode    | g-f1@5 | g-prec@5 | g-rec@5 | g-rprec@5 |
+|:--------------------|:--------|-------:|---------:|--------:|----------:|
+| bold-bassoon        | doc-avg |  0.567 |    0.592 |   0.579 |     0.669 |
+| charming-cello      | doc-avg |  0.495 |    0.505 |   0.530 |     0.601 |
+| dreamy-didgeridoo   | doc-avg |  0.423 |    0.427 |   0.461 |     0.517 |
+| embracing-euphonium | doc-avg |  0.462 |    0.484 |   0.484 |     0.565 |
+
+Graded relevance metrics for all methods (k = 5)
 
 **Note:** Workbook 2 was on a different dataset and here all methods
 were tested on their own dataset. So the results are not directly
