@@ -5,7 +5,7 @@ Workshop **Evaluating Automated Subject Indexing Methods** hosted at
 the Fantastic Futures-Conference 2025 on Dec 3rd at the British National Library in London. 
 
 ## Update:
-
+  * 2025-12-02: add bonus workbook `07` on graded relevance
   * 2025-11-28: all workbooks ready 
   * 2025-11-26: simplified conda install 
   * 2025-11-25: add workbook `04` on long tail metrics
@@ -75,14 +75,16 @@ install.packages(c("tidyverse", "gt", "casimir"))
 
 # Workshop plan
 
-The workshop is organied in individual lessons, contained in the `workbooks`
+The workshop is organised in individual lessons, contained in the `workbooks`
 directory. Each workbook will feature another method or point of view on 
 looking at subject indexing results. To organize your learning process it is
 suggested, that you draw up an empty table at the beginning of the workshop
 featuring columns for "pro/ contra" and a row for each method/ algorithm. 
-The reoccuring question to bear in my across these lessons is: 
+The reoccuring question to bear in mind across these lessons is:
+
 **Which method would I choose, based on what I see in these evaluation results?**
 
-The methods are referred to as `method_A` to `method_F` in this tutorial 
+The methods are referred to as `artful accordion`, `bold bassoon`, 
+`charming cello`, `dreamy didgeredoo` and `embracing euphonium` in this tutorial 
 and are purposefully not disclosed, to allow for unbiased evaluation. 
 The true names and algorithms will be presented at the end of the workshop. 
