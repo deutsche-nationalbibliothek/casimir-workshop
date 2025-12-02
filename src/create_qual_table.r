@@ -70,7 +70,8 @@ create_qualitative_table_single_model <- function(
     gold_standard,
     title_texts,
     gnd,
-    limit = 5) {
+    limit = 5,
+    graded_relevance = FALSE) {
   
   
   if (!is.null(limit)) {
@@ -83,7 +84,8 @@ create_qualitative_table_single_model <- function(
   if (!is.null(gold_standard)) {
     message("Create base comparison with gold standard")
     base_comp <- casimir::create_comparison(
-      gold_standard = gold_standard, predicted =  predicted
+      gold_standard = gold_standard, predicted =  predicted,
+      graded_relevance = graded_relevance
     )
   } else {
     base_comp <- predicted  |>
@@ -99,10 +101,15 @@ create_qualitative_table_single_model <- function(
     dplyr::left_join(gnd, by = c("label_id")) |>
     dplyr::arrange(doc_id) |>
     dplyr::select(doc_id, title_text, label_id,
-                  label_text, gold, suggested, score) |>
+                  label_text, gold, suggested, score, relevance) |>
     dplyr::mutate(title_text = stringr::str_wrap(title_text, 80)) |>
     #dplyr::group_by(doc_id, title_text) |> 
     dplyr::arrange(doc_id, score)
+  
+  if (!graded_relevance) {
+    qual_table <- qual_table |>
+      select(-relevance)
+  }
   
   qual_table
 }
@@ -116,6 +123,43 @@ format_table <- function(df, model_names) {
     purrr::reduce(
       .init = nice_table,
       .f = ~apply_styles(.x, .y)
+    )
+  
+}
+
+apply_styles_single_model_graded_rel <- function(qual_table) {
+  
+  greens <- RColorBrewer::brewer.pal(n = 3, "Greens")
+  
+  qual_table |> 
+    gt() |> 
+    tab_style(
+      style = cell_fill(color = greens[3]),
+      locations = cells_body(
+        columns = c(gold, suggested, score, relevance),
+        rows = gold & suggested
+      )
+    ) %>%
+    tab_style(
+      style = cell_fill(color = greens[2]),
+      locations = cells_body(
+        columns = c(gold, suggested, score, relevance),
+        rows = !gold & suggested & (relevance == 2/3)
+      )
+    ) %>%
+    tab_style(
+      style = cell_fill(color = greens[1]),
+      locations = cells_body(
+        columns = c(gold, suggested, score, relevance),
+        rows = !gold & suggested & (relevance == 1/3)
+      )
+    ) %>%
+    tab_style(
+      style = cell_fill(color = "red"),
+      locations = cells_body(
+        columns = c(gold, suggested, score, relevance),
+        rows = gold & !(suggested)
+      )
     )
   
 }
