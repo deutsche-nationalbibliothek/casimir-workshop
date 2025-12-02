@@ -4,7 +4,7 @@
     <tr>
       <th style="border-bottom: 1px solid #ccc;">label_id</th>
       <th style="border-bottom: 1px solid #ccc;">label_text</th>
-      <th style="border-bottom: 1px solid #ccc;">goldstandard</th>
+      <th style="border-bottom: 1px solid #ccc;">gold-standard</th>
       <th style="border-bottom: 1px solid #ccc;">suggested</th>
     </tr>
   </thead>

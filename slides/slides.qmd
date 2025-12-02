@@ -10,6 +10,10 @@ format:
   revealjs:
     theme: style/custom.scss
     toc: true
+    template-partials: 
+      - style/toc-slide.html
+    include-after-body: 
+      - style/toc-add.html
     toc-depth: 1
     logo: "style/images/dnb.png"
     slide-number: true
@@ -45,8 +49,6 @@ source("../src/load_data.r")
 
 ```
 
-# Introduction
-
 ## Welcome 
 
   Welcome to the Workshop on **Evaluating Automated Subject Indexing Methods**
@@ -65,7 +67,7 @@ source("../src/load_data.r")
   **About this Workshop:**
 
   * Explore evaluation techniques for evaluating automated subject indexing methods, focusing on practical applications using the **CASIMiR**[^casimir] package.
-  * Created as part DNB-AI-Project, funded by the German Federal Commissioner for Culture and Media (BKM) [^bkm]
+  * Created as part of DNB-AI-Project, funded by the German Federal Commissioner for Culture and Media (BKM) [^bkm]
   * All workshop materials are available online[^workshop-materials] 
    
 :::
@@ -76,14 +78,22 @@ source("../src/load_data.r")
 [^bkm]: [https://kulturstaatsminister.de/#](https://kulturstaatsminister.de/#)
 [^workshop-materials]: [https://github.com/deutsche-nationalbibliothek/casimir-workshop](https://github.com/deutsche-nationalbibliothek/casimir-workshop)
 
+# Introduction
+
+## 
+
+```{=html}
+<div id='toc'></div>
+```
+
 ## Why Automated Subject Indexing?
 
 ```{r}
 #| label: publication-volume
 #| echo: false
 #| cache: false
-#| fig.width: 6
-#| fig.height: 2.5
+#| fig.width: 8
+#| fig.height: 4
 
 publication_data <- read_csv("dnb_publication_volumes.csv")  |>
   pivot_longer(cols = -year, names_to = "Type", values_to = "Count")
@@ -100,7 +110,9 @@ manual_fill_scale <- scale_fill_manual(
 ggplot(publication_data, aes(x = year, y = Count, fill = Type)) + 
   geom_bar(stat = "identity", position = "stack") +
   manual_fill_scale + 
-  scale_y_continuous(labels = scales::comma, limits = c(0, 3.2e6))
+  scale_y_continuous(labels = scales::comma, limits = c(0, 3.2e6)) + 
+  xlab("Publication Year") +  ylab("Number of Publications") +
+  ggtitle("Publication volumes collected at the German National Library")
 
 ```
 
@@ -126,10 +138,16 @@ ggplot(publication_data, aes(x = year, y = Count, fill = Type)) +
 
   * very large Vocabularies like GND or LCSH (thousands to millions of labels)
   * very sparse annotations (only few correct labels per document)
+  * highly imbalanced label distributions (some labels are very frequent, others very rare)
   * incomplete ground truth (not all correct labels are assigned in manual indexing)
   * hierarchical relationships between labels (some labels are more general/specific than others)
-  * varying importance of labels (some labels are more important than others for a given document)
+  * ...
 
+::: {.notes}
+
+  * usage of subject term, label, subject heading mostly interchangeable in this talk
+  
+:::
 
 ## Improving Automated Subject Indexing
 
@@ -138,7 +156,7 @@ Three complementary approaches:
 
 ::: r-vstack
 ::: {data-id="box1" auto-animate-delay="0" style="background: #0046c4; width: 800px; height: 150px; margin: 10px; display: flex; align-items: center; padding-left: 40px;"}
-  Find and write better algorithms for keyword extraction
+  Find and write better algorithms for automated subject indexing
 :::
 
 
@@ -195,8 +213,16 @@ Before the advent of Deep Learning and transformers:
 
 {{< include figures/statistical-learning.qmd >}}
 
-* statistical apporaches learn correlations between feature matrix and document-label matrix
+* statistical apporaches learn correlations between **feature matrix** and **document-label matrix**
 * statistical apporaches don't need prefLabels: they do not interpret the description of labels
+
+::: {.notes}
+
+  * texts get processed into feature matrix
+  * gold standard annotations get processed into document-label matrix 
+
+:::
+
 
 ## After the invention of transformers I
 
@@ -330,22 +356,23 @@ Vocabulary:
     * `embracing-euphonium.csv`
   * key-columns are `doc_id` for document identifiers and `label_id` for GND subject headings,
     which are expected by CASIMiR functions
+  * up to 100 suggested doc-label pairs per method and document 
   * every suggested label also has a `score` between 0 and 1 indicating the confidence of the method
 
-::: {style="background: #ff9800; color: black; padding: 20px; border-radius: 10px; font-size: 1.2em; margin: 20px 0;"}
+::: {style="background: #ff9800; color: black; padding: 20px; border-radius: 10px; font-size: 1.2em; margin: 10px 0;"}
 **Workshop Game:** 
 
 Can you guess which method is behind which file name?
 :::
 
-## Practical I
+## Practical I: Manual Inspection
 
   **Practical:** Go to `workbooks/01_inspecting-results-manually.qmd` to inspect the
    data formats and datasets provided.
 
 ::: {style="background: #e62e2e; color: white; padding: 20px; border-radius: 10px; font-size: 1.2em; margin: 20px 0;"}
 **Warning**: English translations of document titles and GND subject labels are created by generative AI
-  and provided for convenience only. They may contain errors or inaccuracies. Keyword-Suggestions are all based on subject indexing methods applied to German text and German labels. 
+  and provided for convenience only. They may contain errors or inaccuracies. Subject-Suggestions are all based on subject indexing methods applied to German texts and German labels. 
 :::
 
 <div style="background: white; color: black; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin: 24px 0;">
@@ -731,6 +758,14 @@ freq_groups |>
   )
 ```
 
+**Training data**: ~ 950K book titles from DNB with manual GND subject annotations
+
+::: {.notes}
+  * zero shot labels not shown here
+  * Top-Labels: Germany, Austria, Switzerland, EU
+  
+:::
+
 ## Practical V: Long Tail Analysis
 
   **Practical:** Go to `workbooks/05_analysing-the-long-tail.qmd` to analyse
@@ -791,16 +826,16 @@ Consider combining them into **ensembles** for improved performance![^orchestra-
 
 ## Bonus: Conditional label weights
 
-Do true, positives, false positive and false negatives mean the same to us?
+Do true positives, false positive and false negatives mean the same to us?
 
-We can assign different costs to different types of errors:
+We can assign different **costs** to different types of errors:
 
 |                | Goldstandard yes | Goldstandard no |
 |----------------|-----------------|-------------------|
 | **Prediction yes**  | $C_{\text{tp}}\cdot \text{tp}$ | $C_{\text{fp}}\cdot\text{fp}$ |
 | **Prediction no** | $C_{\text{fn}}\cdot\text{fn}$ | $C_{\text{tn}}\cdot\text{tn}$ |
 
-Assume label dependent costs for true positives and false negatives:
+Assume **label dependent costs** for true positives and false negatives:
 
 $$C_{\text{tp}} = C_{\text{fn}} = w_{\lambda},$$
 
@@ -878,8 +913,8 @@ Revisit the earlier example document title:
 
 
 
-  * Incomplete ground truth: not all correct labels are assigned in manual indexing
-  * false positives may actually still be helpful suggestions
+  * Incomplete ground truth: not all correct labels are assigned in manual subject indexing
+  * false positives may actually still be helpful suggestions for retrieval
 
 
 ## Bonus: Beyond binary relevance II

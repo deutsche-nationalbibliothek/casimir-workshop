@@ -6,8 +6,8 @@
 <script src="slides_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="slides_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="slides_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="slides_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.26">
+<link href="slides_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.32">
 
   <meta name="author" content="Maximilian Kähler">
   <meta name="dcterms.date" content="2025-12-03">
@@ -96,7 +96,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="slides_files/libs/revealjs/dist/theme/quarto-847fd1119461911a4f9ae32216069dbc.css">
+  <link rel="stylesheet" href="slides_files/libs/revealjs/dist/theme/quarto-b331e54636063e9138b24fec8fd3a628.css">
   <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
@@ -226,8 +226,8 @@ Maximilian Kähler
 
   <p class="date">2025-12-03</p>
 </section><section id="TOC">
-<nav role="doc-toc"> 
-<h2 id="toc-title">Table of contents</h2>
+<nav id="toc-nav" role="doc-toc" style="padding-top: 5px; padding-bottom: 5px;">  
+<h3 id="toc-title">Table of contents</h3>
 <ul>
 <li><a href="#/introduction" id="/toc-introduction">Introduction</a></li>
 <li><a href="#/methods-for-subject-indexing" id="/toc-methods-for-subject-indexing">Methods for Subject Indexing</a></li>
@@ -238,11 +238,6 @@ Maximilian Kähler
 <li><a href="#/the-end" id="/toc-the-end">The End</a></li>
 </ul>
 </nav>
-</section>
-<section>
-<section id="introduction" class="title-slide slide level1 center">
-<h1>Introduction</h1>
-
 </section>
 <section id="welcome" class="slide level2">
 <h2>Welcome</h2>
@@ -260,16 +255,25 @@ Maximilian Kähler
 <p><strong>About this Workshop:</strong></p>
 <ul>
 <li>Explore evaluation techniques for evaluating automated subject indexing methods, focusing on practical applications using the <strong>CASIMiR</strong><sup>1</sup> package.</li>
-<li>Created as part DNB-AI-Project, funded by the German Federal Commissioner for Culture and Media (BKM) <sup>2</sup></li>
+<li>Created as part of DNB-AI-Project, funded by the German Federal Commissioner for Culture and Media (BKM) <sup>2</sup></li>
 <li>All workshop materials are available online<sup>3</sup></li>
 </ul>
 </div>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn1"><p><a href="https://github.com/deutsche-nationalbibliothek/casimir">https://github.com/deutsche-nationalbibliothek/casimir</a></p></li><li id="fn2"><p><a href="https://kulturstaatsminister.de/#">https://kulturstaatsminister.de/#</a></p></li><li id="fn3"><p><a href="https://github.com/deutsche-nationalbibliothek/casimir-workshop">https://github.com/deutsche-nationalbibliothek/casimir-workshop</a></p></li></ol></aside></section>
+<section>
+<section id="introduction" class="title-slide slide level1 center">
+<h1>Introduction</h1>
+
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<div id="toc"></div>
+</section>
 <section id="why-automated-subject-indexing" class="slide level2">
 <h2>Why Automated Subject Indexing?</h2>
 
-<img data-src="figures/publication-volume-1.png" width="576" class="r-stretch"><ul>
+<img data-src="figures/publication-volume-1.png" width="768" class="r-stretch"><ul>
 <li>increasing publication volume</li>
 <li>limited human resources for manual subject indexing</li>
 <li>need for consistent and scalable indexing methods</li>
@@ -290,17 +294,33 @@ Maximilian Kähler
 <ul>
 <li>very large Vocabularies like GND or LCSH (thousands to millions of labels)</li>
 <li>very sparse annotations (only few correct labels per document)</li>
+<li>highly imbalanced label distributions (some labels are very frequent, others very rare)</li>
 <li>incomplete ground truth (not all correct labels are assigned in manual indexing)</li>
 <li>hierarchical relationships between labels (some labels are more general/specific than others)</li>
-<li>varying importance of labels (some labels are more important than others for a given document)</li>
+<li>…</li>
 </ul>
+<aside class="notes">
+<ul>
+<li>usage of subject term, label, subject heading mostly interchangeable in this talk</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="improving-automated-subject-indexing" class="slide level2">
 <h2>Improving Automated Subject Indexing</h2>
 <p>Three complementary approaches: <br><br></p>
 <div class="r-vstack">
 <div data-id="box1" data-auto-animate-delay="0" style="background: #0046c4; width: 800px; height: 150px; margin: 10px; display: flex; align-items: center; padding-left: 40px;">
-<p>Find and write better algorithms for keyword extraction</p>
+<p>Find and write better algorithms for automated subject indexing</p>
 </div>
 <div data-id="box2" data-auto-animate-delay="0.1" style="background: #a4b900; width: 800px; height: 150px; margin: 10px; align-items: center; display: flex; padding-left: 40px;">
 <p>Reduce the complexity of the problem</p>
@@ -345,9 +365,25 @@ Maximilian Kähler
 <p><svg width="900" height="400" xmlns="http://www.w3.org/2000/svg"> <rect width="100%" height="100%" fill="#f9f9f9"></rect> <!-- Document Boxes --> <rect x="20" y="60" width="260" height="80" fill="#a7d1ab" stroke="#333" stroke-width="1.5" rx="14"></rect> <text x="35" y="85" font-family="Arial" font-size="15" font-weight="bold">Title: barking and barking</text> <text x="35" y="105" font-family="Arial" font-size="15">Subject Headings: Dog</text> <text x="35" y="125" font-family="Arial" font-size="16" font-weight="bold">Doc_1</text> <rect x="20" y="170" width="260" height="80" fill="#a7d1ab" stroke="#333" stroke-width="1.5" rx="14"></rect> <text x="35" y="195" font-family="Arial" font-size="15" font-weight="bold">Title: purring, purring and purring</text> <text x="35" y="215" font-family="Arial" font-size="15">Subject Headings: Cat</text> <text x="35" y="235" font-family="Arial" font-size="16" font-weight="bold">Doc_2</text> <rect x="20" y="280" width="260" height="80" fill="#a7d1ab" stroke="#333" stroke-width="1.5" rx="14"></rect> <text x="35" y="305" font-family="Arial" font-size="15" font-weight="bold">Title: barking and purring</text> <text x="35" y="325" font-family="Arial" font-size="15">Subject Headings: Dog, Cat, Mouse</text> <text x="35" y="345" font-family="Arial" font-size="16" font-weight="bold">Doc_3</text> <!-- Feature Matrix Table (SVG) - TOP --> <!-- Feature Matrix Table (SVG) - TOP --> <rect x="470" y="20" width="300" height="120" fill="#fff" stroke="#333" stroke-width="1" rx="5"></rect> <text x="480" y="40" font-family="Arial" font-size="16" font-weight="bold">Feature-Matrix (TFIDF)</text> <text x="520" y="65" font-family="Arial" font-size="13" font-weight="bold">barking</text> <text x="590" y="65" font-family="Arial" font-size="13" font-weight="bold">purring</text> <text x="480" y="90" font-family="Arial" font-size="13" font-weight="bold">Doc_1</text> <text x="530" y="90" font-family="Arial" font-size="13">0.6</text> <text x="600" y="90" font-family="Arial" font-size="13">0</text> <text x="480" y="110" font-family="Arial" font-size="13" font-weight="bold">Doc_2</text> <text x="530" y="110" font-family="Arial" font-size="13">0</text> <text x="600" y="110" font-family="Arial" font-size="13">0.7</text> <text x="480" y="130" font-family="Arial" font-size="13" font-weight="bold">Doc_3</text> <text x="530" y="130" font-family="Arial" font-size="13">0.7</text> <text x="600" y="130" font-family="Arial" font-size="13">0.7</text> <!-- Document-Label Matrix Table (SVG) - BELOW --> <rect x="470" y="220" width="300" height="120" fill="#fff" stroke="#333" stroke-width="1" rx="5"></rect> <text x="480" y="240" font-family="Arial" font-size="16" font-weight="bold">Document-Label-Matrix</text> <text x="520" y="265" font-family="Arial" font-size="13" font-weight="bold" fill="black">Dog</text> <text x="590" y="265" font-family="Arial" font-size="13" font-weight="bold" fill="black">Cat</text> <text x="660" y="265" font-family="Arial" font-size="13" font-weight="bold" fill="black">Mouse</text> <text x="480" y="290" font-family="Arial" font-size="13" font-weight="bold">Doc_1</text> <text x="530" y="290" font-family="Arial" font-size="13">1</text> <text x="600" y="290" font-family="Arial" font-size="13">0</text> <text x="670" y="290" font-family="Arial" font-size="13">0</text> <text x="480" y="310" font-family="Arial" font-size="13" font-weight="bold">Doc_2</text> <text x="530" y="310" font-family="Arial" font-size="13">0</text> <text x="600" y="310" font-family="Arial" font-size="13">1</text> <text x="670" y="310" font-family="Arial" font-size="13">0</text> <text x="480" y="330" font-family="Arial" font-size="13" font-weight="bold">Doc_3</text> <text x="530" y="330" font-family="Arial" font-size="13">1</text> <text x="600" y="330" font-family="Arial" font-size="13">1</text> <text x="670" y="330" font-family="Arial" font-size="13">1</text> <!-- Arrows (adjusted for new layout) --> <defs> <marker id="arrowheadorange" markerwidth="12" markerheight="7" refx="10" refy="3.5" orient="auto" markerunits="strokeWidth"> <polygon points="0 0, 12 3.5, 0 7" fill="orange"></polygon> </marker> </defs> <defs> <marker id="arrowheadgreen" markerwidth="12" markerheight="7" refx="10" refy="3.5" orient="auto" markerunits="strokeWidth"> <polygon points="0 0, 12 3.5, 0 7" fill="green"></polygon> </marker> </defs> <line x1="220" y1="80" x2="470" y2="85" stroke="orange" stroke-width="3" marker-end="url(#arrowheadorange)"></line> <line x1="275" y1="190" x2="470" y2="110" stroke="orange" stroke-width="3" marker-end="url(#arrowheadorange)"></line> <line x1="220" y1="300" x2="470" y2="130" stroke="orange" stroke-width="3" marker-end="url(#arrowheadorange)"></line> <line x1="220" y1="105" x2="470" y2="280" stroke="green" stroke-width="3" marker-end="url(#arrowheadgreen)"></line> <line x1="220" y1="215" x2="470" y2="300" stroke="green" stroke-width="3" marker-end="url(#arrowheadgreen)"></line> <line x1="220" y1="325" x2="470" y2="320" stroke="green" stroke-width="3" marker-end="url(#arrowheadgreen)"></line> </svg></p>
 </div>
 <ul>
-<li>statistical apporaches learn correlations between feature matrix and document-label matrix</li>
+<li>statistical apporaches learn correlations between <strong>feature matrix</strong> and <strong>document-label matrix</strong></li>
 <li>statistical apporaches don’t need prefLabels: they do not interpret the description of labels</li>
 </ul>
+<aside class="notes">
+<ul>
+<li>texts get processed into feature matrix</li>
+<li>gold standard annotations get processed into document-label matrix</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="after-the-invention-of-transformers-i" class="slide level2">
 <h2>After the invention of transformers I</h2>
@@ -504,18 +540,19 @@ Embracing Euphonium
 <li><code>embracing-euphonium.csv</code></li>
 </ul></li>
 <li>key-columns are <code>doc_id</code> for document identifiers and <code>label_id</code> for GND subject headings, which are expected by CASIMiR functions</li>
+<li>up to 100 suggested doc-label pairs per method and document</li>
 <li>every suggested label also has a <code>score</code> between 0 and 1 indicating the confidence of the method</li>
 </ul>
-<div style="background: #ff9800; color: black; padding: 20px; border-radius: 10px; font-size: 1.2em; margin: 20px 0;">
+<div style="background: #ff9800; color: black; padding: 20px; border-radius: 10px; font-size: 1.2em; margin: 10px 0;">
 <p><strong>Workshop Game:</strong></p>
 <p>Can you guess which method is behind which file name?</p>
 </div>
 </section>
-<section id="practical-i" class="slide level2">
-<h2>Practical I</h2>
+<section id="practical-i-manual-inspection" class="slide level2">
+<h2>Practical I: Manual Inspection</h2>
 <p><strong>Practical:</strong> Go to <code>workbooks/01_inspecting-results-manually.qmd</code> to inspect the data formats and datasets provided.</p>
 <div style="background: #e62e2e; color: white; padding: 20px; border-radius: 10px; font-size: 1.2em; margin: 20px 0;">
-<p><strong>Warning</strong>: English translations of document titles and GND subject labels are created by generative AI and provided for convenience only. They may contain errors or inaccuracies. Keyword-Suggestions are all based on subject indexing methods applied to German text and German labels.</p>
+<p><strong>Warning</strong>: English translations of document titles and GND subject labels are created by generative AI and provided for convenience only. They may contain errors or inaccuracies. Subject-Suggestions are all based on subject indexing methods applied to German texts and German labels.</p>
 </div>
 <div style="background: white; color: black; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin: 24px 0;">
 <p><span style="font-size: 2em;">💡</span> If you speak German use the <code>_ger</code> column names in the code examples instead of the <code>_eng</code> variants to see the original German texts.</p>
@@ -975,10 +1012,10 @@ Embracing Euphonium
 }
 </style>
 
-<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading header">
-<td colspan="8" class="gt_heading gt_title gt_font_normal gt_bottom_border">Qualitative Method Comparison</td>
+<th colspan="8" class="gt_heading gt_title gt_font_normal gt_bottom_border">Qualitative Method Comparison</th>
 </tr>
 <tr class="gt_col_headings even">
 <th id="label_id" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">label_id</th>
@@ -993,8 +1030,8 @@ Embracing Euphonium
 </thead>
 <tbody class="gt_table_body">
 <tr class="gt_group_heading_row odd">
-<th colspan="8" id="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
-Implementation" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful Implementation</th>
+<td colspan="8" id="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful Implementation</td>
 </tr>
 <tr class="gt_row_group_first even">
 <td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
@@ -1299,7 +1336,7 @@ label_id
 label_text
 </th>
 <th style="border-bottom: 1px solid #ccc;">
-goldstandard
+gold-standard
 </th>
 <th style="border-bottom: 1px solid #ccc;">
 suggested
@@ -1435,12 +1472,12 @@ FALSE
 <p><strong>Practical:</strong> Go to <code>workbooks/02_set-retrieval-metrics.qmd</code> to compute retrieval metrics for the provided subject indexing methods.</p>
 <p>Example: Compute Precision, Recall, and F1-Score for <code>artful-accordion</code> method</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">compute_set_retrieval_scores</span>(</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">compute_set_retrieval_scores</span>(</span>
 <span id="cb3-2"><a href=""></a>  <span class="at">predicted =</span> predictions[[<span class="st">"artful-accordion"</span>]],</span>
 <span id="cb3-3"><a href=""></a>  <span class="at">gold_standard =</span> gold_standard,</span>
 <span id="cb3-4"><a href=""></a>  <span class="at">k =</span> <span class="dv">5</span>, <span class="co"># limit to top-5 suggestions</span></span>
 <span id="cb3-5"><a href=""></a>  <span class="at">rename_metrics =</span> <span class="cn">TRUE</span></span>
-<span id="cb3-6"><a href=""></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-6"><a href=""></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 4
   metric  mode    value support
@@ -1474,14 +1511,14 @@ FALSE
 <h2>Practical III: Example</h2>
 <p>Given the mapping table <code>subject_groups</code> that assigns each document to a subject group, we can compute stratified retrieval scores:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>res_at_5_by_sg_artful_accordion <span class="ot">&lt;-</span> <span class="fu">compute_set_retrieval_scores</span>(</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>res_at_5_by_sg_artful_accordion <span class="ot">&lt;-</span> <span class="fu">compute_set_retrieval_scores</span>(</span>
 <span id="cb5-2"><a href=""></a>  <span class="at">predicted =</span> predictions[[<span class="st">"artful-accordion"</span>]],</span>
 <span id="cb5-3"><a href=""></a>  <span class="at">gold_standard =</span> gold_standard,</span>
 <span id="cb5-4"><a href=""></a>  <span class="at">doc_groups =</span> subject_groups,</span>
 <span id="cb5-5"><a href=""></a>  <span class="at">k =</span> <span class="dv">5</span></span>
 <span id="cb5-6"><a href=""></a>)</span>
 <span id="cb5-7"><a href=""></a></span>
-<span id="cb5-8"><a href=""></a><span class="fu">kable</span>(<span class="fu">head</span>(res_at_5_by_sg_artful_accordion, <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-8"><a href=""></a><span class="fu">kable</span>(<span class="fu">head</span>(res_at_5_by_sg_artful_accordion, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top">
 <colgroup>
@@ -1569,7 +1606,7 @@ FALSE
 <p><strong>Practical:</strong> Go to <code>workbooks/04_precision-recall-curves.qmd</code> to compute precision-recall curves for the provided subject indexing methods.</p>
 <p>Example: Compute Precision-Recall Curve with CASIMiR</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a>pr_curve <span class="ot">&lt;-</span> <span class="fu">compute_pr_curve</span>(</span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a>pr_curve <span class="ot">&lt;-</span> <span class="fu">compute_pr_curve</span>(</span>
 <span id="cb6-2"><a href=""></a>  <span class="at">predicted =</span> predictions[[<span class="st">"artful-accordion"</span>]],</span>
 <span id="cb6-3"><a href=""></a>  <span class="at">gold_standard =</span> gold_standard,</span>
 <span id="cb6-4"><a href=""></a>  <span class="at">steps =</span> <span class="dv">10</span> <span class="co"># number of thresholds to evaluate</span></span>
@@ -1579,13 +1616,30 @@ FALSE
 <span id="cb6-8"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb6-9"><a href=""></a>  <span class="fu">geom_path</span>() <span class="sc">+</span></span>
 <span id="cb6-10"><a href=""></a>  <span class="fu">coord_fixed</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb6-11"><a href=""></a>  <span class="fu">ggtitle</span>(<span class="st">"Precision-Recall Curve for artful-accordion, computed with CASIMiR"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-11"><a href=""></a>  <span class="fu">ggtitle</span>(<span class="st">"Precision-Recall Curve for artful-accordion, computed with CASIMiR"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="analysing-the-long-tail" class="slide level2">
 <h2>Analysing the long tail</h2>
 
-<img data-src="figures/plot-long-tail-1.png" width="768" class="r-stretch"></section>
+<img data-src="figures/plot-long-tail-1.png" width="768" class="r-stretch"><p><strong>Training data</strong>: ~ 950K book titles from DNB with manual GND subject annotations</p>
+<aside class="notes">
+<ul>
+<li>zero shot labels not shown here</li>
+<li>Top-Labels: Germany, Austria, Switzerland, EU</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="practical-v-long-tail-analysis" class="slide level2">
 <h2>Practical V: Long Tail Analysis</h2>
 <p><strong>Practical:</strong> Go to <code>workbooks/05_analysing-the-long-tail.qmd</code> to analyse performance of subject indexing methods on frequent vs.&nbsp;rare labels.</p>
@@ -1674,8 +1728,8 @@ Embracing Euphonium
 </section>
 <section id="bonus-conditional-label-weights" class="slide level2">
 <h2>Bonus: Conditional label weights</h2>
-<p>Do true, positives, false positive and false negatives mean the same to us?</p>
-<p>We can assign different costs to different types of errors:</p>
+<p>Do true positives, false positive and false negatives mean the same to us?</p>
+<p>We can assign different <strong>costs</strong> to different types of errors:</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 30%">
@@ -1702,7 +1756,7 @@ Embracing Euphonium
 </tr>
 </tbody>
 </table>
-<p>Assume label dependent costs for true positives and false negatives:</p>
+<p>Assume <strong>label dependent costs</strong> for true positives and false negatives:</p>
 <p><span class="math display">C_{\text{tp}} = C_{\text{fn}} = w_{\lambda},</span></p>
 <p>and constant costs for false positives:</p>
 <p><span class="math display">C_{\text{fp}} = \textit{const}</span></p>
@@ -1728,7 +1782,7 @@ label_id
 label_text
 </th>
 <th style="border-bottom: 1px solid #ccc;">
-goldstandard
+gold-standard
 </th>
 <th style="border-bottom: 1px solid #ccc;">
 suggested
@@ -1823,8 +1877,8 @@ FALSE
 </tbody>
 </table>
 <ul>
-<li>Incomplete ground truth: not all correct labels are assigned in manual indexing</li>
-<li>false positives may actually still be helpful suggestions</li>
+<li>Incomplete ground truth: not all correct labels are assigned in manual subject indexing</li>
+<li>false positives may actually still be helpful suggestions for retrieval</li>
 </ul>
 </section>
 <section id="bonus-beyond-binary-relevance-ii" class="slide level2">
@@ -2146,6 +2200,16 @@ FALSE
         ]
       });
     </script>
+    <script>
+      let placeholder = document.querySelector("div#toc");
+      let toc = document.querySelector("#toc-nav");
+      let toc_slide = document.querySelector("section#TOC");
+      
+      let toc_clone = toc.cloneNode(true);
+      placeholder.replaceWith(toc_clone);
+      
+      toc_slide.remove();
+    </script>
     
     <script>
       // htmlwidgets need to know to resize themselves when slides are shown/hidden.
@@ -2232,14 +2296,13 @@ FALSE
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
             }
-          }
-          return codeEl.innerText;
+            return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
