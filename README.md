@@ -5,14 +5,8 @@ Workshop **Evaluating Automated Subject Indexing Methods** hosted at
 the Fantastic Futures-Conference 2025 on Dec 3rd at the British National Library in London. 
 
 ## Update:
-  * 2025-12-02: add bonus workbook `07` on graded relevance
-  * 2025-11-28: all workbooks ready 
-  * 2025-11-26: simplified conda install 
-  * 2025-11-25: add workbook `04` on long tail metrics
-  * 2025-11-21: add workbook `03` and data with training frequencies
-  * 2025-11-20: add workbook `02`, simplify install instructions
-  * 2025-11-17: add workbooks `00` and `01`
-  * 2025-11-15: added install intructions for R and RStudio
+
+  * 2025-12-16: Post-workshop update: uploaded pdf-slides and fix non-interactive workbooks
 
 # Requirements
 
