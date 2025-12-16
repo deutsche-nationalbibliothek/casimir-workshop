@@ -6,8 +6,8 @@
 <script src="slides_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="slides_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="slides_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="slides_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+<link href="slides_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Maximilian Kähler">
   <meta name="dcterms.date" content="2025-12-03">
@@ -96,7 +96,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="slides_files/libs/revealjs/dist/theme/quarto-b331e54636063e9138b24fec8fd3a628.css">
+  <link rel="stylesheet" href="slides_files/libs/revealjs/dist/theme/quarto-847fd1119461911a4f9ae32216069dbc.css">
   <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
@@ -254,7 +254,7 @@ Maximilian Kähler
 <div style="background: white; color: black; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); min-width: 391px; max-width: 460px; height: 410px;">
 <p><strong>About this Workshop:</strong></p>
 <ul>
-<li>Explore evaluation techniques for evaluating automated subject indexing methods, focusing on practical applications using the <strong>CASIMiR</strong><sup>1</sup> package.</li>
+<li>Explore evaluation techniques for evaluating automated subject indexing methods, focussing on practical applications using the <strong>CASIMiR</strong><sup>1</sup> package.</li>
 <li>Created as part of DNB-AI-Project, funded by the German Federal Commissioner for Culture and Media (BKM) <sup>2</sup></li>
 <li>All workshop materials are available online<sup>3</sup></li>
 </ul>
@@ -1012,10 +1012,10 @@ Embracing Euphonium
 }
 </style>
 
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading header">
-<th colspan="8" class="gt_heading gt_title gt_font_normal gt_bottom_border">Qualitative Method Comparison</th>
+<td colspan="8" class="gt_heading gt_title gt_font_normal gt_bottom_border">Qualitative Method Comparison</td>
 </tr>
 <tr class="gt_col_headings even">
 <th id="label_id" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">label_id</th>
@@ -1030,8 +1030,8 @@ Embracing Euphonium
 </thead>
 <tbody class="gt_table_body">
 <tr class="gt_group_heading_row odd">
-<td colspan="8" id="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
-Implementation" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful Implementation</td>
+<th colspan="8" id="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
+Implementation" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful Implementation</th>
 </tr>
 <tr class="gt_row_group_first even">
 <td class="gt_row gt_left" headers="1166742806 - Inclusive School and Curriculum Development: From Aspiration to Successful
@@ -1472,12 +1472,12 @@ FALSE
 <p><strong>Practical:</strong> Go to <code>workbooks/02_set-retrieval-metrics.qmd</code> to compute retrieval metrics for the provided subject indexing methods.</p>
 <p>Example: Compute Precision, Recall, and F1-Score for <code>artful-accordion</code> method</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">compute_set_retrieval_scores</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">compute_set_retrieval_scores</span>(</span>
 <span id="cb3-2"><a href=""></a>  <span class="at">predicted =</span> predictions[[<span class="st">"artful-accordion"</span>]],</span>
 <span id="cb3-3"><a href=""></a>  <span class="at">gold_standard =</span> gold_standard,</span>
 <span id="cb3-4"><a href=""></a>  <span class="at">k =</span> <span class="dv">5</span>, <span class="co"># limit to top-5 suggestions</span></span>
 <span id="cb3-5"><a href=""></a>  <span class="at">rename_metrics =</span> <span class="cn">TRUE</span></span>
-<span id="cb3-6"><a href=""></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-6"><a href=""></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 4
   metric  mode    value support
@@ -1511,14 +1511,14 @@ FALSE
 <h2>Practical III: Example</h2>
 <p>Given the mapping table <code>subject_groups</code> that assigns each document to a subject group, we can compute stratified retrieval scores:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>res_at_5_by_sg_artful_accordion <span class="ot">&lt;-</span> <span class="fu">compute_set_retrieval_scores</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>res_at_5_by_sg_artful_accordion <span class="ot">&lt;-</span> <span class="fu">compute_set_retrieval_scores</span>(</span>
 <span id="cb5-2"><a href=""></a>  <span class="at">predicted =</span> predictions[[<span class="st">"artful-accordion"</span>]],</span>
 <span id="cb5-3"><a href=""></a>  <span class="at">gold_standard =</span> gold_standard,</span>
 <span id="cb5-4"><a href=""></a>  <span class="at">doc_groups =</span> subject_groups,</span>
 <span id="cb5-5"><a href=""></a>  <span class="at">k =</span> <span class="dv">5</span></span>
 <span id="cb5-6"><a href=""></a>)</span>
 <span id="cb5-7"><a href=""></a></span>
-<span id="cb5-8"><a href=""></a><span class="fu">kable</span>(<span class="fu">head</span>(res_at_5_by_sg_artful_accordion, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-8"><a href=""></a><span class="fu">kable</span>(<span class="fu">head</span>(res_at_5_by_sg_artful_accordion, <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="caption-top">
 <colgroup>
@@ -1606,7 +1606,7 @@ FALSE
 <p><strong>Practical:</strong> Go to <code>workbooks/04_precision-recall-curves.qmd</code> to compute precision-recall curves for the provided subject indexing methods.</p>
 <p>Example: Compute Precision-Recall Curve with CASIMiR</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a>pr_curve <span class="ot">&lt;-</span> <span class="fu">compute_pr_curve</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a>pr_curve <span class="ot">&lt;-</span> <span class="fu">compute_pr_curve</span>(</span>
 <span id="cb6-2"><a href=""></a>  <span class="at">predicted =</span> predictions[[<span class="st">"artful-accordion"</span>]],</span>
 <span id="cb6-3"><a href=""></a>  <span class="at">gold_standard =</span> gold_standard,</span>
 <span id="cb6-4"><a href=""></a>  <span class="at">steps =</span> <span class="dv">10</span> <span class="co"># number of thresholds to evaluate</span></span>
@@ -1616,7 +1616,7 @@ FALSE
 <span id="cb6-8"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb6-9"><a href=""></a>  <span class="fu">geom_path</span>() <span class="sc">+</span></span>
 <span id="cb6-10"><a href=""></a>  <span class="fu">coord_fixed</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb6-11"><a href=""></a>  <span class="fu">ggtitle</span>(<span class="st">"Precision-Recall Curve for artful-accordion, computed with CASIMiR"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-11"><a href=""></a>  <span class="fu">ggtitle</span>(<span class="st">"Precision-Recall Curve for artful-accordion, computed with CASIMiR"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="analysing-the-long-tail" class="slide level2">
@@ -2296,13 +2296,14 @@ FALSE
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

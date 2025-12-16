@@ -66,7 +66,7 @@ source("../src/load_data.r")
 ::: {style="background: white; color: black; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); min-width: 391px; max-width: 460px; height: 410px;"}
   **About this Workshop:**
 
-  * Explore evaluation techniques for evaluating automated subject indexing methods, focusing on practical applications using the **CASIMiR**[^casimir] package.
+  * Explore evaluation techniques for evaluating automated subject indexing methods, focussing on practical applications using the **CASIMiR**[^casimir] package.
   * Created as part of DNB-AI-Project, funded by the German Federal Commissioner for Culture and Media (BKM) [^bkm]
   * All workshop materials are available online[^workshop-materials] 
    
