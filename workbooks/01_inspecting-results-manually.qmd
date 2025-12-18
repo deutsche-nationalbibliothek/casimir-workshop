@@ -83,7 +83,7 @@ The dataset contains `r num_docs` document titles, their doc_id and translations
 
 ### Gold Standard Data
 
-Each of the document titles was manually annotated by subject experts of the DNB with subject terms from the Inegrated Authority File (GND). Similar to the document identifiers, each GND subject term has a unique identifier, the `label_id`, which can be resolved to the official GND record by prefixing the base-url `https://d-nb.info/`, e.g. `label_id = 041321634` can be resolved to <https://d-nb.info/041321634>.
+Each of the document titles was manually annotated by subject experts of the DNB with subject terms from the Integrated Authority File (GND). Similar to the document identifiers, each GND subject term has a unique identifier, the `label_id`, which can be resolved to the official GND record by prefixing the base-url `https://d-nb.info/`, e.g. `label_id = 041321634` can be resolved to <https://d-nb.info/041321634>.
 
 For more information on the GND please visit [the official GND website](https://gnd.network/Webs/gnd/EN/Home/home_node.html). In particular, you can find information on each subject term by visiting the [GND explorer](https://explore.gnd.network/en/), where you can search for each `label_id`.
 
@@ -101,7 +101,7 @@ gold_standard_w_labels <- gold_standard |>
 head(gold_standard_w_labels)
 ```
 
-For the rest of this tutorial This is our gold standard data that we compare against.
+For the rest of this tutorial this is our gold standard data that we compare against.
 
 ### Predictions
 
