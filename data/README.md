@@ -19,7 +19,7 @@ DNB's catalogue is provided under a
 LICENSE and may be freely used. 
 Each intentifier can be resolved using the DNB's catalogue, by prefixing
 `https://d-nb.info/`, e.g. `doc_id = 1122545479` can be resolved to
-<https://d-nb.info/1122545479>, to access the full bilbiographic record.
+<https://d-nb.info/1122545479>, to access the full bibliographic record.
 
 ## Test-Set
 
@@ -193,7 +193,7 @@ format:
 
   * `doc_id`: Identifier for documents
   * `label_id`: Identifier for the GND label
-  * `score`: Machine based confidence score for the prediction (higher is better)
+  * `score`: Machine based confidence score for the prediction (higher is more confident)
   * `relevance`: Manual expert rating on relevance
 
 Relevance ratings take values (0,1/3,2/3,1) corresponding to an ordinal rating
@@ -204,13 +204,13 @@ of
   * `1/3`: slightly useful
   * `0`: wrong
 
-where the usefulness relates to how useful a subject suggestions would be for a
+where the usefulness relates to how useful a subject suggestion would be for a
 user from the retrieval perspective. 
 
 Corresponding to the graded relevance data there are document titles and
 machine based translations in the file 
 `graded_relevance/doc_titles_w-translations.csv` that match the documents
-for the graded relvance sample. Columns:
+for the graded relevance sample. Columns:
 
   - `doc_id`: DNB Identifier for documents
   - `doc_title_ger`: German title of the document

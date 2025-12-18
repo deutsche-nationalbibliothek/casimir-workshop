@@ -129,7 +129,7 @@ ggplot(publication_data, aes(x = year, y = Count, fill = Type)) +
   * Annual throughput of ~170.000 publications per year
   * Our target vocabulary is the Integrated Authority File[^gnd] (GND) containing >1.4M potential concepts
 
-[^Poley2025]: Poley etal. 2025. “Automatic Subject Cataloguing at the German National Library.” <br>
+[^Poley2025]: Poley et al. 2025. “Automatic Subject Cataloguing at the German National Library.” <br>
   [https://doi.org/10.53377/lq.19422](https://doi.org/10.53377/lq.19422)
 [^Suominen2019]: Suominen 2019. “Annif: DIY Automated Subject Indexing Using Multiple Algorithms.” <br>
   [https://doi.org/10.18352/lq.10285](https://doi.org/10.18352/lq.10285).
@@ -197,15 +197,15 @@ Before the advent of Deep Learning and transformers:
    Parabel: Partitioned label trees for extreme classification 
    with application to dynamic search advertising
 [^6]: Omikuji Rust-Library: [https://github.com/tomtung/omikuji](https://github.com/tomtung/omikuji)
-[^Bhatia16]: Bhatia etal. 2016. “The Extreme Classification Repository: Multi-Label Datasets and Code.” [http://manikvarma.org/downloads/XC/XMLRepository.html](http://manikvarma.org/downloads/XC/XMLRepository.html).
-[^Dasgupta2023]: Dasguptaetal. 2023. “Review of Extreme Multilabel Classification,” February. [https://arxiv.org/abs/2302.05971v2](https://arxiv.org/abs/2302.05971v2).
+[^Bhatia16]: Bhatia et al. 2016. “The Extreme Classification Repository: Multi-Label Datasets and Code.” [http://manikvarma.org/downloads/XC/XMLRepository.html](http://manikvarma.org/downloads/XC/XMLRepository.html).
+[^Dasgupta2023]: Dasgupta et al. 2023. “Review of Extreme Multilabel Classification,” February. [https://arxiv.org/abs/2302.05971v2](https://arxiv.org/abs/2302.05971v2).
 
 ## Lexical Matching 
 
 {{< include figures/lexical-matching.qmd >}}
 
   * can match any keyword in the vocabulary
-  * heuritstics like frequency, position, etc. are used to rank the keywords after matching
+  * heuristics like frequency, position, etc. are used to rank the keywords after matching
 
 
 
@@ -213,8 +213,8 @@ Before the advent of Deep Learning and transformers:
 
 {{< include figures/statistical-learning.qmd >}}
 
-* statistical apporaches learn correlations between **feature matrix** and **document-label matrix**
-* statistical apporaches don't need prefLabels: they do not interpret the description of labels
+* statistical approaches learn correlations between **feature matrix** and **document-label matrix**
+* statistical approaches don't need prefLabels: they do not interpret the description of labels
 
 ::: {.notes}
 
@@ -235,8 +235,8 @@ Refitting old methods with transformers:
     * represent document features with transformer embeddings rather than only TFIDF
 
 
-[^7]: DND-Prototype: [https://github.com/deutsche-nationalbibliothek/ebm4subjects](https://github.com/deutsche-nationalbibliothek/ebm4subjects)
-[^8]: Zhang etal. (2021). Fast Multi-Resolution Transformer Fine-tuning for Extreme Multi-label Text Classification.
+[^7]: DNB-Prototype: [https://github.com/deutsche-nationalbibliothek/ebm4subjects](https://github.com/deutsche-nationalbibliothek/ebm4subjects)
+[^8]: Zhang et al. (2021). Fast Multi-Resolution Transformer Fine-tuning for Extreme Multi-label Text Classification.
   [https://arxiv.org/abs/2110.00685v2](https://arxiv.org/abs/2110.00685v2)
 
 ## After the invention of transformers II
@@ -244,7 +244,7 @@ Refitting old methods with transformers:
 Going for generative LLM-powered methods:
 
   * prompt LLMs to generate keywords for documents
-  * use few-shot prompting to guide LLMs towards desired behavious
+  * use few-shot prompting to guide LLMs towards desired behaviours
   * map generated keywords to controlled vocabulary
 
 <div style="display: flex; align-items: center; justify-content: center; gap: 48px; margin: 2em 0;">
@@ -494,7 +494,7 @@ $$
   
   $$\mathrm{F1} = 2 \cdot \frac{\mathrm{Prec} \cdot \mathrm{Rec}}{\mathrm{Prec} + \mathrm{Rec}}$$
 
-  * In subject indexing, when results are ranked by a confidence score,we are often interested in top-k suggestions:
+  * In subject indexing, when results are ranked by a confidence score, we are often interested in top-k suggestions:
     * Precision@k, Recall@k, F1@k
     * e.g. how many of the top-5 suggestions are correct?
 
