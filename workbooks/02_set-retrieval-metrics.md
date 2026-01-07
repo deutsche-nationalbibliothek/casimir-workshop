@@ -3,8 +3,8 @@ Maximilian Kähler, DNB
 
 - [Computing overall set retrieval
   metrics](#computing-overall-set-retrieval-metrics)
-- [Finding buttom and top performerming
-  labels](#finding-buttom-and-top-performerming-labels)
+- [Finding buttom and top performing
+  labels](#finding-buttom-and-top-performing-labels)
 - [Your Turn](#your-turn)
 - [Bonus: A short digression to modes of
   aggregation](#bonus-a-short-digression-to-modes-of-aggregation)
@@ -26,9 +26,7 @@ metrics such as precision, recall, and F1-score.
 #### More about metrics
 
 <details>
-
 <summary>
-
 Click to expand explanation of metrics
 </summary>
 
@@ -99,7 +97,7 @@ results <- map_dfr(
   .id = "Method"
 )
 
-# bring results to wide tible for better display
+# bring results to wide table for better display
 results |> 
   select(-support) |> 
   pivot_wider(
@@ -141,12 +139,9 @@ ggplot(results, aes(x = Method, y = value, fill = Method)) +
 ![](figures/02_set-retrieval-metrics/plot-metrics-1.png)
 
 <details>
-
 <summary>
-
 Note
 </summary>
-
 Some people prefer to “zoom-in” on a smaller scale of the y-range to
 emphasize the differences between methods. While this is sometimes
 acceptable for visualization purposes, be aware that this can be
@@ -155,10 +150,10 @@ the actual values in the data table to get a true sense of the
 performance differences.
 </details>
 
-## Finding buttom and top performerming labels
+## Finding buttom and top performing labels
 
 If you want to drill down into results on subject level, CASIMiR also
-provides functions to disect results on the intermediate aggregation
+provides functions to dissect results on the intermediate aggregation
 level. The above function `compute_set_retrieval_scores()` is just a
 convenient wrapper around three steps:
 
@@ -167,7 +162,7 @@ convenient wrapper around three steps:
 2.  `compute_intermediate_results()`: computes true positives, false
     positives, and false negatives on the desired aggregation level (per
     document or per subject).
-3.  `summarise_intermediate_results()` computes avarages of the
+3.  `summarise_intermediate_results()` computes averages of the
     intermediate results to yield the final precision, recall, and
     F1-score.
 
@@ -199,7 +194,7 @@ intermed |>
   select(label_id, label_text_eng, tp, fp, fn, prec, rec, f1) |> 
   head(n = 10) |> 
   kable(
-    caption = "Best performing subject terms for artful-accordion with a mininimum of
+    caption = "Best performing subject terms for artful-accordion with a minimum of
      20 gold standard instances."
   )
 ```
@@ -217,8 +212,8 @@ intermed |>
 | 974041238 | Resilience                 |  13 |   1 |  14 | 0.9285714 | 0.4814815 | 0.6341463 |
 | 042979293 | Mindfulness                |  12 |   4 |  10 | 0.7500000 | 0.5454545 | 0.6315789 |
 
-Best performing subject terms for artful-accordion with a mininimum of
-20 gold standard instances.
+Best performing subject terms for artful-accordion with a minimum of 20
+gold standard instances.
 
 ``` r
 intermed |>
@@ -297,7 +292,7 @@ avoids zero-division issues. To be coherent with other packages like
 [scikit-learn](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html),
 you can change this behaviour by using the argument
 `replace_zero_division_with = 0` which will set precision to 0 for
-documents or subject terms with no predictions, if they have occurences
+documents or subject terms with no predictions, if they have occurrences
 in the gold standard.
 
 Observe how much this can influence the overall value of precision and

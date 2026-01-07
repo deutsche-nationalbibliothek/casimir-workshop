@@ -88,7 +88,7 @@ the document.
 ### Gold Standard Data
 
 Each of the document titles was manually annotated by subject experts of
-the DNB with subject terms from the Inegrated Authority File (GND).
+the DNB with subject terms from the Integrated Authority File (GND).
 Similar to the document identifiers, each GND subject term has a unique
 identifier, the `label_id`, which can be resolved to the official GND
 record by prefixing the base-url `https://d-nb.info/`,
@@ -123,7 +123,7 @@ head(gold_standard_w_labels)
     5 1122545479 042718368 Prädiktive Regelung Predictive Control 
     6 1122545479 043049168 Systemmodell        System model       
 
-For the rest of this tutorial This is our gold standard data that we
+For the rest of this tutorial this is our gold standard data that we
 compare against.
 
 ### Predictions
