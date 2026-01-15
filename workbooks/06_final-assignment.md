@@ -18,8 +18,8 @@ the methods? As a reminder: the five methods we have in our pool are:
 - **LLM-Ensemble**: An ensmble of LLMs used with a few-shot-prompting
   approach
 
-Hint: The frequency based analysis in workbook 04 is key to this. But
-going back to the qualitative comparison in workbook 00 might also help
+Hint: The frequency based analysis in workbook 05 is key to this. But
+going back to the qualitative comparison in workbook 01 might also help
 to discern the methods.
 
 What are your conclusions? Which method would you choose for a
