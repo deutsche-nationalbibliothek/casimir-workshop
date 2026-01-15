@@ -173,7 +173,7 @@ res_at_5_by_sg_all_methods  |>
   ylim(0, 0.7) +
   geom_bar(stat = "identity", position = "dodge") +
   facet_wrap(
-    vars(paste0(sg, ": ", sg_label_eng)),
+    vars(paste0(sg, ": ", sg_label_ger)),
     ncol = 4,
     labeller = label_wrap_gen(width = 20)
   ) +
@@ -346,7 +346,7 @@ types may have very few associated labels.
 
 ``` r
 res_at_5_by_entity_type_all_methods  |>
-  filter(metric == "f1", label_entitytype_eng != "NA") |>
+  filter(metric == "f1", label_entitytype_ger != "NA") |>
   ggplot(aes(x = Method, y = value, fill = Method)) +
   ylim(0, 0.7) +
   geom_bar(stat = "identity", position = "dodge") +
@@ -356,7 +356,7 @@ res_at_5_by_entity_type_all_methods  |>
     position = "dodge"
   ) +
   facet_wrap(
-    vars(label_entitytype_eng),
+    vars(label_entitytype_ger),
     ncol = 3,
     labeller = label_wrap_gen(width = 20)
   ) +
