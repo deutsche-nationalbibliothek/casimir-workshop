@@ -174,7 +174,7 @@ Let's use this to find out the best and worst performing subject terms for
 #| label: Top-and-bottom-labels
 
 label_texts <- read_csv("../data/gnd_pref-labels_w-translation.csv",
-                        col_select = c("label_id", "label_text_eng"))
+                        col_select = c("label_id", "label_text_ger"))
 
 # join predictions with gold standard for one method
 comp <- create_comparison(
@@ -194,7 +194,7 @@ intermed <- compute_intermediate_results(
 intermed |>
   filter(n_gold > 20) |> 
   arrange(desc(f1)) |> 
-  select(label_id, label_text_eng, tp, fp, fn, prec, rec, f1) |> 
+  select(label_id, label_text_ger, tp, fp, fn, prec, rec, f1) |> 
   head(n = 10) |> 
   kable(
     caption = "Best performing subject terms for artful-accordion with a minimum of
@@ -204,7 +204,7 @@ intermed |>
 intermed |>
   filter(n_gold > 20) |> 
   arrange(f1) |> 
-  select(label_id, label_text_eng, tp, fp, fn, prec, rec, f1) |> 
+  select(label_id, label_text_ger, tp, fp, fn, prec, rec, f1) |> 
   head(n = 10) |> 
   kable(
     caption = "Worst performing subject terms for artful-accordion with a minimum of

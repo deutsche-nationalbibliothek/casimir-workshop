@@ -67,8 +67,8 @@ example_table <- create_qualitative_table_single_model(
     predicted = predictions_w_relevance[[method_name]],
     gold_standard = gold_standards[[method_name]],
     doc_id_list = documents,
-    title_texts = select(doc_titles, doc_id, title = doc_title_eng),
-    gnd = select(gnd, label_id, label_text = label_text_eng),
+    title_texts = select(doc_titles, doc_id, title = doc_title_ger),
+    gnd = select(gnd, label_id, label_text = label_text_ger),
     graded_relevance = TRUE
 ) |> 
   group_by(doc_id, title_text)  |> 

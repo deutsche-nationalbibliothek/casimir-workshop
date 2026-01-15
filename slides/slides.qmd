@@ -376,8 +376,8 @@ Can you guess which method is behind which file name?
 :::
 
 <div style="background: white; color: black; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin: 24px 0;">
-  <span style="font-size: 2em;">💡</span> If you speak German use the <code>_ger</code> column names in the code examples
-  instead of the <code>_eng</code> variants to see the original German texts.
+  <span style="font-size: 2em;">💡</span> If you don't speak German use the <code>_eng</code> column names in the code examples
+  instead of the <code>_ger</code> variants to see AI translated English texts.
 </div>
 
 ## Practical I: Example
@@ -406,8 +406,8 @@ qual_table <- create_qualitative_table(
   predicted = predictions,
   gold_standard = gold_standard,
   doc_id_list = select(sample_docs, doc_id),
-  gnd = select(gnd_pref_labels, label_id, label_text = label_text_eng),
-  title_texts = select(doc_titles, doc_id, title = doc_title_eng),
+  gnd = select(gnd_pref_labels, label_id, label_text = label_text_ger),
+  title_texts = select(doc_titles, doc_id, title = doc_title_ger),
   limit = 5 # how many suggestions per method to consider?
 )
 

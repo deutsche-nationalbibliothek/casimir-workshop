@@ -26,7 +26,9 @@ metrics such as precision, recall, and F1-score.
 #### More about metrics
 
 <details>
+
 <summary>
+
 Click to expand explanation of metrics
 </summary>
 
@@ -139,9 +141,12 @@ ggplot(results, aes(x = Method, y = value, fill = Method)) +
 ![](figures/02_set-retrieval-metrics/plot-metrics-1.png)
 
 <details>
+
 <summary>
+
 Note
 </summary>
+
 Some people prefer to “zoom-in” on a smaller scale of the y-range to
 emphasize the differences between methods. While this is sometimes
 acceptable for visualization purposes, be aware that this can be
@@ -171,7 +176,7 @@ for `artful-accordion`.
 
 ``` r
 label_texts <- read_csv("../data/gnd_pref-labels_w-translation.csv",
-                        col_select = c("label_id", "label_text_eng"))
+                        col_select = c("label_id", "label_text_ger"))
 
 # join predictions with gold standard for one method
 comp <- create_comparison(
@@ -191,7 +196,7 @@ intermed <- compute_intermediate_results(
 intermed |>
   filter(n_gold > 20) |> 
   arrange(desc(f1)) |> 
-  select(label_id, label_text_eng, tp, fp, fn, prec, rec, f1) |> 
+  select(label_id, label_text_ger, tp, fp, fn, prec, rec, f1) |> 
   head(n = 10) |> 
   kable(
     caption = "Best performing subject terms for artful-accordion with a minimum of
@@ -199,18 +204,18 @@ intermed |>
   )
 ```
 
-| label_id  | label_text_eng             |  tp |  fp |  fn |      prec |       rec |        f1 |
+| label_id  | label_text_ger             |  tp |  fp |  fn |      prec |       rec |        f1 |
 |:----------|:---------------------------|----:|----:|----:|----------:|----------:|----------:|
 | 118559796 | Kant, Immanuel (1724-1804) |  20 |   5 |   7 | 0.8000000 | 0.7407407 | 0.7692308 |
 | 040402223 | Moral                      |  20 |  11 |   4 | 0.6451613 | 0.8333333 | 0.7272727 |
-| 040464962 | Poland                     |  16 |   1 |  11 | 0.9411765 | 0.5925926 | 0.7272727 |
-| 040598276 | Thermodynamics             |  15 |   3 |   9 | 0.8333333 | 0.6250000 | 0.7142857 |
-| 04045956X | Physics                    |  44 |  31 |   7 | 0.5866667 | 0.8627451 | 0.6984127 |
-| 040300463 | Cat                        |  19 |  16 |   2 | 0.5428571 | 0.9047619 | 0.6785714 |
+| 040464962 | Polen                      |  16 |   1 |  11 | 0.9411765 | 0.5925926 | 0.7272727 |
+| 040598276 | Thermodynamik              |  15 |   3 |   9 | 0.8333333 | 0.6250000 | 0.7142857 |
+| 04045956X | Physik                     |  44 |  31 |   7 | 0.5866667 | 0.8627451 | 0.6984127 |
+| 040300463 | Katze                      |  19 |  16 |   2 | 0.5428571 | 0.9047619 | 0.6785714 |
 | 040489469 | Reformation                |  13 |   5 |   9 | 0.7222222 | 0.5909091 | 0.6500000 |
-| 040306380 | Childcare facility         |  13 |   6 |   9 | 0.6842105 | 0.5909091 | 0.6341463 |
-| 974041238 | Resilience                 |  13 |   1 |  14 | 0.9285714 | 0.4814815 | 0.6341463 |
-| 042979293 | Mindfulness                |  12 |   4 |  10 | 0.7500000 | 0.5454545 | 0.6315789 |
+| 040306380 | Kindertagesstätte          |  13 |   6 |   9 | 0.6842105 | 0.5909091 | 0.6341463 |
+| 974041238 | Resilienz                  |  13 |   1 |  14 | 0.9285714 | 0.4814815 | 0.6341463 |
+| 042979293 | Achtsamkeit                |  12 |   4 |  10 | 0.7500000 | 0.5454545 | 0.6315789 |
 
 Best performing subject terms for artful-accordion with a minimum of 20
 gold standard instances.
@@ -219,7 +224,7 @@ gold standard instances.
 intermed |>
   filter(n_gold > 20) |> 
   arrange(f1) |> 
-  select(label_id, label_text_eng, tp, fp, fn, prec, rec, f1) |> 
+  select(label_id, label_text_ger, tp, fp, fn, prec, rec, f1) |> 
   head(n = 10) |> 
   kable(
     caption = "Worst performing subject terms for artful-accordion with a minimum of
@@ -227,18 +232,18 @@ intermed |>
   )
 ```
 
-| label_id | label_text_eng | tp | fp | fn | prec | rec | f1 |
+| label_id | label_text_ger | tp | fp | fn | prec | rec | f1 |
 |:---|:---|---:|---:|---:|---:|---:|---:|
-| 040205487 | Gender Ratio | 0 | 1 | 25 | 0.0000000 | 0.0000000 | 0.0000000 |
-| 040300056 | Catholic theology | 0 | 1 | 22 | 0.0000000 | 0.0000000 | 0.0000000 |
-| 040665968 | Scientific manuscript | 0 | 0 | 34 | NA | 0.0000000 | 0.0000000 |
-| 041849450 | Text production | 0 | 1 | 25 | 0.0000000 | 0.0000000 | 0.0000000 |
-| 042090377 | Testing site | 0 | 4 | 27 | 0.0000000 | 0.0000000 | 0.0000000 |
-| 949300403 | Python (Programming Language) | 0 | 0 | 21 | NA | 0.0000000 | 0.0000000 |
-| 965002845 | Inclusion (Sociology) | 0 | 0 | 22 | NA | 0.0000000 | 0.0000000 |
-| 041132920 | German | 4 | 180 | 23 | 0.0217391 | 0.1481481 | 0.0379147 |
-| 040158330 | Protestant Church | 1 | 5 | 44 | 0.1666667 | 0.0222222 | 0.0392157 |
-| 040124754 | Discourse | 2 | 14 | 32 | 0.1250000 | 0.0588235 | 0.0800000 |
+| 040205487 | Geschlechterverhältnis | 0 | 1 | 25 | 0.0000000 | 0.0000000 | 0.0000000 |
+| 040300056 | Katholische Theologie | 0 | 1 | 22 | 0.0000000 | 0.0000000 | 0.0000000 |
+| 040665968 | Wissenschaftliches Manuskript | 0 | 0 | 34 | NA | 0.0000000 | 0.0000000 |
+| 041849450 | Textproduktion | 0 | 1 | 25 | 0.0000000 | 0.0000000 | 0.0000000 |
+| 042090377 | Prüfstand | 0 | 4 | 27 | 0.0000000 | 0.0000000 | 0.0000000 |
+| 949300403 | Python (Programmiersprache) | 0 | 0 | 21 | NA | 0.0000000 | 0.0000000 |
+| 965002845 | Inklusion (Soziologie) | 0 | 0 | 22 | NA | 0.0000000 | 0.0000000 |
+| 041132920 | Deutsch | 4 | 180 | 23 | 0.0217391 | 0.1481481 | 0.0379147 |
+| 040158330 | Evangelische Kirche | 1 | 5 | 44 | 0.1666667 | 0.0222222 | 0.0392157 |
+| 040124754 | Diskurs | 2 | 14 | 32 | 0.1250000 | 0.0588235 | 0.0800000 |
 
 Worst performing subject terms for artful-accordion with a minimum of 20
 gold standard instances.
