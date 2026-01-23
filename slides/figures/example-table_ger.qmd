@@ -1,0 +1,49 @@
+
+<table style="border-collapse: collapse; width: 50%;">
+  <thead>
+    <tr>
+      <th style="border-bottom: 1px solid #ccc;">label_id</th>
+      <th style="border-bottom: 1px solid #ccc;">label_text</th>
+      <th style="border-bottom: 1px solid #ccc;">gold-standard</th>
+      <th style="border-bottom: 1px solid #ccc;">suggested</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color: #d4edda;"> 
+      <td>041305450</td>
+      <td>Autorschaft</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+    </tr>
+    <tr style="background-color: #e2e3e5;"> 
+      <td>040359646</td>
+      <td>Literatur</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+    </tr>
+    <tr style="background-color: #e2e3e5;"> 
+      <td>040272230</td>
+      <td>Inszenierung</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+    </tr>
+    <tr style="background-color: #e2e3e5;"> 
+      <td>040533093</td>
+      <td>Schriftsteller</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+    </tr>
+    <tr style="background-color: #e2e3e5;"> 
+      <td>041230655</td>
+      <td>Digitalisierung</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+    </tr>
+    <tr style="background-color: #f8d7da;"> 
+      <td>041223497</td>
+      <td>Selbstdarstellung</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+    </tr>
+  </tbody>
+</table>

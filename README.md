@@ -2,10 +2,12 @@
 
 This is the official repository hosting all meterial needed for the 
 Workshop **Evaluating Automated Subject Indexing Methods** hosted at 
-the Fantastic Futures-Conference 2025 on Dec 3rd at the British National Library in London. 
+the Fantastic Futures-Conference 2025 on Dec 3rd at the British National Library in London
+and at the German National Library in Frankfurt on Jan 28th, 2026.
 
 ## Update:
 
+  * 2026-01-26: Add German slides for 2nd Workshop in Frankfurt
   * 2025-12-16: Post-workshop update: uploaded pdf-slides and fix non-interactive workbooks
 
 # Requirements
