@@ -7,6 +7,7 @@ and at the German National Library in Frankfurt on Jan 28th, 2026.
 
 ## Update:
 
+  * 2026-02-03: Add helper script for converting annif output to casimir format
   * 2026-01-26: Add German slides for 2nd Workshop in Frankfurt
   * 2025-12-16: Post-workshop update: uploaded pdf-slides and fix non-interactive workbooks
 
@@ -84,3 +85,30 @@ The methods are referred to as `artful accordion`, `bold bassoon`,
 `charming cello`, `dreamy didgeredoo` and `embracing euphonium` in this tutorial 
 and are purposefully not disclosed, to allow for unbiased evaluation. 
 The true names and algorithms will be presented at the end of the workshop. 
+
+# Bring your own data from annif
+
+If you work with [Annif](https://annif.org/) you can export suggestions for a
+test set, by using the annif index command. 
+Convert your results to the format expected by casimir with the 
+helper script `src/annif-to-casimir.r`. What it does is simply to read in the
+json structure, unnest it and convert it to the long format expected by casimir. 
+Here is how you would use it:
+
+```bash
+annif index \
+  --projects projects.cfg \
+  # limit to 100 suggestions per document (optional) 
+  --limit 100 \
+  --output suggestions-from-annif.jsonl \
+  [PROJECT_ID] \
+  [Path to text-corpus for testing]
+
+Rscript src/annif-to-casimir.r \
+  --jsonl_input suggestions-from-annif.jsonl \
+  --index test_index.csv \
+  --output suggestions-for-casimir.csv
+```
+
+Here `test_index.csv` is a file containing your `doc_id`'s that should match the
+same order as in your text corpus. 
